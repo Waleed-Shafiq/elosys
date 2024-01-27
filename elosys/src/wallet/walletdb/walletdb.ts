@@ -1158,7 +1158,7 @@ export class WalletDB {
       createdTransactionHash: GENESIS_BLOCK_PREVIOUS,
       id: Asset.nativeId(),
       metadata: Buffer.from('Native asset of Elosys blockchain', 'utf8'),
-      name: Buffer.from('$IRON', 'utf8'),
+      name: Buffer.from('$ELOSYS', 'utf8'),
       nonce: 0,
       creator: Buffer.from('Elosys', 'utf8'),
       owner: Buffer.from('Elosys', 'utf8'),

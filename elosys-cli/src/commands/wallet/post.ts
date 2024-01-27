@@ -117,12 +117,12 @@ export class PostCommand extends elosysCommand {
     }
 
     this.log(
-      `You are about to post a transaction that sends ${CurrencyUtils.renderIron(
+      `You are about to post a transaction that sends ${CurrencyUtils.renderElosys(
         spending,
         true,
       )}, with ${raw.mints.length} mints and ${
         raw.burns.length
-      } burns with a fee ${CurrencyUtils.renderIron(raw.fee, true)} using account ${account}`,
+      } burns with a fee ${CurrencyUtils.renderElosys(raw.fee, true)} using account ${account}`,
     )
 
     return CliUx.ux.confirm('Do you want to post this (Y/N)?')

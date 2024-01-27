@@ -36,8 +36,8 @@ pub const NOTE_ENCRYPTION_KEY_SIZE: usize = ENCRYPTED_SHARED_KEY_SIZE + aead::MA
 /// This does not leak information, since miner notes are already known
 /// to be on the first transaction in a block.
 pub const NOTE_ENCRYPTION_MINER_KEYS: &[u8; NOTE_ENCRYPTION_KEY_SIZE] =
-    b"Iron Fish note encryption miner key000000000000000000000000000000000000000000000";
-const SHARED_KEY_PERSONALIZATION: &[u8; 16] = b"Iron Fish Keyenc";
+    b"Elosys note encryption miner key000000000000000000000000000000000000000000000";
+const SHARED_KEY_PERSONALIZATION: &[u8; 16] = b"Elosys Keyenc";
 
 #[derive(Clone)]
 pub struct MerkleNote {

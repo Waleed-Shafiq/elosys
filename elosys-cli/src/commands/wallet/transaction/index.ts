@@ -60,7 +60,7 @@ export class TransactionCommand extends elosysCommand {
     this.log(`Status: ${response.content.transaction.status}`)
     this.log(`Type: ${response.content.transaction.type}`)
     this.log(`Timestamp: ${TimeUtils.renderString(response.content.transaction.timestamp)}`)
-    this.log(`Fee: ${CurrencyUtils.renderIron(response.content.transaction.fee, true)}`)
+    this.log(`Fee: ${CurrencyUtils.renderElosys(response.content.transaction.fee, true)}`)
     if (response.content.transaction.blockHash && response.content.transaction.blockSequence) {
       this.log(`Block Hash: ${response.content.transaction.blockHash}`)
       this.log(`Block Sequence: ${response.content.transaction.blockSequence}`)
@@ -93,7 +93,7 @@ export class TransactionCommand extends elosysCommand {
       CliUx.ux.table(noteAssetPairs, {
         amount: {
           header: 'Amount',
-          get: ({ note }) => CurrencyUtils.renderIron(note.value),
+          get: ({ note }) => CurrencyUtils.renderElosys(note.value),
         },
         assetName: {
           header: 'Asset Name',

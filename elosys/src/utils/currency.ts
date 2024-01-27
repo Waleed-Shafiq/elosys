@@ -12,23 +12,23 @@ export class CurrencyUtils {
   static locale?: string
 
   /**
-   * Serializes ore as iron with up to 8 decimal places
+   * Serializes ore as elosys with up to 8 decimal places
    */
-  static encodeIron(amount: bigint): string {
+  static encodeElosys(amount: bigint): string {
     return formatFixed(amount, 8)
   }
 
   /**
-   * Parses iron into ore
+   * Parses elosys into ore
    */
-  static decodeIron(amount: string | number): bigint {
+  static decodeElosys(amount: string | number): bigint {
     return parseFixed(amount.toString(), 8).toBigInt()
   }
 
   /**
-   * Parses iron into ore but returns the error if parsing fails
+   * Parses Elosys into ore but returns the error if parsing fails
    */
-  static decodeIronTry(amount: string | number): [bigint, null] | [null, ParseFixedError] {
+  static decodeElosysTry(amount: string | number): [bigint, null] | [null, ParseFixedError] {
     try {
       const parsed = parseFixed(amount.toString(), 8).toBigInt()
       return [parsed, null]
@@ -59,24 +59,24 @@ export class CurrencyUtils {
   }
 
   /*
-   * Renders ore as iron for human-readable purposes
+   * Renders ore as elosys for human-readable purposes
    */
-  static renderIron(amount: bigint | string, includeTicker = false, assetId?: string): string {
+  static renderElosys(amount: bigint | string, includeTicker = false, assetId?: string): string {
     if (typeof amount === 'string') {
       amount = this.decode(amount)
     }
 
-    const iron = FixedNumberUtils.render(amount, 8)
+    const elosys = FixedNumberUtils.render(amount, 8)
 
     if (includeTicker) {
-      let ticker = '$IRON'
+      let ticker = '$ELOSYS'
       if (assetId && !isNativeIdentifier(assetId)) {
         ticker = assetId
       }
-      return `${ticker} ${iron}`
+      return `${ticker} ${elosys}`
     }
 
-    return iron
+    return elosys
   }
 
   /*
@@ -115,8 +115,8 @@ export function isParseFixedError(error: unknown): error is ParseFixedError {
   )
 }
 
-export const ORE_TO_IRON = 100000000
+export const ORE_TO_ELOSYS = 100000000
 export const MINIMUM_ORE_AMOUNT = 0n
 export const MAXIMUM_ORE_AMOUNT = 2n ** 64n
-export const MINIMUM_IRON_AMOUNT = CurrencyUtils.renderIron(MINIMUM_ORE_AMOUNT)
-export const MAXIMUM_IRON_AMOUNT = CurrencyUtils.renderIron(MAXIMUM_ORE_AMOUNT)
+export const MINIMUM_ELOSYS_AMOUNT = CurrencyUtils.renderElosys(MINIMUM_ORE_AMOUNT)
+export const MAXIMUM_ELOSYS_AMOUNT = CurrencyUtils.renderElosys(MAXIMUM_ORE_AMOUNT)

@@ -22,7 +22,7 @@ export const GetConsensusParametersResponseSchema: yup.ObjectSchema<GetConsensus
   yup
     .object({
       allowedBlockFutureSeconds: yup.number().defined(),
-      genesisSupplyInIron: yup.number().defined(),
+      genesisSupplyInElosys: yup.number().defined(),
       targetBlockTimeInSeconds: yup.number().defined(),
       targetBucketTimeInSeconds: yup.number().defined(),
       maxBlockSizeBytes: yup.number().defined(),

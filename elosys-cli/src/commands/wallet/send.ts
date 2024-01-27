@@ -12,7 +12,7 @@ import {
 } from '@elosys/sdk'
 import { CliUx, Flags } from '@oclif/core'
 import { elosysCommand } from '../../command'
-import { HexFlag, IronFlag, RemoteFlags } from '../../flags'
+import { HexFlag, ElosysFlag, RemoteFlags } from '../../flags'
 import { selectAsset } from '../../utils/asset'
 import { promptCurrency } from '../../utils/currency'
 import { getExplorer } from '../../utils/explorer'
@@ -34,7 +34,7 @@ export class Send extends elosysCommand {
       char: 'f',
       description: 'The account to send money from',
     }),
-    amount: IronFlag({
+    amount: ElosysFlag({
       char: 'a',
       description: 'Amount of coins to send',
       flagName: 'amount',
@@ -43,15 +43,15 @@ export class Send extends elosysCommand {
       char: 't',
       description: 'The public address of the recipient',
     }),
-    fee: IronFlag({
+    fee: ElosysFlag({
       char: 'o',
-      description: 'The fee amount in IRON',
+      description: 'The fee amount in ELOSYS',
       minimum: 1n,
       flagName: 'fee',
     }),
-    feeRate: IronFlag({
+    feeRate: ElosysFlag({
       char: 'r',
-      description: 'The fee rate amount in IRON/Kilobyte',
+      description: 'The fee rate amount in ELOSYS/Kilobyte',
       minimum: 1n,
       flagName: 'fee rate',
     }),
@@ -251,9 +251,9 @@ export class Send extends elosysCommand {
       this.warn(`Transaction '${transaction.hash().toString('hex')}' failed to broadcast`)
     }
 
-    this.log(`Sent ${CurrencyUtils.renderIron(amount, true, assetId)} to ${to} from ${from}`)
+    this.log(`Sent ${CurrencyUtils.renderElosys(amount, true, assetId)} to ${to} from ${from}`)
     this.log(`Hash: ${transaction.hash().toString('hex')}`)
-    this.log(`Fee: ${CurrencyUtils.renderIron(transaction.fee(), true)}`)
+    this.log(`Fee: ${CurrencyUtils.renderElosys(transaction.fee(), true)}`)
     this.log(`Memo: ${memo}`)
 
     const networkId = (await client.chain.getNetworkInfo()).content.networkId

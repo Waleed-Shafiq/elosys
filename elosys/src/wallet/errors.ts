@@ -9,11 +9,11 @@ export class NotEnoughFundsError extends Error {
 
   constructor(assetId: Buffer, amount: bigint, amountNeeded: bigint) {
     super()
-    this.message = `Insufficient funds: Needed ${CurrencyUtils.renderIron(
+    this.message = `Insufficient funds: Needed ${CurrencyUtils.renderElosys(
       amountNeeded,
       true,
       assetId.toString('hex'),
-    )} but have ${CurrencyUtils.renderIron(
+    )} but have ${CurrencyUtils.renderElosys(
       amount,
     )} available to spend. Please fund your account and/or wait for any pending transactions to be confirmed.'`
   }

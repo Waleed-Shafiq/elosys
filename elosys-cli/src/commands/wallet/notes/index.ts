@@ -62,7 +62,7 @@ export class NotesCommand extends elosysCommand {
           ...TableCols.asset({ extended: flags.extended }),
           value: {
             header: 'Amount',
-            get: (row) => CurrencyUtils.renderIron(row.value),
+            get: (row) => CurrencyUtils.renderElosys(row.value),
             minWidth: 16,
           },
           noteHash: {

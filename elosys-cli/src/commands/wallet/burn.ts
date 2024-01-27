@@ -11,7 +11,7 @@ import {
 } from '@elosys/sdk'
 import { CliUx, Flags } from '@oclif/core'
 import { elosysCommand } from '../../command'
-import { IronFlag, RemoteFlags } from '../../flags'
+import { ElosysFlag, RemoteFlags } from '../../flags'
 import { selectAsset } from '../../utils/asset'
 import { promptCurrency } from '../../utils/currency'
 import { getExplorer } from '../../utils/explorer'
@@ -33,19 +33,19 @@ export class Burn extends elosysCommand {
       char: 'f',
       description: 'The account to burn from',
     }),
-    fee: IronFlag({
+    fee: ElosysFlag({
       char: 'o',
-      description: 'The fee amount in IRON',
+      description: 'The fee amount in ELOSYS',
       minimum: 1n,
       flagName: 'fee',
     }),
-    feeRate: IronFlag({
+    feeRate: ElosysFlag({
       char: 'r',
-      description: 'The fee rate amount in IRON/Kilobyte',
+      description: 'The fee rate amount in ELOSYS/Kilobyte',
       minimum: 1n,
       flagName: 'fee rate',
     }),
-    amount: IronFlag({
+    amount: ElosysFlag({
       char: 'a',
       description: 'Amount of coins to burn',
       flagName: 'amount',
@@ -218,9 +218,9 @@ export class Burn extends elosysCommand {
 
     this.log(`Burned asset ${assetName} from ${account}`)
     this.log(`Asset Identifier: ${assetId}`)
-    this.log(`Amount: ${CurrencyUtils.renderIron(amount)}`)
+    this.log(`Amount: ${CurrencyUtils.renderElosys(amount)}`)
     this.log(`Hash: ${transaction.hash().toString('hex')}`)
-    this.log(`Fee: ${CurrencyUtils.renderIron(transaction.fee(), true)}`)
+    this.log(`Fee: ${CurrencyUtils.renderElosys(transaction.fee(), true)}`)
 
     const networkId = (await client.chain.getNetworkInfo()).content.networkId
     const transactionUrl = getExplorer(networkId)?.getTransactionUrl(
@@ -250,11 +250,11 @@ export class Burn extends elosysCommand {
     account: string,
   ): Promise<boolean> {
     this.log(
-      `You are about to burn: ${CurrencyUtils.renderIron(
+      `You are about to burn: ${CurrencyUtils.renderElosys(
         amount,
         true,
         assetId,
-      )} plus a transaction fee of ${CurrencyUtils.renderIron(
+      )} plus a transaction fee of ${CurrencyUtils.renderElosys(
         fee,
         true,
       )} with the account ${account}`,

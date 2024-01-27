@@ -99,7 +99,7 @@ export class FaucetCommand extends elosysCommand {
 
 Congratulations! The Elosys Faucet just added your request to the queue!
 
-It will be processed within the next hour and $IRON will be sent directly to your account.
+It will be processed within the next hour and $ELOSYS will be sent directly to your account.
 
 Check your balance by running:
   - elosys wallet:balance

@@ -76,7 +76,7 @@ export class BalancesCommand extends elosysCommand {
       },
       available: {
         header: 'Available Balance',
-        get: ({ balance }) => CurrencyUtils.renderIron(balance.available),
+        get: ({ balance }) => CurrencyUtils.renderElosys(balance.available),
       },
     }
 
@@ -85,15 +85,15 @@ export class BalancesCommand extends elosysCommand {
         ...columns,
         confirmed: {
           header: 'Confirmed Balance',
-          get: ({ balance }) => CurrencyUtils.renderIron(balance.confirmed),
+          get: ({ balance }) => CurrencyUtils.renderElosys(balance.confirmed),
         },
         unconfirmed: {
           header: 'Unconfirmed Balance',
-          get: ({ balance }) => CurrencyUtils.renderIron(balance.unconfirmed),
+          get: ({ balance }) => CurrencyUtils.renderElosys(balance.unconfirmed),
         },
         pending: {
           header: 'Pending Balance',
-          get: ({ balance }) => CurrencyUtils.renderIron(balance.pending),
+          get: ({ balance }) => CurrencyUtils.renderElosys(balance.pending),
         },
         blockHash: {
           header: 'Head Hash',

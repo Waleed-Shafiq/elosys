@@ -28,7 +28,7 @@ describe('Route wallet/getBalance', () => {
         .mockImplementationOnce(async (_account, _assetId, _options?) => {
           return {
             assetId: Asset.nativeId(),
-            assetName: Buffer.from('$IRON', 'utf8'),
+            assetName: Buffer.from('$ELOSYS', 'utf8'),
             assetCreator: Buffer.from('Elosys ', 'utf8'),
             assetOwner: Buffer.from('Copper Clam', 'utf8'),
             assetVerification: { status: 'unknown' },
@@ -124,7 +124,7 @@ describe('Route wallet/getBalance', () => {
         .mockImplementationOnce(async (_account, _assetId, _options?) => {
           return {
             assetId: Asset.nativeId(),
-            assetName: Buffer.from('$IRON', 'utf8'),
+            assetName: Buffer.from('$ELOSYS', 'utf8'),
             assetCreator: Buffer.from('Elosys', 'utf8'),
             assetOwner: Buffer.from('Copper Clam', 'utf8'),
             assetVerification: { status: 'unknown' },

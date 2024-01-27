@@ -81,7 +81,7 @@ describe('Transaction', () => {
     numSpends: number,
     numOutputs: number,
   ): Promise<RawTransaction> {
-    const spendAmount = BigInt(numSpends) * CurrencyUtils.decodeIron(20)
+    const spendAmount = BigInt(numSpends) * CurrencyUtils.decodeElosys(20)
     const outputAmount = BigIntUtils.divide(spendAmount, BigInt(numOutputs))
 
     const outputs: { publicAddress: string; amount: bigint; memo: string; assetId: Buffer }[] =

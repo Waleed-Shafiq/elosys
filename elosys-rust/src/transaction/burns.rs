@@ -31,7 +31,7 @@ impl BurnBuilder {
 }
 
 /// This description represents an action to decrease the supply of an existing
-/// asset on Iron Fish
+/// asset on Elosys
 #[derive(Clone)]
 pub struct BurnDescription {
     /// Identifier for the Asset which is being burned

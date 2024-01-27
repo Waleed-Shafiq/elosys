@@ -278,16 +278,16 @@ export class TransactionsCommand extends elosysCommand {
         header: 'Submitted Sequence',
       },
       feePaid: {
-        header: 'Fee Paid ($IRON)',
+        header: 'Fee Paid ($ELOSYS)',
         get: (row) =>
-          row.feePaid && row.feePaid !== 0n ? CurrencyUtils.renderIron(row.feePaid) : '',
+          row.feePaid && row.feePaid !== 0n ? CurrencyUtils.renderElosys(row.feePaid) : '',
       },
       ...TableCols.asset({ extended, format }),
       amount: {
         header: 'Amount',
         get: (row) => {
           Assert.isNotUndefined(row.amount)
-          return CurrencyUtils.renderIron(row.amount)
+          return CurrencyUtils.renderElosys(row.amount)
         },
         minWidth: 16,
       },

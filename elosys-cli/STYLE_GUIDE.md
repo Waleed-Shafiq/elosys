@@ -74,7 +74,7 @@ However, if prompting is required to complete a command, this means the user wil
 Many commands need to run long running operations. The CLI should not look like it's unresponsive. For example, `elosys wallet:post` posts a transaction and optionally sends it to the network:
 
 ```
-ironfielosyssh wallet:post 403662343137346
+elosysfielosyssh wallet:post 403662343137346
 Posting the transaction... done
 ```
 

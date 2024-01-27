@@ -25,8 +25,8 @@ export function displayTransactionSummary(
 ): void {
   logger = logger ?? createRootLogger()
 
-  const amountString = CurrencyUtils.renderIron(amount, true, assetId)
-  const feeString = CurrencyUtils.renderIron(transaction.fee, true)
+  const amountString = CurrencyUtils.renderElosys(amount, true, assetId)
+  const feeString = CurrencyUtils.renderElosys(transaction.fee, true)
 
   const summary = `\
 \nTRANSACTION SUMMARY:

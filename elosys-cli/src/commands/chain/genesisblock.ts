@@ -43,10 +43,10 @@ export default class GenesisBlockCommand extends elosysCommand {
     allocations: Flags.string({
       required: false,
       description:
-        'A CSV file with the format address,amountInIron,memo containing genesis block allocations',
+        'A CSV file with the format address,amountInElosys,memo containing genesis block allocations',
       exclusive: ['account', 'memo'],
     }),
-    genesisSupplyInIron: Flags.string({
+    genesisSupplyInElosys: Flags.string({
       char: 'g',
       required: true,
       default: '42000000',
@@ -78,7 +78,7 @@ export default class GenesisBlockCommand extends elosysCommand {
       this.exit(0)
     }
 
-    const expectedSupply = CurrencyUtils.decodeIron(flags.genesisSupplyInIron)
+    const expectedSupply = CurrencyUtils.decodeElosys(flags.genesisSupplyInElosys)
     let allocations: GenesisBlockAllocation[]
     if (flags.allocations) {
       // If the allocations flag is set, read allocations from a CSV file
@@ -95,9 +95,9 @@ export default class GenesisBlockCommand extends elosysCommand {
 
       if (totalSupply !== expectedSupply) {
         this.error(
-          `Allocations file contains ${CurrencyUtils.encodeIron(
+          `Allocations file contains ${CurrencyUtils.encodeElosys(
             totalSupply,
-          )} $IRON, but --genesisSupplyInIron expects ${flags.genesisSupplyInIron} $IRON.`,
+          )} $ELOSYS, but --genesisSupplyInElosys expects ${flags.genesisSupplyInElosys} $ELOSYS.`,
         )
       }
 
@@ -140,9 +140,9 @@ export default class GenesisBlockCommand extends elosysCommand {
         get: (row: GenesisBlockAllocation) => row.publicAddress,
       },
       amount: {
-        header: 'AMOUNT ($IRON)',
+        header: 'AMOUNT ($ELOSYS)',
         get: (row: GenesisBlockAllocation) => {
-          return CurrencyUtils.encodeIron(row.amountInOre)
+          return CurrencyUtils.encodeElosys(row.amountInOre)
         },
       },
       memo: {
@@ -213,7 +213,7 @@ const parseAllocationsFile = (
       continue
     }
 
-    const [address, amountInIron, memo, ...rest] = line.split(',').map((v) => v.trim())
+    const [address, amountInElosys, memo, ...rest] = line.split(',').map((v) => v.trim())
 
     if (rest.length > 0) {
       return {
@@ -230,12 +230,12 @@ const parseAllocationsFile = (
       }
     }
 
-    // Check amount is positive and decodes as $IRON
-    const amountInOre = CurrencyUtils.decodeIron(amountInIron)
+    // Check amount is positive and decodes as $ELOSYS
+    const amountInOre = CurrencyUtils.decodeElosys(amountInElosys)
     if (amountInOre < 0) {
       return {
         ok: false,
-        error: `Line ${lineNum}: (${line}) contains a negative $IRON amount.`,
+        error: `Line ${lineNum}: (${line}) contains a negative $ELOSYS amount.`,
       }
     }
 

@@ -76,7 +76,7 @@ export async function selectFee(options: {
     const fee = await promptCurrency({
       client: options.client,
       required: true,
-      text: 'Enter the fee amount in $IRON',
+      text: 'Enter the fee amount in $ELOSYS',
       logger: options.logger,
       balance: {
         account: options.account,
@@ -137,8 +137,8 @@ function getChoiceFromTx(
   value: RawTransaction | null
 } {
   return {
-    name: `${name} ${transaction ? CurrencyUtils.renderIron(transaction.fee) : ''}`,
-    disabled: transaction ? false : 'Not enough $IRON',
+    name: `${name} ${transaction ? CurrencyUtils.renderElosys(transaction.fee) : ''}`,
+    disabled: transaction ? false : 'Not enough $ELOSYS',
     value: transaction,
   }
 }

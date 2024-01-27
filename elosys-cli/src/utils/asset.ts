@@ -134,7 +134,7 @@ export async function selectAsset(
   const choices = balances.map((balance) => {
     const assetName = BufferUtils.toHuman(Buffer.from(assetLookup[balance.assetId].name, 'hex'))
 
-    const name = `${balance.assetId} (${assetName}) (${CurrencyUtils.renderIron(
+    const name = `${balance.assetId} (${assetName}) (${CurrencyUtils.renderElosys(
       balance.available,
     )})`
 

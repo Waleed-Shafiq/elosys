@@ -24,7 +24,7 @@ use jubjub::SubgroupPoint;
 
 use std::io;
 
-const DIFFIE_HELLMAN_PERSONALIZATION: &[u8; 16] = b"Iron Fish shared";
+const DIFFIE_HELLMAN_PERSONALIZATION: &[u8; 16] = b"Elosys shared";
 
 /// Key that allows someone to view a transaction that you have received.
 ///

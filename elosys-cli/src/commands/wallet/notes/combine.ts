@@ -18,7 +18,7 @@ import {
 import { CliUx, Flags } from '@oclif/core'
 import inquirer from 'inquirer'
 import { elosysCommand } from '../../../command'
-import { IronFlag, RemoteFlags } from '../../../flags'
+import { ElosysFlag, RemoteFlags } from '../../../flags'
 import { ProgressBar } from '../../../types'
 import { getExplorer } from '../../../utils/explorer'
 import { selectFee } from '../../../utils/fees'
@@ -29,15 +29,15 @@ export class CombineNotesCommand extends elosysCommand {
 
   static flags = {
     ...RemoteFlags,
-    fee: IronFlag({
+    fee: ElosysFlag({
       char: 'o',
-      description: 'The fee amount in IRON',
+      description: 'The fee amount in ELOSYS',
       minimum: 1n,
       flagName: 'fee',
     }),
-    feeRate: IronFlag({
+    feeRate: ElosysFlag({
       char: 'r',
-      description: 'The fee rate amount in IRON/Kilobyte',
+      description: 'The fee rate amount in ELOSYS/Kilobyte',
       minimum: 1n,
       flagName: 'fee rate',
     }),
@@ -593,7 +593,7 @@ export class CombineNotesCommand extends elosysCommand {
         },
         value: {
           header: 'Value',
-          get: (note) => CurrencyUtils.renderIron(note.value, true),
+          get: (note) => CurrencyUtils.renderElosys(note.value, true),
         },
         owner: {
           header: 'Owner',

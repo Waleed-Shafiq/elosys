@@ -31,7 +31,7 @@ pub use proof_generation_key::*;
 #[cfg(test)]
 mod test;
 
-const EXPANDED_SPEND_BLAKE2_KEY: &[u8; 16] = b"Iron Fish Money ";
+const EXPANDED_SPEND_BLAKE2_KEY: &[u8; 16] = b"Elosys Money ";
 
 pub const SPEND_KEY_SIZE: usize = 32;
 

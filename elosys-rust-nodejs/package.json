@@ -1,7 +1,7 @@
 {
   "name": "@elosys/rust-nodejs",
   "version": "1.14.0",
-  "description": "Node.js bindings for Rust code required by the Iron Fish SDK",
+  "description": "Node.js bindings for Rust code required by the Elosys SDK",
   "main": "index.js",
   "types": "index.d.ts",
   "repository": "https://github.com/elosys/elosys.git",

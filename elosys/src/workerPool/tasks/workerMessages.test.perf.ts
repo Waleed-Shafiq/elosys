@@ -32,7 +32,7 @@ describe('WorkerMessages', () => {
   it('createMinersFeeRequest', async () => {
     Assert.isNotNull(account.spendingKey)
     const message = new CreateMinersFeeRequest(
-      CurrencyUtils.decodeIron(20),
+      CurrencyUtils.decodeElosys(20),
       'hello world memo',
       account.spendingKey,
       TransactionVersion.V1,

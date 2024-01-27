@@ -19,9 +19,9 @@ STATUS="$(curl \
     --silent \
     --output /dev/null \
     --request POST \
-    --header "authorization:Bearer $IRON_FISH_API_KEY" \
+    --header "authorization:Bearer $ELOSYS_FISH_API_KEY" \
     --data "version=$VERSION" \
-    "$IRON_FISH_API_URL/versions")"
+    "$ELOSYS_FISH_API_URL/versions")"
 
 if [[ $STATUS -ne 201 ]]; then
     echo "There was an error pushing the version to the API. See API logs for more information."

@@ -120,7 +120,7 @@ describe('Verify Transaction', () => {
     numMints: number,
     numBurns: number,
   ): Promise<Transaction> {
-    const spendAmount = BigInt(numSpends) * CurrencyUtils.decodeIron(20)
+    const spendAmount = BigInt(numSpends) * CurrencyUtils.decodeElosys(20)
     const outputAmount = BigIntUtils.divide(spendAmount, BigInt(numOutputs))
 
     const outputs: { publicAddress: string; amount: bigint; memo: string; assetId: Buffer }[] =

@@ -20,7 +20,7 @@ pub const ASSET_LENGTH: usize = NAME_LENGTH + PUBLIC_ADDRESS_SIZE + METADATA_LEN
 pub const ID_LENGTH: usize = ASSET_ID_LENGTH;
 
 /// Describes all the fields necessary for creating and transacting with an
-/// asset on the Iron Fish network
+/// asset on the Elosys network
 #[derive(Clone, Copy, PartialEq, Debug)]
 pub struct Asset {
     /// Name of the asset

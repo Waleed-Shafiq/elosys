@@ -20,35 +20,35 @@ describe('CurrencyUtils', () => {
     expect(CurrencyUtils.decode('100000000')).toEqual(100000000n)
   })
 
-  it('encodeIron', () => {
-    expect(CurrencyUtils.encodeIron(0n)).toEqual('0.0')
-    expect(CurrencyUtils.encodeIron(1n)).toEqual('0.00000001')
-    expect(CurrencyUtils.encodeIron(100n)).toEqual('0.000001')
-    expect(CurrencyUtils.encodeIron(10000n)).toEqual('0.0001')
-    expect(CurrencyUtils.encodeIron(100000000n)).toEqual('1.0')
+  it('encodeElosys', () => {
+    expect(CurrencyUtils.encodeElosys(0n)).toEqual('0.0')
+    expect(CurrencyUtils.encodeElosys(1n)).toEqual('0.00000001')
+    expect(CurrencyUtils.encodeElosys(100n)).toEqual('0.000001')
+    expect(CurrencyUtils.encodeElosys(10000n)).toEqual('0.0001')
+    expect(CurrencyUtils.encodeElosys(100000000n)).toEqual('1.0')
 
-    expect(CurrencyUtils.encodeIron(2394n)).toBe('0.00002394')
-    expect(CurrencyUtils.encodeIron(999n)).toBe('0.00000999')
+    expect(CurrencyUtils.encodeElosys(2394n)).toBe('0.00002394')
+    expect(CurrencyUtils.encodeElosys(999n)).toBe('0.00000999')
   })
 
-  it('decodeIron', () => {
-    expect(CurrencyUtils.decodeIron('0.0')).toEqual(0n)
-    expect(CurrencyUtils.decodeIron('0.00000001')).toEqual(1n)
-    expect(CurrencyUtils.decodeIron('0.000001')).toEqual(100n)
-    expect(CurrencyUtils.decodeIron('0.0001')).toEqual(10000n)
-    expect(CurrencyUtils.decodeIron('1.0')).toEqual(100000000n)
+  it('decodeElosys', () => {
+    expect(CurrencyUtils.decodeElosys('0.0')).toEqual(0n)
+    expect(CurrencyUtils.decodeElosys('0.00000001')).toEqual(1n)
+    expect(CurrencyUtils.decodeElosys('0.000001')).toEqual(100n)
+    expect(CurrencyUtils.decodeElosys('0.0001')).toEqual(10000n)
+    expect(CurrencyUtils.decodeElosys('1.0')).toEqual(100000000n)
 
-    expect(CurrencyUtils.decodeIron('0.00002394')).toBe(2394n)
-    expect(CurrencyUtils.decodeIron('0.00000999')).toBe(999n)
+    expect(CurrencyUtils.decodeElosys('0.00002394')).toBe(2394n)
+    expect(CurrencyUtils.decodeElosys('0.00000999')).toBe(999n)
   })
 
-  it('renderIron', () => {
-    expect(CurrencyUtils.renderIron(0n)).toEqual('0.00000000')
-    expect(CurrencyUtils.renderIron(1n)).toEqual('0.00000001')
-    expect(CurrencyUtils.renderIron(100n)).toEqual('0.00000100')
-    expect(CurrencyUtils.renderIron(10000n)).toEqual('0.00010000')
-    expect(CurrencyUtils.renderIron(100000000n)).toEqual('1.00000000')
-    expect(CurrencyUtils.renderIron(1n, true)).toEqual('$IRON 0.00000001')
+  it('renderElosys', () => {
+    expect(CurrencyUtils.renderElosys(0n)).toEqual('0.00000000')
+    expect(CurrencyUtils.renderElosys(1n)).toEqual('0.00000001')
+    expect(CurrencyUtils.renderElosys(100n)).toEqual('0.00000100')
+    expect(CurrencyUtils.renderElosys(10000n)).toEqual('0.00010000')
+    expect(CurrencyUtils.renderElosys(100000000n)).toEqual('1.00000000')
+    expect(CurrencyUtils.renderElosys(1n, true)).toEqual('$ELOSYS 0.00000001')
   })
 
   it('renderOre', () => {

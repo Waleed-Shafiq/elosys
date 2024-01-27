@@ -40,7 +40,7 @@ export async function promptCurrency(options: {
       confirmations: options.balance.confirmations,
     })
 
-    text += ` (balance ${CurrencyUtils.renderIron(balance.content.available)})`
+    text += ` (balance ${CurrencyUtils.renderElosys(balance.content.available)})`
   }
 
   // eslint-disable-next-line no-constant-condition
@@ -53,7 +53,7 @@ export async function promptCurrency(options: {
       return null
     }
 
-    const [amount, error] = CurrencyUtils.decodeIronTry(input)
+    const [amount, error] = CurrencyUtils.decodeElosysTry(input)
 
     if (error) {
       options.logger.error(`Error: ${error.reason}`)
@@ -63,7 +63,7 @@ export async function promptCurrency(options: {
     Assert.isNotNull(amount)
 
     if (options.minimum != null && amount < options.minimum) {
-      options.logger.error(`Error: Minimum is ${CurrencyUtils.renderIron(options.minimum)}`)
+      options.logger.error(`Error: Minimum is ${CurrencyUtils.renderElosys(options.minimum)}`)
       continue
     }
 

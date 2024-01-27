@@ -14,7 +14,7 @@ import {
 } from '@elosys/sdk'
 import { CliUx, Flags } from '@oclif/core'
 import { elosysCommand } from '../../command'
-import { IronFlag, RemoteFlags } from '../../flags'
+import { ElosysFlag, RemoteFlags } from '../../flags'
 import { selectAsset } from '../../utils/asset'
 import { promptCurrency } from '../../utils/currency'
 import { getExplorer } from '../../utils/explorer'
@@ -38,21 +38,21 @@ export class Mint extends elosysCommand {
       char: 'f',
       description: 'The account to mint from',
     }),
-    fee: IronFlag({
+    fee: ElosysFlag({
       char: 'o',
-      description: 'The fee amount in IRON',
+      description: 'The fee amount in ELOSYS',
       minimum: 1n,
       flagName: 'fee',
     }),
-    feeRate: IronFlag({
+    feeRate: ElosysFlag({
       char: 'r',
-      description: 'The fee rate amount in IRON/Kilobyte',
+      description: 'The fee rate amount in ELOSYS/Kilobyte',
       minimum: 1n,
       flagName: 'fee rate',
     }),
-    amount: IronFlag({
+    amount: ElosysFlag({
       char: 'a',
-      description: 'Amount of coins to mint in IRON',
+      description: 'Amount of coins to mint in ELOSYS',
       flagName: 'amount',
     }),
     assetId: Flags.string({
@@ -286,13 +286,13 @@ export class Mint extends elosysCommand {
     this.log(`Minted asset ${BufferUtils.toHuman(minted.asset.name())} from ${account}`)
     this.log(`Asset Identifier: ${minted.asset.id().toString('hex')}`)
     this.log(
-      `Value: ${CurrencyUtils.renderIron(
+      `Value: ${CurrencyUtils.renderElosys(
         minted.value,
         true,
         minted.asset.id().toString('hex'),
       )}`,
     )
-    this.log(`Fee: ${CurrencyUtils.renderIron(transaction.fee(), true)}`)
+    this.log(`Fee: ${CurrencyUtils.renderElosys(transaction.fee(), true)}`)
     this.log(`Hash: ${transaction.hash().toString('hex')}`)
 
     const networkId = (await client.chain.getNetworkInfo()).content.networkId
@@ -330,8 +330,8 @@ export class Mint extends elosysCommand {
     this.log(
       `You are about to mint an asset with the account ${account}:${nameString}${metadataString}`,
     )
-    this.log(`Amount: ${CurrencyUtils.renderIron(amount, !!assetId, assetId)}`)
-    this.log(`Fee: ${CurrencyUtils.renderIron(fee, true)}`)
+    this.log(`Amount: ${CurrencyUtils.renderElosys(amount, !!assetId, assetId)}`)
+    this.log(`Fee: ${CurrencyUtils.renderElosys(fee, true)}`)
 
     if (transferOwnershipTo) {
       this.log(

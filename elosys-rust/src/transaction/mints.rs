@@ -180,7 +180,7 @@ impl UnsignedMintDescription {
 }
 
 /// This description represents an action to increase the supply of an existing
-/// asset on Iron Fish
+/// asset on Elosys
 #[derive(Clone)]
 pub struct MintDescription {
     /// Proof that the mint was valid for the provided creator and asset

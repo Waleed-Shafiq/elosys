@@ -63,7 +63,7 @@ export class BalanceCommand extends elosysCommand {
     ).content
 
     const assetId = response.content.assetId
-    const assetName = renderAssetName(isNativeIdentifier(assetId) ? '$IRON' : assetId, {
+    const assetName = renderAssetName(isNativeIdentifier(assetId) ? '$ELOSYS' : assetId, {
       verification: asset.verification,
       verbose: !!flags.verbose,
       logWarn: this.warn.bind(this),
@@ -79,27 +79,27 @@ export class BalanceCommand extends elosysCommand {
       this.log(`Head Hash: ${response.content.blockHash || 'NULL'}`)
       this.log(`Head Sequence: ${response.content.sequence || 'NULL'}`)
       this.log(
-        `Available:   ${CurrencyUtils.renderIron(response.content.available, true, assetName)}`,
+        `Available:   ${CurrencyUtils.renderElosys(response.content.available, true, assetName)}`,
       )
       this.log(
-        `Confirmed:   ${CurrencyUtils.renderIron(response.content.confirmed, true, assetName)}`,
+        `Confirmed:   ${CurrencyUtils.renderElosys(response.content.confirmed, true, assetName)}`,
       )
       this.log(
-        `Unconfirmed: ${CurrencyUtils.renderIron(
+        `Unconfirmed: ${CurrencyUtils.renderElosys(
           response.content.unconfirmed,
           true,
           assetName,
         )}`,
       )
       this.log(
-        `Pending:     ${CurrencyUtils.renderIron(response.content.pending, true, assetName)}`,
+        `Pending:     ${CurrencyUtils.renderElosys(response.content.pending, true, assetName)}`,
       )
       return
     }
 
     this.log(`Account: ${response.content.account}`)
     this.log(
-      `Available Balance: ${CurrencyUtils.renderIron(
+      `Available Balance: ${CurrencyUtils.renderElosys(
         response.content.available,
         true,
         assetName,
@@ -126,26 +126,26 @@ export class BalanceCommand extends elosysCommand {
     this.log('')
 
     this.log(`Your available balance is made of notes on the chain that are safe to spend`)
-    this.log(`Available: ${CurrencyUtils.renderIron(available, true, assetId)}`)
+    this.log(`Available: ${CurrencyUtils.renderElosys(available, true, assetId)}`)
     this.log('')
 
     this.log('Your confirmed balance includes all notes from transactions on the chain')
-    this.log(`Confirmed: ${CurrencyUtils.renderIron(confirmed, true, assetId)}`)
+    this.log(`Confirmed: ${CurrencyUtils.renderElosys(confirmed, true, assetId)}`)
     this.log('')
 
     this.log(
-      `${response.unconfirmedCount} transactions worth ${CurrencyUtils.renderIron(
+      `${response.unconfirmedCount} transactions worth ${CurrencyUtils.renderElosys(
         unconfirmedDelta,
       )} are on the chain within ${response.confirmations} blocks of the head`,
     )
-    this.log(`Unconfirmed: ${CurrencyUtils.renderIron(unconfirmed, true, assetId)}`)
+    this.log(`Unconfirmed: ${CurrencyUtils.renderElosys(unconfirmed, true, assetId)}`)
     this.log('')
 
     this.log(
-      `${response.pendingCount} transactions worth ${CurrencyUtils.renderIron(
+      `${response.pendingCount} transactions worth ${CurrencyUtils.renderElosys(
         pendingDelta,
       )} are pending and have not been added to the chain`,
     )
-    this.log(`Pending: ${CurrencyUtils.renderIron(pending, true, assetId)}`)
+    this.log(`Pending: ${CurrencyUtils.renderElosys(pending, true, assetId)}`)
   }
 }

@@ -127,18 +127,18 @@ remoteFlags[RpcAuthFlagKey] = RpcAuthFlag as unknown as CompletableOptionFlag
  */
 export const RemoteFlags = remoteFlags
 
-export type IronOpts = { minimum?: bigint; flagName: string }
+export type ElosysOpts = { minimum?: bigint; flagName: string }
 
-export const IronFlag = Flags.custom<bigint, IronOpts>({
-  parse: async (input, _ctx, opts) => parseIron(input, opts),
+export const ElosysFlag = Flags.custom<bigint, ElosysOpts>({
+  parse: async (input, _ctx, opts) => parseElosys(input, opts),
   char: 'i',
 })
 
-export const parseIron = (input: string, opts: IronOpts): Promise<bigint> => {
+export const parseElosys = (input: string, opts: ElosysOpts): Promise<bigint> => {
   return new Promise((resolve, reject) => {
     const { minimum, flagName } = opts ?? {}
     try {
-      const value = CurrencyUtils.decodeIron(input)
+      const value = CurrencyUtils.decodeElosys(input)
 
       if (minimum !== undefined && value < minimum) {
         reject(
