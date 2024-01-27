@@ -346,10 +346,10 @@ export class PeerNetwork {
 
       this.onIsReadyChanged.on((isReady: boolean) => {
         if (isReady) {
-          this.logger.info(`Connected to the Iron Fish network`)
+          this.logger.info(`Connected to the Elosys network`)
           this.node.onPeerNetworkReady()
         } else {
-          this.logger.info(`Not connected to the Iron Fish network`)
+          this.logger.info(`Not connected to the Elosys network`)
           this.node.onPeerNetworkNotReady()
         }
       })

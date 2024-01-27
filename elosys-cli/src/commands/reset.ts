@@ -24,7 +24,7 @@ export default class Reset extends elosysCommand {
     networkId: Flags.integer({
       char: 'i',
       default: undefined,
-      description: 'Network ID of an official Iron Fish network to connect to',
+      description: 'Network ID of an official Elosys network to connect to',
     }),
     confirm: Flags.boolean({
       default: false,

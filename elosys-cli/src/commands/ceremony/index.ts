@@ -13,7 +13,7 @@ import { DataDirFlag, DataDirFlagKey, VerboseFlag, VerboseFlagKey } from '../../
 import { CeremonyClient } from '../../trusted-setup/client'
 
 export default class Ceremony extends elosysCommand {
-  static description = 'Contribute randomness to the Iron Fish trusted setup'
+  static description = 'Contribute randomness to the Elosys trusted setup'
 
   static flags = {
     [VerboseFlagKey]: VerboseFlag,
@@ -158,7 +158,7 @@ export default class Ceremony extends elosysCommand {
           `Server verified a contribution, but you haven't made a contribution yet. Server-generated hash:`,
         )
         this.log(display256CharacterHash(hash))
-        this.error('Please contact the Iron Fish team with this error message.')
+        this.error('Please contact the Elosys team with this error message.')
       }
 
       if (hash !== localHash) {
@@ -166,15 +166,15 @@ export default class Ceremony extends elosysCommand {
         this.log(display256CharacterHash(localHash))
         this.log('Server-generated hash:')
         this.log(display256CharacterHash(hash))
-        this.error('Please contact the Iron Fish team with this error message.')
+        this.error('Please contact the Elosys team with this error message.')
       }
 
       this.log(
-        `\nThank you for your contribution to the Iron Fish Ceremony. You have successfully contributed at position #${contributionNumber}. The public hash of your contribution is:`,
+        `\nThank you for your contribution to the Elosys Ceremony. You have successfully contributed at position #${contributionNumber}. The public hash of your contribution is:`,
       )
       this.log(display256CharacterHash(hash))
       this.log(
-        `This hash is a record of your contribution to the Iron Fish parameters, so you should save it to check later. You can view your contributed file at ${downloadLink}.`,
+        `This hash is a record of your contribution to the Elosys parameters, so you should save it to check later. You can view your contributed file at ${downloadLink}.`,
       )
 
       client.stop(true)

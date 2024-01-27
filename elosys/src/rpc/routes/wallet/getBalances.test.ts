@@ -41,9 +41,9 @@ describe('Route wallet/getBalances', () => {
         },
         {
           assetId: Asset.nativeId(),
-          assetName: Buffer.from('$IRON', 'utf8'),
-          assetCreator: Buffer.from('Iron Fish', 'utf8'),
-          assetOwner: Buffer.from('Iron Fish', 'utf8'),
+          assetName: Buffer.from('$ELOSYS', 'utf8'),
+          assetCreator: Buffer.from('Elosys', 'utf8'),
+          assetOwner: Buffer.from('Elosys', 'utf8'),
           confirmed: BigInt(2000000000),
           unconfirmed: BigInt(2000000000),
           pending: BigInt(2000000000),
@@ -124,8 +124,8 @@ describe('Route wallet/getBalances', () => {
         },
         {
           assetId: Asset.nativeId(),
-          assetName: Buffer.from('$IRON', 'utf8'),
-          assetCreator: Buffer.from('Iron Fish', 'utf8'),
+          assetName: Buffer.from('$ELOSYS', 'utf8'),
+          assetCreator: Buffer.from('Elosys', 'utf8'),
           assetOwner: Buffer.from('Copper Clam', 'utf8'),
           confirmed: BigInt(2000000000),
           unconfirmed: BigInt(2000000000),

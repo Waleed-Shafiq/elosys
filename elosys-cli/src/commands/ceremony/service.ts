@@ -17,7 +17,7 @@ export default class CeremonyService extends elosysCommand {
   static hidden = true
 
   static description = `
-     Start the coordination server for the Iron Fish trusted setup ceremony
+     Start the coordination server for the Elosys trusted setup ceremony
    `
 
   static flags = {

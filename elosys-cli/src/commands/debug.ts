@@ -74,8 +74,8 @@ export default class Debug extends elosysCommand {
     }
 
     return new Map<string, string>([
-      ['Iron Fish version', `${node.pkg.version} @ ${node.pkg.git}`],
-      ['Iron Fish library', `${elosysPKG.version} @ ${elosysPKG.git}`],
+      ['Elosys version', `${node.pkg.version} @ ${node.pkg.git}`],
+      ['Elosys library', `${elosysPKG.version} @ ${elosysPKG.git}`],
       ['Operating system', `${os.type()} ${process.arch}`],
       ['CPU model(s)', `${cpuNames.toString()}`],
       ['CPU threads', `${cpuThreads}`],

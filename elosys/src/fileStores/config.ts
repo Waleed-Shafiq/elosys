@@ -255,7 +255,7 @@ export type ConfigOptions = {
   feeEstimatorPercentileFast: number
 
   /**
-   * Network ID of an official Iron Fish network
+   * Network ID of an official Elosys network
    */
   networkId: number
 
@@ -468,7 +468,7 @@ export class Config<
       blocksPerMessage: 25,
       minerBatchSize: 25000,
       preemptiveBlockMining: true,
-      poolName: 'Iron Fish Pool',
+      poolName: 'Elosys Pool',
       poolAccountName: undefined,
       poolBanning: true,
       poolHost: DEFAULT_POOL_HOST,

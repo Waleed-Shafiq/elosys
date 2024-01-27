@@ -104,7 +104,7 @@ export default class Start extends elosysCommand {
     networkId: Flags.integer({
       char: 'i',
       default: undefined,
-      description: 'Network ID of an official Iron Fish network to connect to',
+      description: 'Network ID of an official Elosys network to connect to',
     }),
     customNetwork: Flags.string({
       char: 'c',
@@ -278,11 +278,11 @@ export default class Start extends elosysCommand {
    */
   async firstRun(node: FullNode): Promise<void> {
     this.log('')
-    this.log('Thank you for installing the Iron Fish Node.')
+    this.log('Thank you for installing the Elosys Node.')
 
     if (!node.config.get(ENABLE_TELEMETRY_CONFIG_KEY)) {
       this.log('')
-      this.log('To help improve Iron Fish, opt in to collecting telemetry by running')
+      this.log('To help improve Elosys, opt in to collecting telemetry by running')
       this.log(` > elosys config:set ${ENABLE_TELEMETRY_CONFIG_KEY} true`)
     }
 

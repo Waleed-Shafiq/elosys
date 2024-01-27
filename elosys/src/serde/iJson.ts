@@ -5,7 +5,7 @@
 import BJSON from 'buffer-json'
 
 /**
- * IJSON, for Iron Fish JSON. Supports parsing/stringifying Buffers and BigInts.
+ * IJSON, for Elosys JSON. Supports parsing/stringifying Buffers and BigInts.
  */
 export const IJSON = {
   stringify(value: unknown, space?: string | number): string {

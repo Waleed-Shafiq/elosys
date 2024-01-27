@@ -125,7 +125,7 @@ export class Target {
   }
 
   /**
-   * Returns the minimum difficulty that can be used for Iron Fish blocks
+   * Returns the minimum difficulty that can be used for Elosys blocks
    * To be used in calculateTarget for easier mocking
    */
   static minDifficulty(): bigint {

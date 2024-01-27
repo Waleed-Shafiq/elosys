@@ -1464,11 +1464,11 @@ export class Blockchain {
       return {
         createdTransactionHash: GENESIS_BLOCK_PREVIOUS,
         id: Asset.nativeId(),
-        metadata: Buffer.from('Native asset of Iron Fish blockchain', 'utf8'),
+        metadata: Buffer.from('Native asset of Elosys blockchain', 'utf8'),
         name: Buffer.from('$IRON', 'utf8'),
         nonce: 0,
-        creator: Buffer.from('Iron Fish', 'utf8'),
-        owner: Buffer.from('Iron Fish', 'utf8'),
+        creator: Buffer.from('Elosys', 'utf8'),
+        owner: Buffer.from('Elosys', 'utf8'),
         supply: 0n,
       }
     }

@@ -1,7 +1,7 @@
 [package]
 name = "elosys-phase2"
 version = "0.2.2"
-authors = ["Sean Bowe <ewillbefull@gmail.com>", "Iron Fish <contact@elosys.network> (https://elosys.network)"]
+authors = ["Sean Bowe <ewillbefull@gmail.com>", "Elosys <contact@elosys.network> (https://elosys.network)"]
 description = "Library for performing MPCs for creating zk-SNARK public parameters"
 homepage = "https://github.com/elosys/elosys"
 license = "MIT OR Apache-2.0"

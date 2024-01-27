@@ -11,7 +11,7 @@ import { ONE_FISH_IMAGE, TWO_FISH_IMAGE } from '../images'
 const FAUCET_DISABLED = false
 
 export class FaucetCommand extends elosysCommand {
-  static description = `Receive coins from the Iron Fish official testnet Faucet`
+  static description = `Receive coins from the Elosys official testnet Faucet`
 
   static flags = {
     ...RemoteFlags,
@@ -47,7 +47,7 @@ export class FaucetCommand extends elosysCommand {
 
     if (!email) {
       email =
-        (await CliUx.ux.prompt('Enter your email to stay updated with Iron Fish', {
+        (await CliUx.ux.prompt('Enter your email to stay updated with Elosys', {
           required: false,
         })) || undefined
     }
@@ -59,7 +59,7 @@ export class FaucetCommand extends elosysCommand {
     if (!accountName) {
       this.log(`You don't have a default account set up yet. Let's create one first!`)
       accountName =
-        (await CliUx.ux.prompt('Please enter the name of your new Iron Fish account', {
+        (await CliUx.ux.prompt('Please enter the name of your new Elosys account', {
           required: false,
         })) || 'default'
 
@@ -68,7 +68,7 @@ export class FaucetCommand extends elosysCommand {
 
     CliUx.ux.action.start(
       'Collecting your funds',
-      'Sending a request to the Iron Fish network',
+      'Sending a request to the Elosys network',
       {
         stdout: true,
       },
@@ -97,7 +97,7 @@ export class FaucetCommand extends elosysCommand {
 
     ${TWO_FISH_IMAGE}
 
-Congratulations! The Iron Fish Faucet just added your request to the queue!
+Congratulations! The Elosys Faucet just added your request to the queue!
 
 It will be processed within the next hour and $IRON will be sent directly to your account.
 

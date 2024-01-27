@@ -29,7 +29,7 @@ describe('Route wallet/getBalance', () => {
           return {
             assetId: Asset.nativeId(),
             assetName: Buffer.from('$IRON', 'utf8'),
-            assetCreator: Buffer.from('Iron Fish', 'utf8'),
+            assetCreator: Buffer.from('Elosys ', 'utf8'),
             assetOwner: Buffer.from('Copper Clam', 'utf8'),
             assetVerification: { status: 'unknown' },
             confirmed: BigInt(2000000000),
@@ -125,7 +125,7 @@ describe('Route wallet/getBalance', () => {
           return {
             assetId: Asset.nativeId(),
             assetName: Buffer.from('$IRON', 'utf8'),
-            assetCreator: Buffer.from('Iron Fish', 'utf8'),
+            assetCreator: Buffer.from('Elosys', 'utf8'),
             assetOwner: Buffer.from('Copper Clam', 'utf8'),
             assetVerification: { status: 'unknown' },
             confirmed: BigInt(2000000000),

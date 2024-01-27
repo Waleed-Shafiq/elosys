@@ -61,7 +61,7 @@ describe('Route wallet/sendTransaction', () => {
     routeTest.chain.synced = false
 
     await expect(routeTest.client.wallet.sendTransaction(TEST_PARAMS)).rejects.toThrow(
-      'Your node must be synced with the Iron Fish network to send a transaction. Please try again later',
+      'Your node must be synced with the Elosys network to send a transaction. Please try again later',
     )
   })
 

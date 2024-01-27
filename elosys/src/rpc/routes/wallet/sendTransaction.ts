@@ -81,7 +81,7 @@ routes.register<typeof SendTransactionRequestSchema, SendTransactionResponse>(
 
     if (!status.content.blockchain.synced) {
       throw new RpcValidationError(
-        `Your node must be synced with the Iron Fish network to send a transaction. Please try again later`,
+        `Your node must be synced with the Elosys network to send a transaction. Please try again later`,
       )
     }
 

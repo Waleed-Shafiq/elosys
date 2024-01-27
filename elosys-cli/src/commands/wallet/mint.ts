@@ -112,7 +112,7 @@ export class Mint extends elosysCommand {
       const status = await client.wallet.getNodeStatus()
       if (!status.content.blockchain.synced) {
         this.log(
-          `Your node must be synced with the Iron Fish network to send a transaction. Please try again later`,
+          `Your node must be synced with the Elosys network to send a transaction. Please try again later`,
         )
         this.exit(1)
       }
