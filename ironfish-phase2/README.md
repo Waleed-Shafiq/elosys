@@ -1,4 +1,4 @@
-# ironfish-phase2
+# elosys-phase2
 
 Much of the code in this folder was originally forked from https://github.com/ebfull/phase2. The original licenses and copyright are retained in this folder.
 

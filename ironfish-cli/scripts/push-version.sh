@@ -13,7 +13,7 @@ if ! command -v curl &> /dev/null; then
     exit 1
 fi
 
-VERSION="$(jq -r '.version' ironfish-cli/package.json)"
+VERSION="$(jq -r '.version' elosys-cli/package.json)"
 STATUS="$(curl \
     --write-out '%{http_code}' \
     --silent \

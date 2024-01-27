@@ -2,10 +2,10 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 import { Flags } from '@oclif/core'
-import { IronfishCommand } from '../../command'
+import { elosysCommand } from '../../command'
 import { RemoteFlags } from '../../flags'
 
-export class WhichCommand extends IronfishCommand {
+export class WhichCommand extends elosysCommand {
   static description = `Show the account currently used.
 
   By default all commands will use this account when deciding what
@@ -34,9 +34,9 @@ export class WhichCommand extends IronfishCommand {
     if (!accountName) {
       this.log(
         'There is currently no account being used.\n' +
-          ' * Create an account: "ironfish wallet:create"\n' +
-          ' * List all accounts: "ironfish wallet:accounts"\n' +
-          ' * Use an existing account: "ironfish wallet:use <name>"',
+          ' * Create an account: "elosys wallet:create"\n' +
+          ' * List all accounts: "elosys wallet:accounts"\n' +
+          ' * Use an existing account: "elosys wallet:use <name>"',
       )
       this.exit(0)
     }

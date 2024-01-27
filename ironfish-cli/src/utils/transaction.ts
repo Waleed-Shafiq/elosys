@@ -11,7 +11,7 @@ import {
   RpcClient,
   TimeUtils,
   TransactionStatus,
-} from '@ironfish/sdk'
+} from '@elosys/sdk'
 import { CliUx } from '@oclif/core'
 
 export function displayTransactionSummary(

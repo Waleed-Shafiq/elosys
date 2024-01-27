@@ -7,12 +7,12 @@ import {
   DEFAULT_FEE_ESTIMATOR_PERCENTILE_FAST,
   DEFAULT_FEE_ESTIMATOR_PERCENTILE_SLOW,
   RpcClient,
-} from '@ironfish/sdk'
+} from '@elosys/sdk'
 import { Flags } from '@oclif/core'
-import { IronfishCommand } from '../command'
+import { elosysCommand } from '../command'
 import { RemoteFlags } from '../flags'
 
-export class FeeCommand extends IronfishCommand {
+export class FeeCommand extends elosysCommand {
   static description = `Get fee distribution for most recent blocks`
 
   static flags = {

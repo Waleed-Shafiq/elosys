@@ -18,11 +18,11 @@ pub fn compute(
     let new_params = File::create(output_path)?;
     let mut new_params = BufWriter::with_capacity(1024 * 1024, new_params);
 
-    let mut sapling_spend = ironfish_phase2::MPCParameters::read(&mut current_params, false)?;
+    let mut sapling_spend = elosys_phase2::MPCParameters::read(&mut current_params, false)?;
 
-    let mut sapling_output = ironfish_phase2::MPCParameters::read(&mut current_params, false)?;
+    let mut sapling_output = elosys_phase2::MPCParameters::read(&mut current_params, false)?;
 
-    let mut sapling_mint = ironfish_phase2::MPCParameters::read(&mut current_params, false)?;
+    let mut sapling_mint = elosys_phase2::MPCParameters::read(&mut current_params, false)?;
 
     let rng: &mut Box<dyn rand::RngCore> = &mut match seed {
         Some(s) => Box::new(Seeder::from(s).make_rng::<ChaCha20Rng>()),

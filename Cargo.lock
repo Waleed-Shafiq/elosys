@@ -174,7 +174,7 @@ name = "benchmarks"
 version = "0.1.0"
 dependencies = [
  "criterion",
- "elosysfish",
+ "elosys",
 ]
 
 [[package]]

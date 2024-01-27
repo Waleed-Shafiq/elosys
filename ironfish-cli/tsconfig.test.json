@@ -5,5 +5,5 @@
     "noEmit": true
   },
   "include": [],
-  "references": [{ "path": "../ironfish" }]
+  "references": [{ "path": "../elosys" }]
 }

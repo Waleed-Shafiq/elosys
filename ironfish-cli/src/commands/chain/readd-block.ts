@@ -2,10 +2,10 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 import { CliUx } from '@oclif/core'
-import { IronfishCommand } from '../../command'
+import { elosysCommand } from '../../command'
 import { LocalFlags } from '../../flags'
 
-export default class ReAddBlock extends IronfishCommand {
+export default class ReAddBlock extends elosysCommand {
   static description =
     'Remove and readd a block on the chain if it has no other blocks after it'
 

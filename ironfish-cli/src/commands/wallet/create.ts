@@ -3,10 +3,10 @@
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 
 import { CliUx } from '@oclif/core'
-import { IronfishCommand } from '../../command'
+import { elosysCommand } from '../../command'
 import { RemoteFlags } from '../../flags'
 
-export class CreateCommand extends IronfishCommand {
+export class CreateCommand extends elosysCommand {
   static description = `Create a new account for sending and receiving coins`
 
   static args = [
@@ -43,7 +43,7 @@ export class CreateCommand extends IronfishCommand {
     if (isDefaultAccount) {
       this.log(`The default account is now: ${name}`)
     } else {
-      this.log(`Run "ironfish wallet:use ${name}" to set the account as default`)
+      this.log(`Run "elosys wallet:use ${name}" to set the account as default`)
     }
   }
 }

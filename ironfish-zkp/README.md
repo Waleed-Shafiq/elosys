@@ -1,4 +1,4 @@
-# ironfish-zkp
+# elosys-zkp
 
 This is the foundation of the Iron Fish project that knows about the
 [Sapling](https://github.com/zcash/librustzcash/tree/master/zcash_primitives/src/sapling)

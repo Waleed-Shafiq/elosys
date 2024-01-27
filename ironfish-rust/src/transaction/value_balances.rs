@@ -5,7 +5,7 @@ use std::collections::{hash_map, HashMap};
 
 use crate::{
     assets::asset_identifier::{AssetIdentifier, NATIVE_ASSET},
-    errors::{IronfishError, IronfishErrorKind},
+    errors::{elosysError, elosysErrorKind},
 };
 
 pub struct ValueBalances {
@@ -21,11 +21,11 @@ impl ValueBalances {
         ValueBalances { values: hash_map }
     }
 
-    pub fn add(&mut self, asset_id: &AssetIdentifier, value: i64) -> Result<(), IronfishError> {
+    pub fn add(&mut self, asset_id: &AssetIdentifier, value: i64) -> Result<(), elosysError> {
         let current_value = self.values.entry(*asset_id).or_insert(0);
         let new_value = current_value
             .checked_add(value)
-            .ok_or_else(|| IronfishError::new(IronfishErrorKind::InvalidBalance))?;
+            .ok_or_else(|| elosysError::new(elosysErrorKind::InvalidBalance))?;
 
         *current_value = new_value;
 
@@ -36,11 +36,11 @@ impl ValueBalances {
         &mut self,
         asset_id: &AssetIdentifier,
         value: i64,
-    ) -> Result<(), IronfishError> {
+    ) -> Result<(), elosysError> {
         let current_value = self.values.entry(*asset_id).or_insert(0);
         let new_value = current_value
             .checked_sub(value)
-            .ok_or_else(|| IronfishError::new(IronfishErrorKind::InvalidBalance))?;
+            .ok_or_else(|| elosysError::new(elosysErrorKind::InvalidBalance))?;
 
         *current_value = new_value;
 

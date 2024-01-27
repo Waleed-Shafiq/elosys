@@ -2,7 +2,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 
-use ironfish_frost::frost::{
+use elosys_frost::frost::{
     self,
     keys::KeyPackage,
     round1::SigningNonces,
@@ -11,7 +11,7 @@ use ironfish_frost::frost::{
 };
 use rand::{rngs::StdRng, SeedableRng};
 
-use crate::errors::{IronfishError, IronfishErrorKind};
+use crate::errors::{elosysError, elosysErrorKind};
 
 // Wrapper around frost::round2::sign that provides a seedable rng from u64
 pub fn round_two(
@@ -19,9 +19,9 @@ pub fn round_two(
     key_package: KeyPackage,
     randomizer: Randomizer,
     seed: u64,
-) -> Result<SignatureShare, IronfishError> {
+) -> Result<SignatureShare, elosysError> {
     let mut rng = StdRng::seed_from_u64(seed);
     let signer_nonces = SigningNonces::new(key_package.signing_share(), &mut rng);
     frost::round2::sign(&signing_package, &signer_nonces, &key_package, randomizer)
-        .map_err(|_| IronfishError::new(IronfishErrorKind::RoundTwoSigningFailure))
+        .map_err(|_| elosysError::new(elosysErrorKind::RoundTwoSigningFailure))
 }

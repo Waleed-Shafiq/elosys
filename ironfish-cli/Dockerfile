@@ -8,19 +8,19 @@ RUN \
 
 RUN curl https://sh.rustup.rs -sSf | sh -s -- -y
 
-COPY ./ /usr/src/ironfish
+COPY ./ /usr/src/elosys
 
-RUN /usr/src/ironfish/ironfish-cli/scripts/build.sh
+RUN /usr/src/elosys/elosys-cli/scripts/build.sh
 
 FROM node:20-bookworm-slim
 
 EXPOSE 8020:8020
 EXPOSE 9033:9033
-VOLUME /root/.ironfish
+VOLUME /root/.elosys
 ENV NODE_ENV production
 
-COPY --from=build /usr/src/ironfish/ironfish-cli/build.cli/ironfish-cli /usr/share/ironfish
-COPY --from=build --chmod=755 /usr/src/ironfish/ironfish-cli/scripts/docker-entrypoint.sh /usr/bin/ironfish
+COPY --from=build /usr/src/elosys/elosys-cli/build.cli/elosys-cli /usr/share/elosys
+COPY --from=build --chmod=755 /usr/src/elosys/elosys-cli/scripts/docker-entrypoint.sh /usr/bin/elosys
 
-ENTRYPOINT ["/usr/bin/ironfish"]
+ENTRYPOINT ["/usr/bin/elosys"]
 CMD ["start", "--rpc.ipc", "--rpc.tcp"]

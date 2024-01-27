@@ -2,7 +2,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 
-import { Asset } from '@ironfish/rust-nodejs'
+import { Asset } from '@elosys/rust-nodejs'
 import {
   AssetVerification,
   BufferUtils,
@@ -10,7 +10,7 @@ import {
   RpcAsset,
   RpcClient,
   StringUtils,
-} from '@ironfish/sdk'
+} from '@elosys/sdk'
 import chalk from 'chalk'
 import inquirer from 'inquirer'
 

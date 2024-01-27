@@ -1,13 +1,13 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
-import { FileUtils } from '@ironfish/sdk'
+import { FileUtils } from '@elosys/sdk'
 import { Flags } from '@oclif/core'
 import { parseNumber } from '../../args'
-import { IronfishCommand } from '../../command'
+import { elosysCommand } from '../../command'
 import { LocalFlags } from '../../flags'
 
-export default class Power extends IronfishCommand {
+export default class Power extends elosysCommand {
   static description = "Show the network's hash power per second"
 
   static flags = {

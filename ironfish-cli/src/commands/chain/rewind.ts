@@ -9,13 +9,13 @@ import {
   NodeUtils,
   TimeUtils,
   Wallet,
-} from '@ironfish/sdk'
+} from '@elosys/sdk'
 import { CliUx, Command } from '@oclif/core'
-import { IronfishCommand } from '../../command'
+import { elosysCommand } from '../../command'
 import { LocalFlags } from '../../flags'
 import { ProgressBar } from '../../types'
 
-export default class Rewind extends IronfishCommand {
+export default class Rewind extends elosysCommand {
   static description =
     'Rewind the chain database to the given sequence by deleting all blocks with greater sequences'
 

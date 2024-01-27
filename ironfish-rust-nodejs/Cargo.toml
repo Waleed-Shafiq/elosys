@@ -1,10 +1,10 @@
 [package]
-name = "ironfish-rust-nodejs"
+name = "elosys-rust-nodejs"
 version = "0.1.0"
 license = "MPL-2.0"
 
-description = "Node.js addon for interacting with transactions on the Iron Fish chain"
-keywords = ["iron-fish", "cryptocurrency", "blockchain"]
+description = "Node.js addon for interacting with transactions on the elosys chain"
+keywords = ["elosys", "cryptocurrency", "blockchain"]
 
 publish = false
 
@@ -28,8 +28,8 @@ crate-type = ["cdylib"]
 [dependencies]
 base64 = "0.13.0"
 fish_hash = "0.1.0"
-ironfish = { path = "../ironfish-rust" }
-ironfish_mpc = { path = "../ironfish-mpc" }
+elosys = { path = "../elosys-rust" }
+elosys_mpc = { path = "../elosys-mpc" }
 napi = { version = "2.13.2", features = ["napi6"] }
 napi-derive = "2.13.0"
 

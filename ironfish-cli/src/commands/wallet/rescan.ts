@@ -2,14 +2,14 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 
-import { Meter, TimeUtils } from '@ironfish/sdk'
+import { Meter, TimeUtils } from '@elosys/sdk'
 import { CliUx, Flags } from '@oclif/core'
-import { IronfishCommand } from '../../command'
+import { elosysCommand } from '../../command'
 import { RemoteFlags } from '../../flags'
 import { ProgressBar } from '../../types'
 import { hasUserResponseError } from '../../utils'
 
-export class RescanCommand extends IronfishCommand {
+export class RescanCommand extends elosysCommand {
   static description = `Rescan the blockchain for transactions. Clears wallet disk caches before rescanning.`
 
   static flags = {

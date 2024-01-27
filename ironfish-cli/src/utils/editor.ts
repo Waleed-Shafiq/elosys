@@ -1,7 +1,7 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
-import { Assert, Config } from '@ironfish/sdk'
+import { Assert, Config } from '@elosys/sdk'
 import { spawn } from 'child_process'
 
 export function launchEditor(file: string, config?: Config): Promise<number | null> {
@@ -13,7 +13,7 @@ export function launchEditor(file: string, config?: Config): Promise<number | nu
 
   if (!editor) {
     throw new Error(
-      `you must set the EDITOR environment variable or 'editor' in the ironfish config`,
+      `you must set the EDITOR environment variable or 'editor' in the elosys config`,
     )
   }
 

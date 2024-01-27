@@ -1,3 +1,3 @@
-# `@ironfish/rust-nodejs-linux-x64-musl`
+# `@elosys/rust-nodejs-linux-x64-musl`
 
-This is the **x86_64-unknown-linux-musl** binary for `@ironfish/rust-nodejs`
+This is the **x86_64-unknown-linux-musl** binary for `@elosys/rust-nodejs`

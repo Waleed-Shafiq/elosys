@@ -1,13 +1,13 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
-import { ConfigOptions } from '@ironfish/sdk'
+import { ConfigOptions } from '@elosys/sdk'
 import { Flags } from '@oclif/core'
 import jsonColorizer from 'json-colorizer'
-import { IronfishCommand } from '../../command'
+import { elosysCommand } from '../../command'
 import { RemoteFlags } from '../../flags'
 
-export class GetCommand extends IronfishCommand {
+export class GetCommand extends elosysCommand {
   static description = `Print out one config value`
 
   static args = [

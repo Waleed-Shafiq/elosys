@@ -1,13 +1,13 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
-import { DEFAULT_CONFIG_NAME, JSONUtils } from '@ironfish/sdk'
+import { DEFAULT_CONFIG_NAME, JSONUtils } from '@elosys/sdk'
 import { Flags } from '@oclif/core'
 import { mkdtemp, readFile, writeFile } from 'fs'
 import os from 'os'
 import path from 'path'
 import { promisify } from 'util'
-import { IronfishCommand } from '../../command'
+import { elosysCommand } from '../../command'
 import { ConfigFlag, ConfigFlagKey, DataDirFlag, DataDirFlagKey } from '../../flags'
 import { launchEditor } from '../../utils'
 
@@ -15,10 +15,10 @@ const mkdtempAsync = promisify(mkdtemp)
 const writeFileAsync = promisify(writeFile)
 const readFileAsync = promisify(readFile)
 
-export class EditCommand extends IronfishCommand {
+export class EditCommand extends elosysCommand {
   static description = `Edit the config in your configured editor
 
-  Set the editor in either EDITOR environment variable, or set 'editor' in your ironfish config`
+  Set the editor in either EDITOR environment variable, or set 'editor' in your elosys config`
 
   static flags = {
     [ConfigFlagKey]: ConfigFlag,
@@ -44,7 +44,7 @@ export class EditCommand extends IronfishCommand {
     const output = JSON.stringify(response.content, undefined, '   ')
 
     const tmpDir = os.tmpdir()
-    const folderPath = await mkdtempAsync(path.join(tmpDir, '@ironfish-sdk-'))
+    const folderPath = await mkdtempAsync(path.join(tmpDir, '@elosys-sdk-'))
     const filePath = path.join(folderPath, DEFAULT_CONFIG_NAME)
 
     await writeFileAsync(filePath, output)

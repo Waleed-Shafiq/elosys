@@ -1,12 +1,12 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
-import { ALL_API_NAMESPACES, NodeUtils, RpcMemoryClient } from '@ironfish/sdk'
+import { ALL_API_NAMESPACES, NodeUtils, RpcMemoryClient } from '@elosys/sdk'
 import { Flags } from '@oclif/core'
 import fs from 'fs/promises'
 import repl from 'node:repl'
 import path from 'path'
-import { IronfishCommand } from '../command'
+import { elosysCommand } from '../command'
 import {
   ConfigFlag,
   ConfigFlagKey,
@@ -16,7 +16,7 @@ import {
   VerboseFlagKey,
 } from '../flags'
 
-export default class Repl extends IronfishCommand {
+export default class Repl extends elosysCommand {
   static description = 'An interactive terminal to the node'
 
   static flags = {

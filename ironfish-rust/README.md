@@ -1,4 +1,4 @@
-[![codecov](https://codecov.io/gh/iron-fish/ironfish/branch/master/graph/badge.svg?token=PCSVEVEW5V&flag=ironfish-rust)](https://codecov.io/gh/iron-fish/ironfish)
+[![codecov](https://codecov.io/gh/elosys/elosys/branch/master/graph/badge.svg?token=PCSVEVEW5V&flag=elosys-rust)](https://codecov.io/gh/elosys/elosys)
 
 This is the core API for interacting with transactions and the chain. It's essentially a facade to a lot of different projects.
 
@@ -8,7 +8,7 @@ This layer is tangentially aware of the chain. It is not aware of the peer-to-pe
 
 This library requires Sapling parameters to be present prior to compilation.
 
-1. Use the `download-params` feature-flag to download the Iron Fish parameters from [Github](https://github.com/iron-fish/ironfish/tree/master/ironfish-rust/src/sapling_params) at compile-time.
+1. Use the `download-params` feature-flag to download the Elosys Fish parameters from [Github](https://github.com/elosys/elosys/tree/master/elosys-rust/src/sapling_params) at compile-time.
 2. Bring your own params files and put them in your src folder. You can download them from the Github link above and add them to your repo manually, if you prefer. They must be present at `./src/sapling_params/sapling_{spend | output | mint}.params`
    ```bash
    $ ls ./src/sapling_params

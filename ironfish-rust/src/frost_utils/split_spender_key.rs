@@ -3,17 +3,17 @@
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 
 use group::GroupEncoding;
-use ironfish_frost::frost::{
+use elosys_frost::frost::{
     keys::{IdentifierList, KeyPackage, PublicKeyPackage},
     Identifier,
 };
-use ironfish_zkp::{constants::PROOF_GENERATION_KEY_GENERATOR, ProofGenerationKey};
+use elosys_zkp::{constants::PROOF_GENERATION_KEY_GENERATOR, ProofGenerationKey};
 use jubjub::SubgroupPoint;
 use rand::thread_rng;
 use std::collections::HashMap;
 
 use crate::{
-    errors::{IronfishError, IronfishErrorKind},
+    errors::{elosysError, elosysErrorKind},
     IncomingViewKey, OutgoingViewKey, PublicAddress, SaplingKey, ViewKey,
 };
 
@@ -37,7 +37,7 @@ pub fn split_spender_key(
     min_signers: u16,
     max_signers: u16,
     identifiers: Vec<Identifier>,
-) -> Result<TrustedDealerKeyPackages, IronfishError> {
+) -> Result<TrustedDealerKeyPackages, elosysError> {
     let secret = coordinator_sapling_key
         .spend_authorizing_key
         .to_bytes()
@@ -59,7 +59,7 @@ pub fn split_spender_key(
     let authorizing_key_bytes = public_key_package.verifying_key().serialize();
 
     let authorizing_key = Option::from(SubgroupPoint::from_bytes(&authorizing_key_bytes))
-        .ok_or_else(|| IronfishError::new(IronfishErrorKind::InvalidAuthorizingKey))?;
+        .ok_or_else(|| elosysError::new(elosysErrorKind::InvalidAuthorizingKey))?;
 
     let proof_generation_key = ProofGenerationKey {
         ak: authorizing_key,
@@ -95,7 +95,7 @@ pub fn split_spender_key(
 #[cfg(test)]
 mod test {
     use super::*;
-    use ironfish_frost::{
+    use elosys_frost::{
         frost::{frost::keys::reconstruct, JubjubBlake2b512},
         participant::Secret,
     };
@@ -117,7 +117,7 @@ mod test {
         let result = split_spender_key(sapling_key_1, 5, 11, identifiers.clone());
         assert!(result.is_err());
         let err = result.err().unwrap();
-        assert_eq!(err.kind, IronfishErrorKind::FrostLibError);
+        assert_eq!(err.kind, elosysErrorKind::FrostLibError);
         assert!(err.to_string().contains("Incorrect number of identifiers."));
 
         let sapling_key2 = SaplingKey::generate_key();
@@ -126,7 +126,7 @@ mod test {
 
         assert!(result.is_err());
         let err = result.err().unwrap();
-        assert_eq!(err.kind, IronfishErrorKind::FrostLibError);
+        assert_eq!(err.kind, elosysErrorKind::FrostLibError);
         assert!(err.to_string().contains("Incorrect number of identifiers."));
     }
 

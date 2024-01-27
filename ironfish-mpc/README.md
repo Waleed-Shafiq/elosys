@@ -1,4 +1,4 @@
-# ironfish-mpc
+# elosys-mpc
 
 Much of the code in this folder was originally forked from https://github.com/zcash-hackworks/sapling-mpc. The original licenses and copyright are retained in this folder.
 

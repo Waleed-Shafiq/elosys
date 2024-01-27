@@ -4,16 +4,16 @@
 
 use byteorder::{LittleEndian, ReadBytesExt, WriteBytesExt};
 use group::GroupEncoding;
-use ironfish_frost::frost::{round1::SigningCommitments, Identifier, SigningPackage};
+use elosys_frost::frost::{round1::SigningCommitments, Identifier, SigningPackage};
 
-use ironfish_zkp::redjubjub::{self, Signature};
+use elosys_zkp::redjubjub::{self, Signature};
 use std::{
     collections::BTreeMap,
     io::{self, Write},
 };
 
 use crate::{
-    errors::IronfishError, serializing::read_scalar, transaction::Blake2b, OutputDescription,
+    errors::elosysError, serializing::read_scalar, transaction::Blake2b, OutputDescription,
     SaplingKey, Transaction,
 };
 
@@ -68,7 +68,7 @@ impl UnsignedTransaction {
     /// Load a Transaction from a Read implementation (e.g: socket, file)
     /// This is the main entry-point when reconstructing a serialized transaction
     /// for verifying.
-    pub fn read<R: io::Read>(mut reader: R) -> Result<Self, IronfishError> {
+    pub fn read<R: io::Read>(mut reader: R) -> Result<Self, elosysError> {
         let version = TransactionVersion::read(&mut reader)?;
         let num_spends = reader.read_u64::<LittleEndian>()?;
         let num_outputs = reader.read_u64::<LittleEndian>()?;
@@ -117,7 +117,7 @@ impl UnsignedTransaction {
 
     /// Store the bytes of this transaction in the given writer. This is used
     /// to serialize transactions to file or network
-    pub fn write<W: io::Write>(&self, mut writer: W) -> Result<(), IronfishError> {
+    pub fn write<W: io::Write>(&self, mut writer: W) -> Result<(), elosysError> {
         self.version.write(&mut writer)?;
         writer.write_u64::<LittleEndian>(self.spends.len() as u64)?;
         writer.write_u64::<LittleEndian>(self.outputs.len() as u64)?;
@@ -152,7 +152,7 @@ impl UnsignedTransaction {
     /// Calculate a hash of the transaction data. This hash was signed by the
     /// private keys when the transaction was constructed, and will now be
     /// reconstructed to verify the signature.
-    pub fn transaction_signature_hash(&self) -> Result<[u8; 32], IronfishError> {
+    pub fn transaction_signature_hash(&self) -> Result<[u8; 32], elosysError> {
         let mut hasher = Blake2b::new()
             .hash_length(32)
             .personal(SIGNATURE_HASH_PERSONALIZATION)
@@ -186,7 +186,7 @@ impl UnsignedTransaction {
     }
 
     // Post transaction without much validation.
-    pub fn sign(&self, spender_key: &SaplingKey) -> Result<Transaction, IronfishError> {
+    pub fn sign(&self, spender_key: &SaplingKey) -> Result<Transaction, elosysError> {
         // Create the transaction signature hash
         let data_to_sign = self.transaction_signature_hash()?;
 
@@ -220,7 +220,7 @@ impl UnsignedTransaction {
     pub fn signing_package(
         &self,
         commitments: BTreeMap<Identifier, SigningCommitments>,
-    ) -> Result<SigningPackage, IronfishError> {
+    ) -> Result<SigningPackage, elosysError> {
         // Create the transaction signature hash
         let data_to_sign = self.transaction_signature_hash()?;
         Ok(SigningPackage::new(commitments, &data_to_sign))

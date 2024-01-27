@@ -5,7 +5,7 @@ use bellperson::groth16;
 use blstrs::Bls12;
 
 use crate::{
-    errors::{IronfishError, IronfishErrorKind},
+    errors::{elosysError, elosysErrorKind},
     sapling_bls12::SAPLING,
 };
 
@@ -15,9 +15,9 @@ use crate::{
 pub(crate) fn verify_spend_proof(
     proof: &groth16::Proof<Bls12>,
     inputs: &[blstrs::Scalar],
-) -> Result<(), IronfishError> {
+) -> Result<(), elosysError> {
     if !groth16::verify_proof(&SAPLING.spend_verifying_key, proof, inputs)? {
-        return Err(IronfishError::new(IronfishErrorKind::InvalidSpendProof));
+        return Err(elosysError::new(elosysErrorKind::InvalidSpendProof));
     }
 
     Ok(())
@@ -29,9 +29,9 @@ pub(crate) fn verify_spend_proof(
 pub(crate) fn verify_output_proof(
     proof: &groth16::Proof<Bls12>,
     inputs: &[blstrs::Scalar],
-) -> Result<(), IronfishError> {
+) -> Result<(), elosysError> {
     if !groth16::verify_proof(&SAPLING.output_verifying_key, proof, inputs)? {
-        return Err(IronfishError::new(IronfishErrorKind::InvalidOutputProof));
+        return Err(elosysError::new(elosysErrorKind::InvalidOutputProof));
     }
 
     Ok(())
@@ -43,9 +43,9 @@ pub(crate) fn verify_output_proof(
 pub(crate) fn verify_mint_proof(
     proof: &groth16::Proof<Bls12>,
     inputs: &[blstrs::Scalar],
-) -> Result<(), IronfishError> {
+) -> Result<(), elosysError> {
     if !groth16::verify_proof(&SAPLING.mint_verifying_key, proof, inputs)? {
-        return Err(IronfishError::new(IronfishErrorKind::InvalidMintProof));
+        return Err(elosysError::new(elosysErrorKind::InvalidMintProof));
     }
 
     Ok(())

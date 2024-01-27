@@ -8,12 +8,12 @@ import {
   RpcAsset,
   RpcWalletNote,
   TimeUtils,
-} from '@ironfish/sdk'
+} from '@elosys/sdk'
 import { CliUx } from '@oclif/core'
-import { IronfishCommand } from '../../../command'
+import { elosysCommand } from '../../../command'
 import { RemoteFlags } from '../../../flags'
 
-export class TransactionCommand extends IronfishCommand {
+export class TransactionCommand extends elosysCommand {
   static description = `Display an account transaction`
 
   static flags = {

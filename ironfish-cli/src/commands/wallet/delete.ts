@@ -3,10 +3,10 @@
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 
 import { CliUx, Flags } from '@oclif/core'
-import { IronfishCommand } from '../../command'
+import { elosysCommand } from '../../command'
 import { RemoteFlags } from '../../flags'
 
-export class DeleteCommand extends IronfishCommand {
+export class DeleteCommand extends elosysCommand {
   static description = `Permanently delete an account`
 
   static args = [

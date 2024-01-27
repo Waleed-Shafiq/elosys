@@ -2,7 +2,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 
-use ironfish::{
+use elosys::{
     assets::asset::ID_LENGTH as ASSET_ID_LENGTH,
     note::{AMOUNT_VALUE_SIZE, MEMO_SIZE, SCALAR_SIZE},
     ViewKey,
@@ -10,9 +10,9 @@ use ironfish::{
 use napi::{bindgen_prelude::*, JsBuffer};
 use napi_derive::napi;
 
-use ironfish::Note;
+use elosys::Note;
 
-use ironfish::keys::PUBLIC_ADDRESS_SIZE;
+use elosys::keys::PUBLIC_ADDRESS_SIZE;
 
 use crate::to_napi_err;
 
@@ -59,8 +59,8 @@ impl NativeNote {
         sender: String,
     ) -> Result<Self> {
         let value_u64 = value.get_u64().1;
-        let owner_address = ironfish::PublicAddress::from_hex(&owner).map_err(to_napi_err)?;
-        let sender_address = ironfish::PublicAddress::from_hex(&sender).map_err(to_napi_err)?;
+        let owner_address = elosys::PublicAddress::from_hex(&owner).map_err(to_napi_err)?;
+        let sender_address = elosys::PublicAddress::from_hex(&sender).map_err(to_napi_err)?;
 
         let buffer = asset_id.into_value()?;
         let asset_id_vec = buffer.as_ref();

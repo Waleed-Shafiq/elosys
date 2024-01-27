@@ -1,4 +1,4 @@
-use ironfish_mpc::compute;
+use elosys_mpc::compute;
 
 fn main() {
     let hash = compute("params", "new_params", &None).unwrap();

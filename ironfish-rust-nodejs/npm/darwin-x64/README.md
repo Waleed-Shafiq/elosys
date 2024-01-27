@@ -1,3 +1,3 @@
-# `@ironfish/rust-nodejs-darwin-x64`
+# `@elosys/rust-nodejs-darwin-x64`
 
-This is the **x86_64-apple-darwin** binary for `@ironfish/rust-nodejs`
+This is the **x86_64-apple-darwin** binary for `@elosys/rust-nodejs`

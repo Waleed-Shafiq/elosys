@@ -1,11 +1,11 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
-import { Assert, FullNode, NodeUtils, PromiseUtils } from '@ironfish/sdk'
+import { Assert, FullNode, NodeUtils, PromiseUtils } from '@elosys/sdk'
 import { Flags } from '@oclif/core'
 import inspector from 'node:inspector'
 import { v4 as uuid } from 'uuid'
-import { IronfishCommand, SIGNALS } from '../command'
+import { elosysCommand, SIGNALS } from '../command'
 import {
   ConfigFlag,
   ConfigFlagKey,
@@ -37,7 +37,7 @@ import { ONE_FISH_IMAGE } from '../images'
 export const ENABLE_TELEMETRY_CONFIG_KEY = 'enableTelemetry'
 const DEFAULT_ACCOUNT_NAME = 'default'
 
-export default class Start extends IronfishCommand {
+export default class Start extends elosysCommand {
   static description = 'Start the node'
 
   static flags = {
@@ -247,7 +247,7 @@ export default class Start extends IronfishCommand {
     if (!trees.valid) {
       this.log(
         `Error starting node: your merkle trees are corrupt: ${String(trees.reason)}.` +
-          `\n  1. Run ironfish chain:repair to attempt repair` +
+          `\n  1. Run elosys chain:repair to attempt repair` +
           `\n  2. Delete your database at ${node.config.chainDatabasePath}`,
       )
 
@@ -283,7 +283,7 @@ export default class Start extends IronfishCommand {
     if (!node.config.get(ENABLE_TELEMETRY_CONFIG_KEY)) {
       this.log('')
       this.log('To help improve Iron Fish, opt in to collecting telemetry by running')
-      this.log(` > ironfish config:set ${ENABLE_TELEMETRY_CONFIG_KEY} true`)
+      this.log(` > elosys config:set ${ENABLE_TELEMETRY_CONFIG_KEY} true`)
     }
 
     if (!node.wallet.getDefaultAccount()) {

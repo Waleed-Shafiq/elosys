@@ -7,10 +7,10 @@ import {
   DatabaseVersionError,
   ErrorUtils,
   InternalOptions,
-  IronfishSdk,
+  elosysSdk,
   Logger,
   RpcConnectionError,
-} from '@ironfish/sdk'
+} from '@elosys/sdk'
 import { Command, Config } from '@oclif/core'
 import { CLIError, ExitError } from '@oclif/core/lib/errors'
 import {
@@ -32,7 +32,7 @@ import {
   VerboseFlag,
   VerboseFlagKey,
 } from './flags'
-import { IronfishCliPKG } from './package'
+import { elosysCliPKG } from './package'
 import { hasUserResponseError } from './utils'
 
 export type SIGNALS = 'SIGTERM' | 'SIGINT' | 'SIGUSR2'
@@ -51,11 +51,11 @@ export type FLAGS =
   | typeof VerboseFlagKey
   | typeof RpcAuthFlagKey
 
-export abstract class IronfishCommand extends Command {
+export abstract class elosysCommand extends Command {
   // Yes, this is disabling the type system but any code
   // that may use this will not be executed until after
   // run() is called and it provides a lot of value
-  sdk!: IronfishSdk
+  sdk!: elosysSdk
 
   /**
    * Use this logger instance for debug/error output.
@@ -174,8 +174,8 @@ export abstract class IronfishCommand extends Command {
       internalOverrides.rpcAuthToken = rpcAuthFlag
     }
 
-    this.sdk = await IronfishSdk.init({
-      pkg: IronfishCliPKG,
+    this.sdk = await elosysSdk.init({
+      pkg: elosysCliPKG,
       configOverrides: configOverrides,
       internalOverrides: internalOverrides,
       configName: typeof configFlag === 'string' ? configFlag : undefined,

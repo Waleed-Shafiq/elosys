@@ -1,7 +1,7 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
-import { RpcBlockHeader, SetIntervalToken } from '@ironfish/sdk'
+import { RpcBlockHeader, SetIntervalToken } from '@elosys/sdk'
 import LRU from 'blru'
 
 export type GossipFork = {

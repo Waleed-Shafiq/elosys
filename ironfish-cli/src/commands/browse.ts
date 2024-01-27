@@ -1,13 +1,13 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
-import { Platform } from '@ironfish/sdk'
+import { Platform } from '@elosys/sdk'
 import { Flags } from '@oclif/core'
-import { IronfishCommand } from '../command'
+import { elosysCommand } from '../command'
 import { ConfigFlag, ConfigFlagKey, DataDirFlag, DataDirFlagKey } from '../flags'
 import { PlatformUtils } from '../utils'
 
-export class BrowseCommand extends IronfishCommand {
+export class BrowseCommand extends elosysCommand {
   static description = `Browse to your data directory`
 
   static flags = {

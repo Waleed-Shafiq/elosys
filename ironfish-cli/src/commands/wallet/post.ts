@@ -7,19 +7,19 @@ import {
   RawTransactionSerde,
   RpcClient,
   Transaction,
-} from '@ironfish/sdk'
+} from '@elosys/sdk'
 import { CliUx, Flags } from '@oclif/core'
-import { IronfishCommand } from '../../command'
+import { elosysCommand } from '../../command'
 import { RemoteFlags } from '../../flags'
 
-export class PostCommand extends IronfishCommand {
+export class PostCommand extends elosysCommand {
   static summary = 'Post a raw transaction'
 
   static description = `Use this command to post a raw transaction.
    The output is a finalized posted transaction.`
 
   static examples = [
-    '$ ironfish wallet:post 618c098d8d008c9f78f6155947014901a019d9ec17160dc0f0d1bb1c764b29b4...',
+    '$ elosys wallet:post 618c098d8d008c9f78f6155947014901a019d9ec17160dc0f0d1bb1c764b29b4...',
   ]
 
   static flags = {
@@ -90,7 +90,7 @@ export class PostCommand extends IronfishCommand {
     this.log(response.content.transaction)
 
     if (!flags.broadcast) {
-      this.log(`\nRun "ironfish wallet:transaction:add" to add the transaction to your wallet`)
+      this.log(`\nRun "elosys wallet:transaction:add" to add the transaction to your wallet`)
     }
   }
 

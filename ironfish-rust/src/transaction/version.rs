@@ -2,7 +2,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 
-use crate::errors::{IronfishError, IronfishErrorKind};
+use crate::errors::{elosysError, elosysErrorKind};
 use byteorder::{ReadBytesExt, WriteBytesExt};
 use std::io;
 
@@ -39,12 +39,12 @@ impl TransactionVersion {
         Self::V2
     }
 
-    pub fn write<W: io::Write>(&self, mut writer: W) -> Result<(), IronfishError> {
+    pub fn write<W: io::Write>(&self, mut writer: W) -> Result<(), elosysError> {
         writer.write_u8((*self).into())?;
         Ok(())
     }
 
-    pub fn read<R: io::Read>(mut reader: R) -> Result<Self, IronfishError> {
+    pub fn read<R: io::Read>(mut reader: R) -> Result<Self, elosysError> {
         Self::try_from(reader.read_u8()?)
     }
 
@@ -56,12 +56,12 @@ impl TransactionVersion {
 }
 
 impl TryFrom<u8> for TransactionVersion {
-    type Error = IronfishError;
+    type Error = elosysError;
 
     #[inline]
     fn try_from(value: u8) -> Result<Self, Self::Error> {
         Self::from_u8(value)
-            .ok_or_else(|| IronfishError::new(IronfishErrorKind::InvalidTransactionVersion))
+            .ok_or_else(|| elosysError::new(elosysErrorKind::InvalidTransactionVersion))
     }
 }
 

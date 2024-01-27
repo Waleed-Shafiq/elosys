@@ -1,10 +1,10 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
-import { FullNode, PEER_STORE_FILE_NAME } from '@ironfish/sdk'
+import { FullNode, PEER_STORE_FILE_NAME } from '@elosys/sdk'
 import { CliUx, Flags } from '@oclif/core'
 import fsAsync from 'fs/promises'
-import { IronfishCommand } from '../command'
+import { elosysCommand } from '../command'
 import {
   ConfigFlag,
   ConfigFlagKey,
@@ -14,7 +14,7 @@ import {
   VerboseFlagKey,
 } from '../flags'
 
-export default class Reset extends IronfishCommand {
+export default class Reset extends elosysCommand {
   static description = 'Reset the node to its initial state'
 
   static flags = {

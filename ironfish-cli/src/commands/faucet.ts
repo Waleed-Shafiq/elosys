@@ -2,15 +2,15 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 
-import { DEFAULT_DISCORD_INVITE, RpcRequestError } from '@ironfish/sdk'
+import { DEFAULT_DISCORD_INVITE, RpcRequestError } from '@elosys/sdk'
 import { CliUx, Flags } from '@oclif/core'
-import { IronfishCommand } from '../command'
+import { elosysCommand } from '../command'
 import { RemoteFlags } from '../flags'
 import { ONE_FISH_IMAGE, TWO_FISH_IMAGE } from '../images'
 
 const FAUCET_DISABLED = false
 
-export class FaucetCommand extends IronfishCommand {
+export class FaucetCommand extends elosysCommand {
   static description = `Receive coins from the Iron Fish official testnet Faucet`
 
   static flags = {
@@ -102,10 +102,10 @@ Congratulations! The Iron Fish Faucet just added your request to the queue!
 It will be processed within the next hour and $IRON will be sent directly to your account.
 
 Check your balance by running:
-  - ironfish wallet:balance
+  - elosys wallet:balance
 
 Learn how to send a transaction by running:
-  - ironfish wallet:send --help`,
+  - elosys wallet:send --help`,
     )
   }
 }

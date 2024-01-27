@@ -2,7 +2,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 
-import { ErrorUtils, IronfishSdk, TimeUtils } from '@ironfish/sdk'
+import { ErrorUtils, elosysSdk, TimeUtils } from '@elosys/sdk'
 import axios from 'axios'
 import crypto from 'crypto'
 import fs from 'fs'
@@ -20,8 +20,8 @@ export type SnapshotManifest = {
   database_version: number
 }
 
-export const DEFAULT_MAINNET_MANIFEST_URL = `https://snapshots.ironfish.network/manifest.json`
-export const DEFAULT_TESTNET_MANIFEST_URL = `https://testnet.snapshots.ironfish.network/manifest.json`
+export const DEFAULT_MAINNET_MANIFEST_URL = `https://snapshots.elosys.network/manifest.json`
+export const DEFAULT_TESTNET_MANIFEST_URL = `https://testnet.snapshots.elosys.network/manifest.json`
 
 export const getDefaultManifestUrl = (networkId: number): string | null => {
   switch (networkId) {
@@ -221,10 +221,10 @@ export class SnapshotDownloader {
 }
 
 export class DownloadedSnapshot {
-  private sdk: IronfishSdk
+  private sdk: elosysSdk
   readonly file: string
 
-  constructor(sdk: IronfishSdk, file: string) {
+  constructor(sdk: elosysSdk, file: string) {
     this.sdk = sdk
     this.file = file
   }

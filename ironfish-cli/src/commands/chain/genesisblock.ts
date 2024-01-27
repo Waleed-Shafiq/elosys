@@ -1,7 +1,7 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
-import { MEMO_LENGTH } from '@ironfish/rust-nodejs'
+import { MEMO_LENGTH } from '@elosys/rust-nodejs'
 import {
   BlockSerde,
   CurrencyUtils,
@@ -11,13 +11,13 @@ import {
   isValidPublicAddress,
   makeGenesisBlock,
   Target,
-} from '@ironfish/sdk'
+} from '@elosys/sdk'
 import { CliUx, Flags } from '@oclif/core'
 import fs from 'fs/promises'
-import { IronfishCommand } from '../../command'
+import { elosysCommand } from '../../command'
 import { LocalFlags } from '../../flags'
 
-export default class GenesisBlockCommand extends IronfishCommand {
+export default class GenesisBlockCommand extends elosysCommand {
   static description = 'Create and serialize a genesis block'
 
   static hidden = true
@@ -27,7 +27,7 @@ export default class GenesisBlockCommand extends IronfishCommand {
     account: Flags.string({
       char: 'a',
       required: false,
-      default: 'IronFishGenesisAccount',
+      default: 'elosysGenesisAccount',
       description: 'The name of the account to use for keys to assign the genesis block to',
     }),
     difficulty: Flags.string({
@@ -110,7 +110,7 @@ export default class GenesisBlockCommand extends IronfishCommand {
       }
 
       if (account === null) {
-        const name = `IronFishGenesisAccount` // Faucet depends on the name
+        const name = `elosysGenesisAccount` // Faucet depends on the name
         account = await node.wallet.createAccount(name)
         this.log(`Creating account ${account.name} to assign the genesis block to.`)
       }

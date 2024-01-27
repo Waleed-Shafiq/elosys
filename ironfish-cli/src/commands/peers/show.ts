@@ -1,15 +1,15 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
-import { GetPeerMessagesResponse, GetPeerResponse, TimeUtils } from '@ironfish/sdk'
+import { GetPeerMessagesResponse, GetPeerResponse, TimeUtils } from '@elosys/sdk'
 import colors from 'colors/safe'
-import { IronfishCommand } from '../../command'
+import { elosysCommand } from '../../command'
 import { RemoteFlags } from '../../flags'
 
 type GetPeerResponsePeer = NonNullable<GetPeerResponse['peer']>
 type GetPeerMessagesResponseMessages = GetPeerMessagesResponse['messages'][0]
 
-export class ShowCommand extends IronfishCommand {
+export class ShowCommand extends elosysCommand {
   static description = `Display info about a peer`
 
   static args = [

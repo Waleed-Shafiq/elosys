@@ -3,7 +3,7 @@
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 
 use crate::{
-    errors::{IronfishError, IronfishErrorKind},
+    errors::{elosysError, elosysErrorKind},
     keys::SaplingKey,
     merkle_note::{position as witness_position, sapling_auth_path},
     note::Note,
@@ -19,7 +19,7 @@ use blstrs::{Bls12, Scalar};
 use byteorder::{LittleEndian, ReadBytesExt, WriteBytesExt};
 use ff::{Field, PrimeField};
 use group::{Curve, GroupEncoding};
-use ironfish_zkp::{
+use elosys_zkp::{
     constants::SPENDING_KEY_GENERATOR,
     primitives::ValueCommitment,
     proofs::Spend,
@@ -95,7 +95,7 @@ impl SpendBuilder {
         view_key: &ViewKey,
         public_key_randomness: &jubjub::Fr,
         randomized_public_key: &redjubjub::PublicKey,
-    ) -> Result<UnsignedSpendDescription, IronfishError> {
+    ) -> Result<UnsignedSpendDescription, elosysError> {
         let value_commitment_point = self.value_commitment_point();
 
         let circuit = Spend {
@@ -160,7 +160,7 @@ impl UnsignedSpendDescription {
         mut self,
         spender_key: &SaplingKey,
         signature_hash: &[u8; 32],
-    ) -> Result<SpendDescription, IronfishError> {
+    ) -> Result<SpendDescription, elosysError> {
         let private_key = redjubjub::PrivateKey(spender_key.spend_authorizing_key);
         let randomized_private_key = private_key.randomize(self.public_key_randomness);
 
@@ -172,7 +172,7 @@ impl UnsignedSpendDescription {
                 .randomize(self.public_key_randomness, *SPENDING_KEY_GENERATOR);
 
         if randomized_public_key.0 != transaction_randomized_public_key.0 {
-            return Err(IronfishError::new(IronfishErrorKind::InvalidSigningKey));
+            return Err(elosysError::new(elosysErrorKind::InvalidSigningKey));
         }
 
         // NOTE: The initial versions of the RedDSA specification and the redjubjub crate (that
@@ -199,7 +199,7 @@ impl UnsignedSpendDescription {
         self.description
     }
 
-    pub fn read<R: io::Read>(mut reader: R) -> Result<Self, IronfishError> {
+    pub fn read<R: io::Read>(mut reader: R) -> Result<Self, elosysError> {
         let public_key_randomness = read_scalar(&mut reader)?;
         let description = SpendDescription::read(&mut reader)?;
 
@@ -209,7 +209,7 @@ impl UnsignedSpendDescription {
         })
     }
 
-    pub fn write<W: io::Write>(&self, mut writer: W) -> Result<(), IronfishError> {
+    pub fn write<W: io::Write>(&self, mut writer: W) -> Result<(), elosysError> {
         writer.write_all(&self.public_key_randomness.to_bytes())?;
         self.description.write(&mut writer)?;
 
@@ -256,7 +256,7 @@ impl SpendDescription {
     /// Load a [`SpendDescription`] from a Read implementation (e.g: socket,
     /// file) This is the main entry-point when reconstructing a serialized
     /// transaction.
-    pub fn read<R: io::Read>(mut reader: R) -> Result<Self, IronfishError> {
+    pub fn read<R: io::Read>(mut reader: R) -> Result<Self, elosysError> {
         let proof = groth16::Proof::read(&mut reader)?;
         let value_commitment = read_point(&mut reader)?;
         let root_hash = read_scalar(&mut reader)?;
@@ -276,7 +276,7 @@ impl SpendDescription {
     }
 
     /// Stow the bytes of this [`SpendDescription`] in the given writer.
-    pub fn write<W: io::Write>(&self, mut writer: W) -> Result<(), IronfishError> {
+    pub fn write<W: io::Write>(&self, mut writer: W) -> Result<(), elosysError> {
         self.serialize_signature_fields(&mut writer)?;
         self.authorizing_signature.write(&mut writer)?;
 
@@ -301,9 +301,9 @@ impl SpendDescription {
         &self,
         signature_hash_value: &[u8; 32],
         randomized_public_key: &redjubjub::PublicKey,
-    ) -> Result<(), IronfishError> {
+    ) -> Result<(), elosysError> {
         if randomized_public_key.0.is_small_order().into() {
-            return Err(IronfishError::new(IronfishErrorKind::IsSmallOrder));
+            return Err(elosysError::new(elosysErrorKind::IsSmallOrder));
         }
 
         // NOTE: The initial versions of the RedDSA specification and the redjubjub crate (that
@@ -320,7 +320,7 @@ impl SpendDescription {
             &self.authorizing_signature,
             *SPENDING_KEY_GENERATOR,
         ) {
-            return Err(IronfishError::new(IronfishErrorKind::InvalidSpendSignature));
+            return Err(elosysError::new(elosysErrorKind::InvalidSpendSignature));
         }
 
         Ok(())
@@ -331,15 +331,15 @@ impl SpendDescription {
     /// with. Note that this does not verify the proof, that happens in the
     /// [`SpendBuilder`] build function as the prover, and in
     /// [`super::batch_verify_transactions`] as the verifier.
-    pub fn partial_verify(&self) -> Result<(), IronfishError> {
+    pub fn partial_verify(&self) -> Result<(), elosysError> {
         self.verify_not_small_order()?;
 
         Ok(())
     }
 
-    fn verify_not_small_order(&self) -> Result<(), IronfishError> {
+    fn verify_not_small_order(&self) -> Result<(), elosysError> {
         if self.value_commitment.is_small_order().into() {
-            return Err(IronfishError::new(IronfishErrorKind::IsSmallOrder));
+            return Err(elosysError::new(elosysErrorKind::IsSmallOrder));
         }
 
         Ok(())
@@ -373,7 +373,7 @@ impl SpendDescription {
     pub(crate) fn serialize_signature_fields<W: io::Write>(
         &self,
         writer: W,
-    ) -> Result<(), IronfishError> {
+    ) -> Result<(), elosysError> {
         serialize_signature_fields(
             writer,
             &self.proof,
@@ -394,7 +394,7 @@ fn serialize_signature_fields<W: io::Write>(
     root_hash: &Scalar,
     tree_size: u32,
     nullifier: &Nullifier,
-) -> Result<(), IronfishError> {
+) -> Result<(), elosysError> {
     proof.write(&mut writer)?;
     writer.write_all(&value_commitment.to_bytes())?;
     writer.write_all(root_hash.to_repr().as_ref())?;
@@ -413,8 +413,8 @@ mod test {
     use crate::{keys::SaplingKey, note::Note, test_util::make_fake_witness};
     use ff::Field;
     use group::Curve;
-    use ironfish_zkp::constants::SPENDING_KEY_GENERATOR;
-    use ironfish_zkp::redjubjub::{self, PrivateKey, PublicKey};
+    use elosys_zkp::constants::SPENDING_KEY_GENERATOR;
+    use elosys_zkp::redjubjub::{self, PrivateKey, PublicKey};
     use rand::prelude::*;
     use rand::{thread_rng, Rng};
 

@@ -3,20 +3,20 @@ extern crate pairing;
 use std::fs::File;
 use std::io::BufWriter;
 
-use ironfish_zkp::constants::ASSET_ID_LENGTH;
+use elosys_zkp::constants::ASSET_ID_LENGTH;
 
 fn main() {
     let params = File::create("params").unwrap();
     let mut params = BufWriter::with_capacity(1024 * 1024, params);
 
     // Sapling spend circuit
-    ironfish_phase2::MPCParameters::new(ironfish_zkp::proofs::Spend {
+    elosys_phase2::MPCParameters::new(elosys_zkp::proofs::Spend {
         value_commitment: None,
         proof_generation_key: None,
         payment_address: None,
         commitment_randomness: None,
         ar: None,
-        auth_path: vec![None; ironfish_zkp::constants::TREE_DEPTH],
+        auth_path: vec![None; elosys_zkp::constants::TREE_DEPTH],
         anchor: None,
         sender_address: None,
     })
@@ -25,7 +25,7 @@ fn main() {
     .unwrap();
 
     // Sapling output circuit
-    ironfish_phase2::MPCParameters::new(ironfish_zkp::proofs::Output {
+    elosys_phase2::MPCParameters::new(elosys_zkp::proofs::Output {
         value_commitment: None,
         payment_address: None,
         commitment_randomness: None,
@@ -39,7 +39,7 @@ fn main() {
     .unwrap();
 
     // Sapling mint circuit
-    ironfish_phase2::MPCParameters::new(ironfish_zkp::proofs::MintAsset {
+    elosys_phase2::MPCParameters::new(elosys_zkp::proofs::MintAsset {
         proof_generation_key: None,
         public_key_randomness: None,
     })

@@ -1,7 +1,7 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
-import { Asset } from '@ironfish/rust-nodejs'
+import { Asset } from '@elosys/rust-nodejs'
 import {
   CreateTransactionRequest,
   CurrencyUtils,
@@ -9,9 +9,9 @@ import {
   RawTransaction,
   RawTransactionSerde,
   Transaction,
-} from '@ironfish/sdk'
+} from '@elosys/sdk'
 import { CliUx, Flags } from '@oclif/core'
-import { IronfishCommand } from '../../command'
+import { elosysCommand } from '../../command'
 import { HexFlag, IronFlag, RemoteFlags } from '../../flags'
 import { selectAsset } from '../../utils/asset'
 import { promptCurrency } from '../../utils/currency'
@@ -19,13 +19,13 @@ import { getExplorer } from '../../utils/explorer'
 import { selectFee } from '../../utils/fees'
 import { displayTransactionSummary, watchTransaction } from '../../utils/transaction'
 
-export class Send extends IronfishCommand {
+export class Send extends elosysCommand {
   static description = `Send coins to another account`
 
   static examples = [
-    '$ ironfish wallet:send --amount 2 --fee 0.00000001 --to 997c586852d1b12da499bcff53595ba37d04e4909dbdb1a75f3bfd90dd7212217a1c2c0da652d187fc52ed',
-    '$ ironfish wallet:send --amount 2 --fee 0.00000001 --to 997c586852d1b12da499bcff53595ba37d04e4909dbdb1a75f3bfd90dd7212217a1c2c0da652d187fc52ed --account otheraccount',
-    '$ ironfish wallet:send --amount 2 --fee 0.00000001 --to 997c586852d1b12da499bcff53595ba37d04e4909dbdb1a75f3bfd90dd7212217a1c2c0da652d187fc52ed --account otheraccount --memo "enjoy!"',
+    '$ elosys wallet:send --amount 2 --fee 0.00000001 --to 997c586852d1b12da499bcff53595ba37d04e4909dbdb1a75f3bfd90dd7212217a1c2c0da652d187fc52ed',
+    '$ elosys wallet:send --amount 2 --fee 0.00000001 --to 997c586852d1b12da499bcff53595ba37d04e4909dbdb1a75f3bfd90dd7212217a1c2c0da652d187fc52ed --account otheraccount',
+    '$ elosys wallet:send --amount 2 --fee 0.00000001 --to 997c586852d1b12da499bcff53595ba37d04e4909dbdb1a75f3bfd90dd7212217a1c2c0da652d187fc52ed --account otheraccount --memo "enjoy!"',
   ]
 
   static flags = {
@@ -154,7 +154,7 @@ export class Send extends IronfishCommand {
       if (!response.content.account) {
         this.error(
           `No account is currently active.
-           Use ironfish wallet:create <name> to first create an account`,
+           Use elosys wallet:create <name> to first create an account`,
         )
       }
 
@@ -216,7 +216,7 @@ export class Send extends IronfishCommand {
     if (flags.rawTransaction) {
       this.log('Raw Transaction')
       this.log(RawTransactionSerde.serialize(raw).toString('hex'))
-      this.log(`Run "ironfish wallet:post" to post the raw transaction. `)
+      this.log(`Run "elosys wallet:post" to post the raw transaction. `)
       this.exit(0)
     }
 

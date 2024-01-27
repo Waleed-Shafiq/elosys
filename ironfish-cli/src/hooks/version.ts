@@ -3,9 +3,9 @@
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 
 /* eslint-disable no-console */
-import { Platform } from '@ironfish/sdk'
+import { Platform } from '@elosys/sdk'
 import { Hook } from '@oclif/core'
-import { IronfishCliPKG } from '../package'
+import { elosysCliPKG } from '../package'
 
 // eslint-disable-next-line @typescript-eslint/require-await
 const VersionHook: Hook<'init'> = async () => {
@@ -16,9 +16,9 @@ const VersionHook: Hook<'init'> = async () => {
   if (showVersion) {
     const runtime = Platform.getRuntime()
 
-    console.log(`name       ${IronfishCliPKG.name}`)
-    console.log(`version    ${IronfishCliPKG.version}`)
-    console.log(`git        ${IronfishCliPKG.git}`)
+    console.log(`name       ${elosysCliPKG.name}`)
+    console.log(`version    ${elosysCliPKG.version}`)
+    console.log(`git        ${elosysCliPKG.git}`)
     console.log(`runtime    ${runtime.type}/${runtime.runtime}`)
 
     return process.exit(0)

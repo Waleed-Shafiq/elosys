@@ -48,7 +48,7 @@ fn fetch_if_missing(dst: &Path) {
         .open(&tmp)
         .unwrap_or_else(|err| panic!("failed to open {}: {}", tmp.display(), err));
     let url = format!(
-        "https://github.com/iron-fish/ironfish/raw/master/ironfish-rust/src/sapling_params/{}",
+        "https://github.com/elosys/elosys/raw/master/elosys-rust/src/sapling_params/{}",
         name
     );
     reqwest::blocking::get(&url)

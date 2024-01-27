@@ -11,13 +11,13 @@ import {
   StratumTcpClient,
   StratumTlsClient,
   waitForEmit,
-} from '@ironfish/sdk'
+} from '@elosys/sdk'
 import { Flags } from '@oclif/core'
 import blessed from 'blessed'
 import dns from 'dns'
-import { IronfishCommand } from '../../../command'
+import { elosysCommand } from '../../../command'
 
-export class PoolStatus extends IronfishCommand {
+export class PoolStatus extends elosysCommand {
   static description = `Show the status of a mining pool`
 
   static flags = {

@@ -6,7 +6,7 @@ use std::io;
 
 use byteorder::{LittleEndian, ReadBytesExt, WriteBytesExt};
 
-use crate::{assets::asset_identifier::AssetIdentifier, errors::IronfishError};
+use crate::{assets::asset_identifier::AssetIdentifier, errors::elosysError};
 
 /// Parameters used to build a burn description
 pub struct BurnBuilder {
@@ -50,14 +50,14 @@ impl BurnDescription {
     pub(crate) fn serialize_signature_fields<W: io::Write>(
         &self,
         mut writer: W,
-    ) -> Result<(), IronfishError> {
+    ) -> Result<(), elosysError> {
         self.asset_id.write(&mut writer)?;
         writer.write_u64::<LittleEndian>(self.value)?;
 
         Ok(())
     }
 
-    pub fn read<R: io::Read>(mut reader: R) -> Result<Self, IronfishError> {
+    pub fn read<R: io::Read>(mut reader: R) -> Result<Self, elosysError> {
         let asset_id = AssetIdentifier::read(&mut reader)?;
         let value = reader.read_u64::<LittleEndian>()?;
 
@@ -65,7 +65,7 @@ impl BurnDescription {
     }
 
     /// Stow the bytes of this [`BurnDescription`] in the given writer.
-    pub fn write<W: io::Write>(&self, writer: W) -> Result<(), IronfishError> {
+    pub fn write<W: io::Write>(&self, writer: W) -> Result<(), elosysError> {
         self.serialize_signature_fields(writer)?;
 
         Ok(())

@@ -9,7 +9,7 @@ use blstrs::{Bls12, Scalar};
 use byteorder::{LittleEndian, ReadBytesExt, WriteBytesExt};
 use ff::Field;
 use group::{Curve, GroupEncoding};
-use ironfish_zkp::{
+use elosys_zkp::{
     constants::SPENDING_KEY_GENERATOR,
     proofs::MintAsset,
     redjubjub::{self, Signature},
@@ -20,7 +20,7 @@ use rand::thread_rng;
 
 use crate::{
     assets::asset::Asset,
-    errors::{IronfishError, IronfishErrorKind},
+    errors::{elosysError, elosysErrorKind},
     sapling_bls12::SAPLING,
     serializing::read_scalar,
     transaction::TransactionVersion,
@@ -63,7 +63,7 @@ impl MintBuilder {
         public_address: &PublicAddress,
         public_key_randomness: &jubjub::Fr,
         randomized_public_key: &redjubjub::PublicKey,
-    ) -> Result<UnsignedMintDescription, IronfishError> {
+    ) -> Result<UnsignedMintDescription, elosysError> {
         let circuit = MintAsset {
             proof_generation_key: Some(proof_generation_key.clone()),
             public_key_randomness: Some(*public_key_randomness),
@@ -117,7 +117,7 @@ impl UnsignedMintDescription {
         mut self,
         spender_key: &SaplingKey,
         signature_hash: &[u8; 32],
-    ) -> Result<MintDescription, IronfishError> {
+    ) -> Result<MintDescription, elosysError> {
         let private_key = redjubjub::PrivateKey(spender_key.spend_authorizing_key);
         let randomized_private_key = private_key.randomize(self.public_key_randomness);
         let randomized_public_key =
@@ -128,7 +128,7 @@ impl UnsignedMintDescription {
                 .randomize(self.public_key_randomness, *SPENDING_KEY_GENERATOR);
 
         if randomized_public_key.0 != transaction_randomized_public_key.0 {
-            return Err(IronfishError::new(IronfishErrorKind::InvalidSigningKey));
+            return Err(elosysError::new(elosysErrorKind::InvalidSigningKey));
         }
 
         // NOTE: The initial versions of the RedDSA specification and the redjubjub crate (that
@@ -157,7 +157,7 @@ impl UnsignedMintDescription {
     pub fn read<R: io::Read>(
         mut reader: R,
         version: TransactionVersion,
-    ) -> Result<Self, IronfishError> {
+    ) -> Result<Self, elosysError> {
         let public_key_randomness = read_scalar(&mut reader)?;
         let description = MintDescription::read(&mut reader, version)?;
 
@@ -171,7 +171,7 @@ impl UnsignedMintDescription {
         &self,
         mut writer: W,
         version: TransactionVersion,
-    ) -> Result<(), IronfishError> {
+    ) -> Result<(), elosysError> {
         writer.write_all(&self.public_key_randomness.to_bytes())?;
         self.description.write(&mut writer, version)?;
 
@@ -213,9 +213,9 @@ impl MintDescription {
         &self,
         signature_hash_value: &[u8; 32],
         randomized_public_key: &redjubjub::PublicKey,
-    ) -> Result<(), IronfishError> {
+    ) -> Result<(), elosysError> {
         if randomized_public_key.0.is_small_order().into() {
-            return Err(IronfishError::new(IronfishErrorKind::IsSmallOrder));
+            return Err(elosysError::new(elosysErrorKind::IsSmallOrder));
         }
 
         // NOTE: The initial versions of the RedDSA specification and the redjubjub crate (that
@@ -232,7 +232,7 @@ impl MintDescription {
             &self.authorizing_signature,
             *SPENDING_KEY_GENERATOR,
         ) {
-            return Err(IronfishError::new(IronfishErrorKind::InvalidMintSignature));
+            return Err(elosysError::new(elosysErrorKind::InvalidMintSignature));
         }
 
         Ok(())
@@ -257,13 +257,13 @@ impl MintDescription {
     /// with. Note that this does not verify the proof, that happens in the
     /// [`MintBuilder`] build function as the prover, and in
     /// [`super::batch_verify_transactions`] as the verifier.
-    pub fn partial_verify(&self) -> Result<(), IronfishError> {
+    pub fn partial_verify(&self) -> Result<(), elosysError> {
         self.verify_valid_asset()?;
 
         Ok(())
     }
 
-    fn verify_valid_asset(&self) -> Result<(), IronfishError> {
+    fn verify_valid_asset(&self) -> Result<(), elosysError> {
         let asset = Asset::new_with_nonce(
             self.asset.creator,
             self.asset.name,
@@ -271,8 +271,8 @@ impl MintDescription {
             self.asset.nonce,
         )?;
         if asset.id != self.asset.id {
-            return Err(IronfishError::new(
-                IronfishErrorKind::InvalidAssetIdentifier,
+            return Err(elosysError::new(
+                elosysErrorKind::InvalidAssetIdentifier,
             ));
         }
 
@@ -288,7 +288,7 @@ impl MintDescription {
         &self,
         mut writer: W,
         version: TransactionVersion,
-    ) -> Result<(), IronfishError> {
+    ) -> Result<(), elosysError> {
         self.proof.write(&mut writer)?;
         self.asset.write(&mut writer)?;
         writer.write_u64::<LittleEndian>(self.value)?;
@@ -302,8 +302,8 @@ impl MintDescription {
                 writer.write_u8(0)?;
             }
         } else if self.transfer_ownership_to.is_some() {
-            return Err(IronfishError::new(
-                IronfishErrorKind::InvalidTransactionVersion,
+            return Err(elosysError::new(
+                elosysErrorKind::InvalidTransactionVersion,
             ));
         }
 
@@ -313,7 +313,7 @@ impl MintDescription {
     pub fn read<R: io::Read>(
         mut reader: R,
         version: TransactionVersion,
-    ) -> Result<Self, IronfishError> {
+    ) -> Result<Self, elosysError> {
         let proof = groth16::Proof::read(&mut reader)?;
         let asset = Asset::read(&mut reader)?;
         let value = reader.read_u64::<LittleEndian>()?;
@@ -349,7 +349,7 @@ impl MintDescription {
         &self,
         mut writer: W,
         version: TransactionVersion,
-    ) -> Result<(), IronfishError> {
+    ) -> Result<(), elosysError> {
         self.serialize_signature_fields(&mut writer, version)?;
         self.authorizing_signature.write(&mut writer)?;
 
@@ -360,12 +360,12 @@ impl MintDescription {
 #[cfg(test)]
 mod test {
     use ff::Field;
-    use ironfish_zkp::{constants::SPENDING_KEY_GENERATOR, redjubjub};
+    use elosys_zkp::{constants::SPENDING_KEY_GENERATOR, redjubjub};
     use rand::{random, thread_rng};
 
     use crate::{
         assets::asset::Asset,
-        errors::IronfishErrorKind,
+        errors::elosysErrorKind,
         transaction::{
             mints::{MintBuilder, MintDescription},
             utils::verify_mint_proof,
@@ -456,7 +456,7 @@ mod test {
 
         assert!(matches!(
             mint.build(&owner_key.sapling_proof_generation_key(), &owner_key.public_address(), &public_key_randomness, &randomized_public_key),
-            Err(e) if matches!(e.kind, IronfishErrorKind::InvalidMintProof)
+            Err(e) if matches!(e.kind, elosysErrorKind::InvalidMintProof)
         ))
     }
 

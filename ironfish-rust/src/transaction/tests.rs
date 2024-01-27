@@ -7,7 +7,7 @@ use super::internal_batch_verify_transactions;
 use super::{ProposedTransaction, Transaction};
 use crate::{
     assets::{asset::Asset, asset_identifier::NATIVE_ASSET},
-    errors::{IronfishError, IronfishErrorKind},
+    errors::{elosysError, elosysErrorKind},
     keys::SaplingKey,
     merkle_note::NOTE_ENCRYPTION_MINER_KEYS,
     note::Note,
@@ -20,7 +20,7 @@ use crate::{
 };
 
 use ff::Field;
-use ironfish_zkp::{
+use elosys_zkp::{
     constants::{ASSET_ID_LENGTH, SPENDING_KEY_GENERATOR, TREE_DEPTH},
     proofs::{MintAsset, Output, Spend},
     redjubjub::{self, Signature},
@@ -361,11 +361,11 @@ fn test_transaction_created_with_version_1() {
 
 #[test]
 fn test_transaction_version_is_checked() {
-    fn assert_invalid_version(result: Result<Transaction, IronfishError>) {
+    fn assert_invalid_version(result: Result<Transaction, elosysError>) {
         match result {
             Ok(_) => panic!("expected an error"),
-            Err(IronfishError { kind, .. }) => match kind {
-                IronfishErrorKind::InvalidTransactionVersion => {}
+            Err(elosysError { kind, .. }) => match kind {
+                elosysErrorKind::InvalidTransactionVersion => {}
                 _ => {
                     panic!("expected InvalidTransactionVersion, got {:?} instead", kind);
                 }
@@ -638,6 +638,6 @@ fn test_batch_verify() {
 
     assert!(matches!(
         batch_verify_transactions([&transaction1, &transaction2]),
-        Err(e) if matches!(e.kind, IronfishErrorKind::InvalidSpendSignature)
+        Err(e) if matches!(e.kind, elosysErrorKind::InvalidSpendSignature)
     ));
 }

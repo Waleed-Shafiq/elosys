@@ -10,13 +10,13 @@ fn main() {
     let current_params = File::open("params").expect("couldn't open `./params`");
     let mut current_params = BufReader::with_capacity(1024 * 1024, current_params);
 
-    let sapling_spend = ironfish_phase2::MPCParameters::read(&mut current_params, false)
+    let sapling_spend = elosys_phase2::MPCParameters::read(&mut current_params, false)
         .expect("couldn't deserialize Sapling Spend params");
 
-    let sapling_output = ironfish_phase2::MPCParameters::read(&mut current_params, false)
+    let sapling_output = elosys_phase2::MPCParameters::read(&mut current_params, false)
         .expect("couldn't deserialize Sapling Output params");
 
-    let sapling_mint = ironfish_phase2::MPCParameters::read(&mut current_params, false)
+    let sapling_mint = elosys_phase2::MPCParameters::read(&mut current_params, false)
         .expect("couldn't deserialize Sapling Mint params");
 
     {

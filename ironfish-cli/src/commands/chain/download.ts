@@ -1,15 +1,15 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
-import { ErrorUtils, FileUtils, Meter, NodeUtils, TimeUtils } from '@ironfish/sdk'
+import { ErrorUtils, FileUtils, Meter, NodeUtils, TimeUtils } from '@elosys/sdk'
 import { CliUx, Flags } from '@oclif/core'
 import fsAsync from 'fs/promises'
-import { IronfishCommand } from '../../command'
+import { elosysCommand } from '../../command'
 import { LocalFlags } from '../../flags'
 import { DownloadedSnapshot, getDefaultManifestUrl, SnapshotDownloader } from '../../snapshot'
 import { ProgressBar } from '../../types'
 
-export default class Download extends IronfishCommand {
+export default class Download extends elosysCommand {
   static hidden = false
 
   static description = `Download and import a chain snapshot`

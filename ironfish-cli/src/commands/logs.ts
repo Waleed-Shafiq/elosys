@@ -1,12 +1,12 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
-import { ConsoleReporterInstance, FullNode, IJSON } from '@ironfish/sdk'
+import { ConsoleReporterInstance, FullNode, IJSON } from '@elosys/sdk'
 import { logType } from 'consola'
-import { IronfishCommand } from '../command'
+import { elosysCommand } from '../command'
 import { RemoteFlags } from '../flags'
 
-export default class LogsCommand extends IronfishCommand {
+export default class LogsCommand extends elosysCommand {
   static description = 'Tail server logs'
 
   static flags = {

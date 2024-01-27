@@ -2,8 +2,8 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 
-import { ASSET_NAME_LENGTH } from '@ironfish/rust-nodejs'
-import { Assert, BufferUtils, TimeUtils } from '@ironfish/sdk'
+import { ASSET_NAME_LENGTH } from '@elosys/rust-nodejs'
+import { Assert, BufferUtils, TimeUtils } from '@elosys/sdk'
 import { table } from '@oclif/core/lib/cli-ux/styled/table'
 
 /**

@@ -1,7 +1,7 @@
 [package]
-name = "ironfish_mpc"
+name = "elosys_mpc"
 version = "0.2.0"
-authors = ["Sean Bowe <ewillbefull@gmail.com>", "Iron Fish <contact@ironfish.network> (https://ironfish.network)"]
+authors = ["Sean Bowe <ewillbefull@gmail.com>", "Iron Fish <contact@elosys.network> (https://elosys.network)"]
 
 publish = false
 
@@ -31,15 +31,15 @@ required-features = ["beacon"]
 name = "split_params"
 
 [dependencies]
-ironfish-phase2 = { path = "../ironfish-phase2" }
+elosys-phase2 = { path = "../elosys-phase2" }
 pairing = "0.23"
 rand = "0.8.5"
 rand_chacha = "0.3.1"
 rand_seeder = "0.2.3"
 blake2 = "0.10.6"
 
-[dependencies.ironfish_zkp]
-path = "../ironfish-zkp"
+[dependencies.elosys_zkp]
+path = "../elosys-zkp"
 optional = true
 
 [dependencies.byteorder]
@@ -51,5 +51,5 @@ version = "0.1"
 optional = true
 
 [features]
-verification = ["ironfish_zkp"]
+verification = ["elosys_zkp"]
 beacon = ["byteorder"]

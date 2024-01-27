@@ -1,7 +1,7 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
-import { Asset } from '@ironfish/rust-nodejs'
+import { Asset } from '@elosys/rust-nodejs'
 import {
   Assert,
   CurrencyUtils,
@@ -9,15 +9,15 @@ import {
   PartialRecursive,
   RpcAsset,
   TransactionType,
-} from '@ironfish/sdk'
+} from '@elosys/sdk'
 import { CliUx, Flags } from '@oclif/core'
-import { IronfishCommand } from '../../command'
+import { elosysCommand } from '../../command'
 import { RemoteFlags } from '../../flags'
 import { getAssetsByIDs } from '../../utils'
 import { Format, TableCols } from '../../utils/table'
 
 const { sort: _, ...tableFlags } = CliUx.ux.table.flags()
-export class TransactionsCommand extends IronfishCommand {
+export class TransactionsCommand extends elosysCommand {
   static description = `Display the account transactions`
 
   static flags = {

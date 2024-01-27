@@ -2,7 +2,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 
-use crate::{errors::IronfishError, keys::EphemeralKeyPair, serializing::read_point};
+use crate::{errors::elosysError, keys::EphemeralKeyPair, serializing::read_point};
 
 /// Implement a merkle note to store all the values that need to go into a merkle tree.
 /// A tree containing these values can serve as a snapshot of the entire chain.
@@ -18,7 +18,7 @@ use blake2b_simd::Params as Blake2b;
 use blstrs::Scalar;
 use ff::PrimeField;
 use group::GroupEncoding;
-use ironfish_zkp::primitives::ValueCommitment;
+use elosys_zkp::primitives::ValueCommitment;
 use jubjub::{ExtendedPoint, SubgroupPoint};
 
 use std::{convert::TryInto, io};
@@ -143,7 +143,7 @@ impl MerkleNote {
     }
 
     /// Load a MerkleNote from the given stream
-    pub fn read<R: io::Read>(mut reader: R) -> Result<Self, IronfishError> {
+    pub fn read<R: io::Read>(mut reader: R) -> Result<Self, elosysError> {
         let value_commitment = read_point(&mut reader)?;
         let note_commitment = read_scalar(&mut reader)?;
         let ephemeral_public_key = read_point(&mut reader)?;
@@ -162,7 +162,7 @@ impl MerkleNote {
         })
     }
 
-    pub fn write<W: io::Write>(&self, writer: &mut W) -> Result<(), IronfishError> {
+    pub fn write<W: io::Write>(&self, writer: &mut W) -> Result<(), elosysError> {
         writer.write_all(&self.value_commitment.to_bytes())?;
         writer.write_all(&self.note_commitment.to_bytes_le())?;
         writer.write_all(&self.ephemeral_public_key.to_bytes())?;
@@ -179,7 +179,7 @@ impl MerkleNote {
     pub fn decrypt_note_for_owner(
         &self,
         owner_view_key: &IncomingViewKey,
-    ) -> Result<Note, IronfishError> {
+    ) -> Result<Note, elosysError> {
         let shared_secret = owner_view_key.shared_secret(&self.ephemeral_public_key);
         let note =
             Note::from_owner_encrypted(owner_view_key, &shared_secret, &self.encrypted_note)?;
@@ -190,7 +190,7 @@ impl MerkleNote {
     pub fn decrypt_note_for_spender(
         &self,
         spender_key: &OutgoingViewKey,
-    ) -> Result<Note, IronfishError> {
+    ) -> Result<Note, elosysError> {
         let encryption_key = calculate_key_for_encryption_keys(
             spender_key,
             &self.value_commitment,
@@ -278,7 +278,7 @@ mod test {
     use crate::{keys::SaplingKey, note::Note};
 
     use blstrs::Scalar;
-    use ironfish_zkp::primitives::ValueCommitment;
+    use elosys_zkp::primitives::ValueCommitment;
     use rand::prelude::*;
 
     #[test]

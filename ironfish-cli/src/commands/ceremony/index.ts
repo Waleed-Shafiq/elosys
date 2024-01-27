@@ -1,18 +1,18 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
-import { contribute } from '@ironfish/rust-nodejs'
-import { ErrorUtils, PromiseUtils, TimeUtils } from '@ironfish/sdk'
+import { contribute } from '@elosys/rust-nodejs'
+import { ErrorUtils, PromiseUtils, TimeUtils } from '@elosys/sdk'
 import { CliUx, Flags } from '@oclif/core'
 import axios from 'axios'
 import fsAsync from 'fs/promises'
 import path from 'path'
 import { pipeline } from 'stream/promises'
-import { IronfishCommand } from '../../command'
+import { elosysCommand } from '../../command'
 import { DataDirFlag, DataDirFlagKey, VerboseFlag, VerboseFlagKey } from '../../flags'
 import { CeremonyClient } from '../../trusted-setup/client'
 
-export default class Ceremony extends IronfishCommand {
+export default class Ceremony extends elosysCommand {
   static description = 'Contribute randomness to the Iron Fish trusted setup'
 
   static flags = {
@@ -20,7 +20,7 @@ export default class Ceremony extends IronfishCommand {
     [DataDirFlagKey]: DataDirFlag,
     host: Flags.string({
       parse: (input: string) => Promise.resolve(input.trim()),
-      default: 'ceremony.ironfish.network',
+      default: 'ceremony.elosys.network',
       description: 'Host address of the ceremony coordination server',
     }),
     port: Flags.integer({
@@ -49,7 +49,7 @@ export default class Ceremony extends IronfishCommand {
 
     // Prompt for randomness
     let randomness: string | null = await CliUx.ux.prompt(
-      `If you'd like to contribute your own randomness to the ceremony, type it here, then press Enter. For more information on where this should come from and its importance, please read https://setup.ironfish.network. If you'd like the command to generate some randomness for you, just press Enter`,
+      `If you'd like to contribute your own randomness to the ceremony, type it here, then press Enter. For more information on where this should come from and its importance, please read https://setup.elosys.network. If you'd like the command to generate some randomness for you, just press Enter`,
       { required: false },
     )
     randomness = randomness.length ? randomness : null

@@ -1,5 +1,5 @@
 {
-  "name": "@ironfish/rust-nodejs-darwin-x64",
+  "name": "@elosys/rust-nodejs-darwin-x64",
   "version": "1.14.0",
   "os": [
     "darwin"
@@ -7,9 +7,9 @@
   "cpu": [
     "x64"
   ],
-  "main": "ironfish-rust-nodejs.darwin-x64.node",
+  "main": "elosys-rust-nodejs.darwin-x64.node",
   "files": [
-    "ironfish-rust-nodejs.darwin-x64.node"
+    "elosys-rust-nodejs.darwin-x64.node"
   ],
   "license": "MPL-2.0",
   "engines": {

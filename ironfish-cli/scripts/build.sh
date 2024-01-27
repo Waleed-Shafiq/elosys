@@ -22,7 +22,7 @@ fi
 if [[ -d .git ]]; then
     git_hash=$(git rev-parse --short HEAD)
 
-    for file in ironfish/package.json ironfish-cli/package.json; do
+    for file in elosys/package.json elosys-cli/package.json; do
         echo "Inserting GIT hash into $file as gitHash"
         cat <<< "$(jq --arg gh "$git_hash" '.gitHash = $gh' < "$file")" > "$file"
     done
@@ -37,7 +37,7 @@ yarn build
 echo "Removing lifecycle scripts"
 cat <<< "$(jq 'del(.scripts.postinstall)' < package.json)" > package.json
 
-cd ironfish-cli
+cd elosys-cli
 echo "Outputting build to $PWD/build.cli"
 rm -rf build.cli
 mkdir build.cli
@@ -51,7 +51,7 @@ echo "Installing production node_modules"
 rm -rf ../../node_modules
 cd ../..
 yarn --non-interactive --frozen-lockfile --production
-cd ironfish-cli/build.cli
+cd elosys-cli/build.cli
 
 cd package
 echo "Copying build"
@@ -59,21 +59,21 @@ cp -R ../../build ./
 
 echo "Copying node_modules"
 # Exclude fsevents to fix brew audit error:
-# "Binaries built for a non-native architecture were installed into ironfish's prefix"
-rsync -L -avrq --exclude '@ironfish/rust-nodejs/target' --exclude 'ironfish' --exclude 'fsevents' ../../../node_modules ./
-# Copy node_modules from ironfish-cli folder into the production node_modules folder
+# "Binaries built for a non-native architecture were installed into elosys's prefix"
+rsync -L -avrq --exclude '@elosys/rust-nodejs/target' --exclude 'elosys' --exclude 'fsevents' ../../../node_modules ./
+# Copy node_modules from elosys-cli folder into the production node_modules folder
 # yarn --production seems to split some packages into different folders for some reason
 # if ../../node_modules/ is empty then the cp command will error so skip copying
 cp -R ../../node_modules/* ./node_modules || true
 
 echo ""
 if ! ./bin/run --version > /dev/null; then
-    echo "Failed to build ironfish"
+    echo "Failed to build elosys"
 else
-    echo "Ironfish CLI built successfully"
+    echo "Elosys CLI built successfully"
 fi
 
-echo "Packaging build into ironfish-cli.tar.gz"
+echo "Packaging build into elosys-cli.tar.gz"
 cd ..
-mv package ironfish-cli
-tar -cf ironfish-cli.tar.gz ironfish-cli
+mv package elosys-cli
+tar -cf elosys-cli.tar.gz elosys-cli

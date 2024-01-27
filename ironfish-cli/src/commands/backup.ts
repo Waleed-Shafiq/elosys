@@ -4,16 +4,16 @@
 import { CognitoIdentity } from '@aws-sdk/client-cognito-identity'
 import { S3Client } from '@aws-sdk/client-s3'
 import { Credentials } from '@aws-sdk/types/dist-types/credentials'
-import { Assert, FileUtils, NodeUtils } from '@ironfish/sdk'
+import { Assert, FileUtils, NodeUtils } from '@elosys/sdk'
 import { CliUx, Flags } from '@oclif/core'
 import fsAsync from 'fs/promises'
 import path from 'path'
 import { v4 as uuid } from 'uuid'
-import { IronfishCommand } from '../command'
+import { elosysCommand } from '../command'
 import { DataDirFlag, DataDirFlagKey, VerboseFlag, VerboseFlagKey } from '../flags'
 import { S3Utils, TarUtils } from '../utils'
 
-export default class Backup extends IronfishCommand {
+export default class Backup extends elosysCommand {
   static hidden = true
   static description = 'Zip and upload your datadir to an S3 bucket'
 

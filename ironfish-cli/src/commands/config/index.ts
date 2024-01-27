@@ -3,11 +3,11 @@
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 import { Flags } from '@oclif/core'
 import jsonColorizer from 'json-colorizer'
-import { IronfishCommand } from '../../command'
+import { elosysCommand } from '../../command'
 import { ColorFlag, ColorFlagKey } from '../../flags'
 import { RemoteFlags } from '../../flags'
 
-export class ShowCommand extends IronfishCommand {
+export class ShowCommand extends elosysCommand {
   static description = `Print out the entire config`
 
   static flags = {

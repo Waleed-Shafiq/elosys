@@ -7,17 +7,17 @@ import {
   ErrorUtils,
   FileUtils,
   FullNode,
-  IronfishPKG,
-} from '@ironfish/sdk'
+  elosysPKG,
+} from '@elosys/sdk'
 import { execSync } from 'child_process'
 import os from 'os'
 import { getHeapStatistics } from 'v8'
-import { IronfishCommand } from '../command'
+import { elosysCommand } from '../command'
 import { LocalFlags } from '../flags'
 
 const SPACE_BUFFER = 8
 
-export default class Debug extends IronfishCommand {
+export default class Debug extends elosysCommand {
   static description = 'Show debug information to help locate issues'
   static hidden = true
 
@@ -67,7 +67,7 @@ export default class Debug extends IronfishCommand {
 
     let cmdInPath: boolean
     try {
-      execSync('ironfish --help', { stdio: 'ignore' })
+      execSync('elosys --help', { stdio: 'ignore' })
       cmdInPath = true
     } catch {
       cmdInPath = false
@@ -75,14 +75,14 @@ export default class Debug extends IronfishCommand {
 
     return new Map<string, string>([
       ['Iron Fish version', `${node.pkg.version} @ ${node.pkg.git}`],
-      ['Iron Fish library', `${IronfishPKG.version} @ ${IronfishPKG.git}`],
+      ['Iron Fish library', `${elosysPKG.version} @ ${elosysPKG.git}`],
       ['Operating system', `${os.type()} ${process.arch}`],
       ['CPU model(s)', `${cpuNames.toString()}`],
       ['CPU threads', `${cpuThreads}`],
       ['RAM total', `${memTotal}`],
       ['Heap total', `${heapTotal}`],
       ['Node version', `${process.version}`],
-      ['ironfish in PATH', `${cmdInPath.toString()}`],
+      ['elosys in PATH', `${cmdInPath.toString()}`],
       ['Garbage Collector Exposed', `${String(!!global.gc)}`],
       ['Telemetry enabled', `${telemetryEnabled}`],
       ['Asset Verification enabled', `${assetVerificationEnabled}`],

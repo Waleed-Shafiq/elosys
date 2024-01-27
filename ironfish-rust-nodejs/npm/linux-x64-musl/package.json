@@ -1,5 +1,5 @@
 {
-  "name": "@ironfish/rust-nodejs-linux-x64-musl",
+  "name": "@elosys/rust-nodejs-linux-x64-musl",
   "version": "1.14.0",
   "os": [
     "linux"
@@ -7,9 +7,9 @@
   "cpu": [
     "x64"
   ],
-  "main": "ironfish-rust-nodejs.linux-x64-musl.node",
+  "main": "elosys-rust-nodejs.linux-x64-musl.node",
   "files": [
-    "ironfish-rust-nodejs.linux-x64-musl.node"
+    "elosys-rust-nodejs.linux-x64-musl.node"
   ],
   "license": "MPL-2.0",
   "engines": {

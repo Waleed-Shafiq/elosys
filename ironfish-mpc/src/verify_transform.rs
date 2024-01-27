@@ -14,23 +14,23 @@ pub fn verify_transform(
     let new_params = File::open(new_params_path)?;
     let mut new_params = BufReader::with_capacity(1024 * 1024, new_params);
 
-    let sapling_spend = ironfish_phase2::MPCParameters::read(&mut params, false)?;
+    let sapling_spend = elosys_phase2::MPCParameters::read(&mut params, false)?;
 
-    let sapling_output = ironfish_phase2::MPCParameters::read(&mut params, false)?;
+    let sapling_output = elosys_phase2::MPCParameters::read(&mut params, false)?;
 
-    let sapling_mint = ironfish_phase2::MPCParameters::read(&mut params, false)?;
+    let sapling_mint = elosys_phase2::MPCParameters::read(&mut params, false)?;
 
-    let new_sapling_spend = ironfish_phase2::MPCParameters::read(&mut new_params, true)?;
+    let new_sapling_spend = elosys_phase2::MPCParameters::read(&mut new_params, true)?;
 
-    let new_sapling_output = ironfish_phase2::MPCParameters::read(&mut new_params, true)?;
+    let new_sapling_output = elosys_phase2::MPCParameters::read(&mut new_params, true)?;
 
-    let new_sapling_mint = ironfish_phase2::MPCParameters::read(&mut new_params, true)?;
+    let new_sapling_mint = elosys_phase2::MPCParameters::read(&mut new_params, true)?;
 
-    let h1 = ironfish_phase2::verify_contribution(&sapling_spend, &new_sapling_spend)?;
+    let h1 = elosys_phase2::verify_contribution(&sapling_spend, &new_sapling_spend)?;
 
-    let h2 = ironfish_phase2::verify_contribution(&sapling_output, &new_sapling_output)?;
+    let h2 = elosys_phase2::verify_contribution(&sapling_output, &new_sapling_output)?;
 
-    let h3 = ironfish_phase2::verify_contribution(&sapling_mint, &new_sapling_mint)?;
+    let h3 = elosys_phase2::verify_contribution(&sapling_mint, &new_sapling_mint)?;
 
     let mut h = Blake2b512::new();
     h.update(h1);

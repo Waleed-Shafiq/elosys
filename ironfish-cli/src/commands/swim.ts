@@ -2,12 +2,12 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 import { CliUx } from '@oclif/core'
-import { IronfishCommand } from '../command'
+import { elosysCommand } from '../command'
 import { ONE_FISH_IMAGE, TWO_FISH_IMAGE } from '../images'
 
 const FRAME_RATE_MS = 1000 / 30
 
-export default class SwimCommand extends IronfishCommand {
+export default class SwimCommand extends elosysCommand {
   static description = 'See the hex fish swim'
   static hidden = true
 

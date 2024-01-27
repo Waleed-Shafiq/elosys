@@ -4,7 +4,7 @@
 
 use crate::{
     assets::asset_identifier::AssetIdentifier,
-    errors::{IronfishError, IronfishErrorKind},
+    errors::{elosysError, elosysErrorKind},
     keys::PUBLIC_ADDRESS_SIZE,
     util::str_to_array,
     ViewKey,
@@ -19,7 +19,7 @@ use blstrs::Scalar;
 use byteorder::{ByteOrder, LittleEndian, ReadBytesExt, WriteBytesExt};
 use ff::{Field, PrimeField};
 use group::{Curve, GroupEncoding};
-use ironfish_zkp::{
+use elosys_zkp::{
     constants::{ASSET_ID_LENGTH, NULLIFIER_POSITION_GENERATOR, PRF_NF_PERSONALIZATION},
     util::commitment_full_point,
     Nullifier,
@@ -124,7 +124,7 @@ impl<'a> Note {
     ///
     /// You probably don't want to use this unless you are transmitting
     /// across nodejs threads in memory.
-    pub fn read<R: io::Read>(mut reader: R) -> Result<Self, IronfishError> {
+    pub fn read<R: io::Read>(mut reader: R) -> Result<Self, elosysError> {
         let owner = PublicAddress::read(&mut reader)?;
 
         let asset_id = AssetIdentifier::read(&mut reader)?;
@@ -152,7 +152,7 @@ impl<'a> Note {
     /// This should generally never be used to serialize to disk or the network.
     /// It is primarily added as a device for transmitting the note across
     /// thread boundaries.
-    pub fn write<W: io::Write>(&self, mut writer: &mut W) -> Result<(), IronfishError> {
+    pub fn write<W: io::Write>(&self, mut writer: &mut W) -> Result<(), elosysError> {
         self.owner.write(&mut writer)?;
         self.asset_id.write(&mut writer)?;
         writer.write_u64::<LittleEndian>(self.value)?;
@@ -176,7 +176,7 @@ impl<'a> Note {
         owner_view_key: &'a IncomingViewKey,
         shared_secret: &[u8; 32],
         encrypted_bytes: &[u8; ENCRYPTED_NOTE_SIZE + aead::MAC_SIZE],
-    ) -> Result<Self, IronfishError> {
+    ) -> Result<Self, elosysError> {
         let (randomness, asset_id, value, memo, sender) =
             Note::decrypt_note_parts(shared_secret, encrypted_bytes)?;
         let owner = owner_view_key.public_address();
@@ -204,7 +204,7 @@ impl<'a> Note {
         public_address: SubgroupPoint,
         shared_secret: &[u8; 32],
         encrypted_bytes: &[u8; ENCRYPTED_NOTE_SIZE + aead::MAC_SIZE],
-    ) -> Result<Self, IronfishError> {
+    ) -> Result<Self, elosysError> {
         let (randomness, asset_id, value, memo, sender) =
             Note::decrypt_note_parts(shared_secret, encrypted_bytes)?;
 
@@ -329,18 +329,18 @@ impl<'a> Note {
     }
 
     /// Verify that the note's commitment matches the one passed in
-    pub(crate) fn verify_commitment(&self, commitment: Scalar) -> Result<(), IronfishError> {
+    pub(crate) fn verify_commitment(&self, commitment: Scalar) -> Result<(), elosysError> {
         if commitment == self.commitment_point() {
             Ok(())
         } else {
-            Err(IronfishError::new(IronfishErrorKind::InvalidCommitment))
+            Err(elosysError::new(elosysErrorKind::InvalidCommitment))
         }
     }
 
     fn decrypt_note_parts(
         shared_secret: &[u8; 32],
         encrypted_bytes: &[u8; ENCRYPTED_NOTE_SIZE + aead::MAC_SIZE],
-    ) -> Result<(jubjub::Fr, AssetIdentifier, u64, Memo, PublicAddress), IronfishError> {
+    ) -> Result<(jubjub::Fr, AssetIdentifier, u64, Memo, PublicAddress), elosysError> {
         let plaintext_bytes: [u8; ENCRYPTED_NOTE_SIZE] =
             aead::decrypt(shared_secret, encrypted_bytes)?;
 

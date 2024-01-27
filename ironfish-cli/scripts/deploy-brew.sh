@@ -4,7 +4,7 @@ cd "$(dirname "$0")"
 cd ..
 
 # This script will package the CLI for mac and upload a release asset
-# to the latest release at https://github.com/iron-fish/homebrew-brew
+# to the latest release at https://github.com/elosys/homebrew-brew
 # then prints out some extra steps to make the release public
 
 if [ -z "${AWS_ACCESS_KEY_ID-}" ]; then
@@ -17,7 +17,7 @@ if [ -z "${AWS_SECRET_ACCESS_KEY-}" ]; then
     exit 1
 fi
 
-SOURCE_NAME=ironfish-cli.tar.gz
+SOURCE_NAME=elosys-cli.tar.gz
 SOURCE_PATH=./build.cli/$SOURCE_NAME
 
 echo "Getting git hash"
@@ -26,14 +26,14 @@ GIT_HASH=$(git rev-parse --short HEAD)
 echo "Getting sha256"
 UPLOAD_HASH=$(shasum -a 256 $SOURCE_PATH | awk '{print $1}')
 
-UPLOAD_NAME=ironfish-cli-$GIT_HASH.tar.gz
-UPLOAD_URL=s3://ironfish-cli/$UPLOAD_NAME
+UPLOAD_NAME=elosys-cli-$GIT_HASH.tar.gz
+UPLOAD_URL=s3://elosys-cli/$UPLOAD_NAME
 
 if [ -z "${UPLOAD_TO_R2-}" ];
 then
-  PUBLIC_URL=https://ironfish-cli.s3.amazonaws.com/$UPLOAD_NAME
+  PUBLIC_URL=https://elosys-cli.s3.amazonaws.com/$UPLOAD_NAME
 else
-  PUBLIC_URL=https://releases.ironfish.network/$UPLOAD_NAME
+  PUBLIC_URL=https://releases.elosys.network/$UPLOAD_NAME
 fi
 
 echo ""
@@ -46,7 +46,7 @@ echo ""
 
 if [ -z "${UPLOAD_TO_R2-}" ];
 then
-  if aws s3api head-object --bucket ironfish-cli --key $UPLOAD_NAME > /dev/null 2>&1 ; then
+  if aws s3api head-object --bucket elosys-cli --key $UPLOAD_NAME > /dev/null 2>&1 ; then
     echo "Release already uploaded: $PUBLIC_URL"
     exit 1
   fi
@@ -54,7 +54,7 @@ then
   echo "Uploading $SOURCE_NAME to $UPLOAD_URL"
   aws s3 cp $SOURCE_PATH $UPLOAD_URL
 else
-  if aws s3api head-object --bucket ironfish-cli --endpoint-url https://a93bebf26da4c2fe205f71c896afcf89.r2.cloudflarestorage.com --key $UPLOAD_NAME > /dev/null 2>&1 ; then
+  if aws s3api head-object --bucket elosys-cli --endpoint-url https://a93bebf26da4c2fe205f71c896afcf89.r2.cloudflarestorage.com --key $UPLOAD_NAME > /dev/null 2>&1 ; then
     echo "Release already uploaded: $PUBLIC_URL"
     exit 1
   fi
@@ -65,7 +65,7 @@ fi
 
 echo ""
 echo "You are almost finished! To finish the process you need to update update url and sha256 in"
-echo "https://github.com/iron-fish/homebrew-brew/blob/master/Formula/ironfish.rb"
+echo "https://github.com/elosys/homebrew-brew/blob/master/Formula/elosys.rb"
 echo ""
 echo "URL = \"$PUBLIC_URL\".freeze"
 echo "SHA = \"$UPLOAD_HASH\".freeze"

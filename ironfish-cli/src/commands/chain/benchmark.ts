@@ -1,16 +1,16 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
-import { BenchUtils, IronfishSdk, NodeUtils } from '@ironfish/sdk'
+import { BenchUtils, elosysSdk, NodeUtils } from '@elosys/sdk'
 import { CliUx, Flags } from '@oclif/core'
 import blessed from 'blessed'
 import fs from 'fs/promises'
 import path from 'path'
-import { IronfishCommand } from '../../command'
+import { elosysCommand } from '../../command'
 import { LocalFlags } from '../../flags'
-import { IronfishCliPKG } from '../../package'
+import { elosysCliPKG } from '../../package'
 
-export default class Benchmark extends IronfishCommand {
+export default class Benchmark extends elosysCommand {
   static description =
     'Test the performance of the chain by re-importing data from an existing chain'
 
@@ -55,8 +55,8 @@ export default class Benchmark extends IronfishCommand {
 
     const noLoggingConfig = Object.assign({}, this.sdk.config.overrides)
     noLoggingConfig.logLevel = '*:error'
-    const tmpSdk = await IronfishSdk.init({
-      pkg: IronfishCliPKG,
+    const tmpSdk = await elosysSdk.init({
+      pkg: elosysCliPKG,
       configOverrides: noLoggingConfig,
       configName: undefined,
       dataDir: targetDirectory,

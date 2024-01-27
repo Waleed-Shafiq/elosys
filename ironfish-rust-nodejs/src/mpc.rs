@@ -2,7 +2,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 
-use ironfish_mpc;
+use elosys_mpc;
 
 use napi::bindgen_prelude::*;
 use napi::{Env, JsString, Result, Task};
@@ -22,7 +22,7 @@ impl Task for Contribute {
     type JsValue = JsString;
 
     fn compute(&mut self) -> Result<Self::Output> {
-        ironfish_mpc::compute(&self.input_path, &self.output_path, &self.seed).map_err(to_napi_err)
+        elosys_mpc::compute(&self.input_path, &self.output_path, &self.seed).map_err(to_napi_err)
     }
 
     fn resolve(&mut self, env: Env, output: Self::Output) -> Result<Self::JsValue> {
@@ -54,7 +54,7 @@ impl Task for VerifyTransform {
     type JsValue = JsString;
 
     fn compute(&mut self) -> Result<Self::Output> {
-        ironfish_mpc::verify_transform(&self.params_path, &self.new_params_path)
+        elosys_mpc::verify_transform(&self.params_path, &self.new_params_path)
             .map_err(to_napi_err)
     }
 

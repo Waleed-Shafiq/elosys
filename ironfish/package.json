@@ -1,7 +1,7 @@
 {
   "name": "@elosys/sdk",
   "version": "1.17.0",
-  "description": "SDK for running and interacting with an Iron Fish node",
+  "description": "SDK for running and interacting with an elosys node",
   "author": "Elosys <contact@elosys.network> (https://elosys.network)",
   "main": "build/src/index.js",
   "types": "build/src/index.d.ts",

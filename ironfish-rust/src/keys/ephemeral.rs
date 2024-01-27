@@ -2,7 +2,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 use ff::Field;
-use ironfish_zkp::constants::PUBLIC_KEY_GENERATOR;
+use elosys_zkp::constants::PUBLIC_KEY_GENERATOR;
 use rand::thread_rng;
 
 /// Diffie Hellman key exchange pair as used in note encryption.
@@ -36,7 +36,7 @@ impl EphemeralKeyPair {
 
 #[cfg(test)]
 mod test {
-    use ironfish_zkp::constants::PUBLIC_KEY_GENERATOR;
+    use elosys_zkp::constants::PUBLIC_KEY_GENERATOR;
 
     use super::EphemeralKeyPair;
 

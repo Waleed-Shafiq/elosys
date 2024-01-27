@@ -1,5 +1,5 @@
 {
-  "name": "@ironfish/rust-nodejs-linux-arm64-gnu",
+  "name": "@elosys/rust-nodejs-linux-arm64-gnu",
   "version": "1.14.0",
   "os": [
     "linux"
@@ -7,9 +7,9 @@
   "cpu": [
     "arm64"
   ],
-  "main": "ironfish-rust-nodejs.linux-arm64-gnu.node",
+  "main": "elosys-rust-nodejs.linux-arm64-gnu.node",
   "files": [
-    "ironfish-rust-nodejs.linux-arm64-gnu.node"
+    "elosys-rust-nodejs.linux-arm64-gnu.node"
   ],
   "license": "MPL-2.0",
   "engines": {

@@ -1,3 +1,3 @@
-# @ironfish/rust-nodejs
+# @elosys/rust-nodejs
 
-Builds [ironfish-rust](../ironfish-rust/README.md) as a Node.js native addon using [napi-rs](https://napi.rs/).
+Builds [elosys-rust](../elosys-rust/README.md) as a Node.js native addon using [napi-rs](https://napi.rs/).

@@ -2,10 +2,10 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 import { Flags } from '@oclif/core'
-import { IronfishCommand } from '../../command'
+import { elosysCommand } from '../../command'
 import { RemoteFlags } from '../../flags'
 
-export class UnsetCommand extends IronfishCommand {
+export class UnsetCommand extends elosysCommand {
   static description = `Unset a value in the config and fall back to default`
 
   static args = [
@@ -25,7 +25,7 @@ export class UnsetCommand extends IronfishCommand {
     }),
   }
 
-  static examples = ['$ ironfish config:unset blockGraffiti']
+  static examples = ['$ elosys config:unset blockGraffiti']
 
   async start(): Promise<void> {
     const { args, flags } = await this.parse(UnsetCommand)

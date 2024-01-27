@@ -11,7 +11,7 @@ import {
   DEFAULT_USE_RPC_TLS,
   MAXIMUM_ORE_AMOUNT,
   MINIMUM_ORE_AMOUNT,
-} from '@ironfish/sdk'
+} from '@elosys/sdk'
 import { Flags, Interfaces } from '@oclif/core'
 
 type CompletableOptionFlag = Interfaces.CompletableOptionFlag<unknown>
@@ -51,7 +51,7 @@ export const DataDirFlag = Flags.string({
   char: 'd',
   default: DEFAULT_DATA_DIR,
   description: 'The path to the data dir',
-  env: 'IRONFISH_DATA_DIR',
+  env: 'elosys_DATA_DIR',
 })
 
 export const RpcUseIpcFlag = Flags.boolean({

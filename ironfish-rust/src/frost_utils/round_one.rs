@@ -2,7 +2,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 
-use ironfish_frost::frost::{
+use elosys_frost::frost::{
     self,
     keys::KeyPackage,
     round1::{SigningCommitments, SigningNonces},
@@ -18,7 +18,7 @@ pub fn round_one(key_package: &KeyPackage, seed: u64) -> (SigningNonces, Signing
 #[cfg(test)]
 mod test {
     use ff::Field;
-    use ironfish_frost::frost::keys::IdentifierList;
+    use elosys_frost::frost::keys::IdentifierList;
     use jubjub::Fr;
     use rand::rngs::ThreadRng;
 

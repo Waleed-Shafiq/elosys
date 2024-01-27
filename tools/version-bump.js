@@ -6,17 +6,17 @@
  * the Rust package version.
  *
  * Flags:
- *   rust - Bumps the @ironfish/rust-nodejs package version.
+ *   rust - Bumps the @elosys/rust-nodejs package version.
  */
 
 const fs = require('fs/promises');
 const path = require('path')
 
-const CLI_PACKAGE = path.join(__dirname, '../ironfish-cli/package.json')
-const NODE_PACKAGE = path.join(__dirname, '../ironfish/package.json')
-const RUST_PACKAGE = path.join(__dirname, '../ironfish-rust-nodejs/package.json')
+const CLI_PACKAGE = path.join(__dirname, '../elosys-cli/package.json')
+const NODE_PACKAGE = path.join(__dirname, '../elosys/package.json')
+const RUST_PACKAGE = path.join(__dirname, '../elosys-rust-nodejs/package.json')
 
-const shouldBumpIronfishRust = process.argv.find((a) => a.includes('rust'))
+const shouldBumpelosysRust = process.argv.find((a) => a.includes('rust'))
 const isPatchRelease = process.argv.find((a) => a.includes('patch'))
 const isMajorRelease = process.argv.find((a) => a.includes('major'))
 
@@ -99,10 +99,10 @@ const bumpNodeAndCliPackage = async (shouldBumpRust) => {
 }
 
 const bumpRustPackage = async () => {
-  const deps = await getDirectories(path.join(__dirname, '../ironfish-rust-nodejs/npm/'))
+  const deps = await getDirectories(path.join(__dirname, '../elosys-rust-nodejs/npm/'))
 
   for (const dep of deps) {
-    const package = path.join(__dirname, '../ironfish-rust-nodejs/npm/', dep, 'package.json')
+    const package = path.join(__dirname, '../elosys-rust-nodejs/npm/', dep, 'package.json')
     const depPackage = await readPackage(package)
     depPackage.version = bumpVersion(depPackage.version)
     await writePackage(package, depPackage)
@@ -125,7 +125,7 @@ const bumpRustPackage = async () => {
 
 // Main script
 const main = async () => {
-  if (shouldBumpIronfishRust) {
+  if (shouldBumpelosysRust) {
     await bumpRustPackage()
   }
 

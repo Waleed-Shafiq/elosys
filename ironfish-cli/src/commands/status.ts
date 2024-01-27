@@ -8,13 +8,13 @@ import {
   GetNodeStatusResponse,
   PromiseUtils,
   TimeUtils,
-} from '@ironfish/sdk'
+} from '@elosys/sdk'
 import { Flags } from '@oclif/core'
 import blessed from 'blessed'
-import { IronfishCommand } from '../command'
+import { elosysCommand } from '../command'
 import { RemoteFlags } from '../flags'
 
-export default class Status extends IronfishCommand {
+export default class Status extends elosysCommand {
   static description = 'Show the status of the node'
 
   static flags = {

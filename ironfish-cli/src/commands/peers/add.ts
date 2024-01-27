@@ -1,11 +1,11 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
-import { DEFAULT_WEBSOCKET_PORT, parseUrl } from '@ironfish/sdk'
-import { IronfishCommand } from '../../command'
+import { DEFAULT_WEBSOCKET_PORT, parseUrl } from '@elosys/sdk'
+import { elosysCommand } from '../../command'
 import { RemoteFlags } from '../../flags'
 
-export class AddCommand extends IronfishCommand {
+export class AddCommand extends elosysCommand {
   static description = `Attempt to connect to a peer through websockets`
 
   static args = [

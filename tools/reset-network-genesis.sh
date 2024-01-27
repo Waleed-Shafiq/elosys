@@ -14,9 +14,9 @@ cd "$(dirname "$0")"
 
 (
     echo "Regenerating genesis block"
-    cd ../ironfish-cli
-    yarn start chain:genesisblock -a IronFishGenesisAccount
+    cd ../elosys-cli
+    yarn start chain:genesisblock -a elosysGenesisAccount
 
     echo ""
-    echo "Copy the above block into `DEV_GENESIS` in ironfish/src/defaultNetworkDefinitions.ts"
+    echo "Copy the above block into `DEV_GENESIS` in elosys/src/defaultNetworkDefinitions.ts"
 )

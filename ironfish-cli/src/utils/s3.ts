@@ -22,7 +22,7 @@ import {
 import { GetSecretValueCommand, SecretsManagerClient } from '@aws-sdk/client-secrets-manager'
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
 import { Credentials } from '@aws-sdk/types/dist-types/credentials'
-import { Assert, ErrorUtils, Logger } from '@ironfish/sdk'
+import { Assert, ErrorUtils, Logger } from '@elosys/sdk'
 import fsAsync from 'fs/promises'
 import { pipeline } from 'stream/promises'
 

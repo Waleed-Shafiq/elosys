@@ -6,13 +6,13 @@ use std::cell::RefCell;
 
 use std::convert::TryInto;
 
-use ironfish::assets::asset_identifier::AssetIdentifier;
-use ironfish::transaction::unsigned::UnsignedTransaction;
-use ironfish::transaction::{
+use elosys::assets::asset_identifier::AssetIdentifier;
+use elosys::transaction::unsigned::UnsignedTransaction;
+use elosys::transaction::{
     batch_verify_transactions, TransactionVersion, TRANSACTION_EXPIRATION_SIZE,
     TRANSACTION_FEE_SIZE, TRANSACTION_PUBLIC_KEY_SIZE, TRANSACTION_SIGNATURE_SIZE,
 };
-use ironfish::{
+use elosys::{
     keys::proof_generation_key::{ProofGenerationKey, ProofGenerationKeySerializable},
     MerkleNoteHash, OutgoingViewKey, ProposedTransaction, PublicAddress, SaplingKey, Transaction,
     ViewKey,
@@ -29,7 +29,7 @@ use super::note::NativeNote;
 use super::spend_proof::NativeSpendDescription;
 use super::witness::JsWitness;
 use super::{NativeAsset, ENCRYPTED_NOTE_LENGTH};
-use ironfish::transaction::outputs::PROOF_SIZE;
+use elosys::transaction::outputs::PROOF_SIZE;
 
 #[napi]
 pub const PROOF_LENGTH: u32 = PROOF_SIZE;

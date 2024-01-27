@@ -14,7 +14,7 @@
 
 use super::PublicAddress;
 use crate::{
-    errors::{IronfishError, IronfishErrorKind},
+    errors::{elosysError, elosysErrorKind},
     serializing::{bytes_to_hex, hex_to_bytes, read_scalar},
 };
 use bip39::{Language, Mnemonic};
@@ -36,25 +36,25 @@ pub struct IncomingViewKey {
 
 impl IncomingViewKey {
     /// load view key from a Read implementation
-    pub fn read<R: io::Read>(reader: &mut R) -> Result<Self, IronfishError> {
+    pub fn read<R: io::Read>(reader: &mut R) -> Result<Self, elosysError> {
         let view_key = read_scalar(reader)?;
         Ok(IncomingViewKey { view_key })
     }
 
     /// Load a key from a string of hexadecimal digits
-    pub fn from_hex(value: &str) -> Result<Self, IronfishError> {
+    pub fn from_hex(value: &str) -> Result<Self, elosysError> {
         match hex_to_bytes::<32>(value) {
-            Err(_) => Err(IronfishError::new(IronfishErrorKind::InvalidViewingKey)),
+            Err(_) => Err(elosysError::new(elosysErrorKind::InvalidViewingKey)),
             Ok(bytes) => Self::read(&mut bytes.as_ref()),
         }
     }
 
     /// Load a key from a string of words to be decoded into bytes.
-    pub fn from_words(language_code: &str, value: String) -> Result<Self, IronfishError> {
+    pub fn from_words(language_code: &str, value: String) -> Result<Self, elosysError> {
         let language = Language::from_language_code(language_code)
-            .ok_or_else(|| IronfishError::new(IronfishErrorKind::InvalidLanguageEncoding))?;
+            .ok_or_else(|| elosysError::new(elosysErrorKind::InvalidLanguageEncoding))?;
         let mnemonic = Mnemonic::from_phrase(&value, language)
-            .map_err(|_| IronfishError::new(IronfishErrorKind::InvalidPaymentAddress))?;
+            .map_err(|_| elosysError::new(elosysErrorKind::InvalidPaymentAddress))?;
         let bytes = mnemonic.entropy();
         let mut byte_arr = [0; 32];
         byte_arr.clone_from_slice(&bytes[0..32]);
@@ -67,9 +67,9 @@ impl IncomingViewKey {
     }
 
     /// Even more readable
-    pub fn words_key(&self, language_code: &str) -> Result<String, IronfishError> {
+    pub fn words_key(&self, language_code: &str) -> Result<String, elosysError> {
         let language = Language::from_language_code(language_code)
-            .ok_or_else(|| IronfishError::new(IronfishErrorKind::InvalidLanguageEncoding))?;
+            .ok_or_else(|| elosysError::new(elosysErrorKind::InvalidLanguageEncoding))?;
         let mnemonic = Mnemonic::from_entropy(&self.view_key.to_bytes(), language).unwrap();
         Ok(mnemonic.phrase().to_string())
     }
@@ -103,7 +103,7 @@ pub struct ViewKey {
 
 impl ViewKey {
     /// Load a key from a string of hexadecimal digits
-    pub fn from_hex(value: &str) -> Result<Self, IronfishError> {
+    pub fn from_hex(value: &str) -> Result<Self, elosysError> {
         let bytes: [u8; 64] = hex_to_bytes(value)?;
 
         let mut authorizing_key_bytes = [0; 32];
@@ -113,11 +113,11 @@ impl ViewKey {
         nullifier_deriving_key_bytes.clone_from_slice(&bytes[32..]);
 
         let authorizing_key = Option::from(SubgroupPoint::from_bytes(&authorizing_key_bytes))
-            .ok_or_else(|| IronfishError::new(IronfishErrorKind::InvalidAuthorizingKey))?;
+            .ok_or_else(|| elosysError::new(elosysErrorKind::InvalidAuthorizingKey))?;
         let nullifier_deriving_key = Option::from(SubgroupPoint::from_bytes(
             &nullifier_deriving_key_bytes,
         ))
-        .ok_or_else(|| IronfishError::new(IronfishErrorKind::InvalidNullifierDerivingKey))?;
+        .ok_or_else(|| elosysError::new(elosysErrorKind::InvalidNullifierDerivingKey))?;
 
         Ok(Self {
             authorizing_key,
@@ -148,19 +148,19 @@ pub struct OutgoingViewKey {
 
 impl OutgoingViewKey {
     /// Load a key from a string of hexadecimal digits
-    pub fn from_hex(value: &str) -> Result<Self, IronfishError> {
+    pub fn from_hex(value: &str) -> Result<Self, elosysError> {
         match hex_to_bytes(value) {
-            Err(_) => Err(IronfishError::new(IronfishErrorKind::InvalidViewingKey)),
+            Err(_) => Err(elosysError::new(elosysErrorKind::InvalidViewingKey)),
             Ok(bytes) => Ok(Self { view_key: bytes }),
         }
     }
 
     /// Load a key from a string of words to be decoded into bytes.
-    pub fn from_words(language_code: &str, value: String) -> Result<Self, IronfishError> {
+    pub fn from_words(language_code: &str, value: String) -> Result<Self, elosysError> {
         let language = Language::from_language_code(language_code)
-            .ok_or_else(|| IronfishError::new(IronfishErrorKind::InvalidLanguageEncoding))?;
+            .ok_or_else(|| elosysError::new(elosysErrorKind::InvalidLanguageEncoding))?;
         let mnemonic = Mnemonic::from_phrase(&value, language)
-            .map_err(|_| IronfishError::new(IronfishErrorKind::InvalidPaymentAddress))?;
+            .map_err(|_| elosysError::new(elosysErrorKind::InvalidPaymentAddress))?;
         let bytes = mnemonic.entropy();
         let mut view_key = [0; 32];
         view_key.clone_from_slice(&bytes[0..32]);
@@ -173,9 +173,9 @@ impl OutgoingViewKey {
     }
 
     /// Even more readable
-    pub fn words_key(&self, language_code: &str) -> Result<String, IronfishError> {
+    pub fn words_key(&self, language_code: &str) -> Result<String, elosysError> {
         let language = Language::from_language_code(language_code)
-            .ok_or_else(|| IronfishError::new(IronfishErrorKind::InvalidLanguageEncoding))?;
+            .ok_or_else(|| elosysError::new(elosysErrorKind::InvalidLanguageEncoding))?;
         let mnemonic = Mnemonic::from_entropy(&self.view_key, language).unwrap();
         Ok(mnemonic.phrase().to_string())
     }

@@ -2,10 +2,10 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 import { CliUx } from '@oclif/core'
-import { IronfishCommand } from '../../command'
+import { elosysCommand } from '../../command'
 import { RemoteFlags } from '../../flags'
 
-export class BroadcastCommand extends IronfishCommand {
+export class BroadcastCommand extends elosysCommand {
   static description = `Broadcast a transaction to the network`
 
   static flags = {

@@ -1,5 +1,5 @@
 {
-  "name": "@ironfish/rust-nodejs-win32-x64-msvc",
+  "name": "@elosys/rust-nodejs-win32-x64-msvc",
   "version": "1.14.0",
   "os": [
     "win32"
@@ -7,9 +7,9 @@
   "cpu": [
     "x64"
   ],
-  "main": "ironfish-rust-nodejs.win32-x64-msvc.node",
+  "main": "elosys-rust-nodejs.win32-x64-msvc.node",
   "files": [
-    "ironfish-rust-nodejs.win32-x64-msvc.node"
+    "elosys-rust-nodejs.win32-x64-msvc.node"
   ],
   "license": "MPL-2.0",
   "engines": {

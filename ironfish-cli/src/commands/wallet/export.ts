@@ -1,15 +1,15 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
-import { AccountFormat, ErrorUtils, LanguageUtils } from '@ironfish/sdk'
+import { AccountFormat, ErrorUtils, LanguageUtils } from '@elosys/sdk'
 import { CliUx, Flags } from '@oclif/core'
 import fs from 'fs'
 import jsonColorizer from 'json-colorizer'
 import path from 'path'
-import { IronfishCommand } from '../../command'
+import { elosysCommand } from '../../command'
 import { ColorFlag, ColorFlagKey, RemoteFlags } from '../../flags'
 
-export class ExportCommand extends IronfishCommand {
+export class ExportCommand extends elosysCommand {
   static description = `Export an account`
 
   static flags = {
@@ -87,7 +87,7 @@ export class ExportCommand extends IronfishCommand {
         const stats = await fs.promises.stat(resolved)
 
         if (stats.isDirectory()) {
-          resolved = this.sdk.fileSystem.join(resolved, `ironfish-${account}.txt`)
+          resolved = this.sdk.fileSystem.join(resolved, `elosys-${account}.txt`)
         }
 
         if (fs.existsSync(resolved)) {

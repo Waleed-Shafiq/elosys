@@ -1,11 +1,11 @@
 [package]
-name = "ironfish-phase2"
+name = "elosys-phase2"
 version = "0.2.2"
-authors = ["Sean Bowe <ewillbefull@gmail.com>", "Iron Fish <contact@ironfish.network> (https://ironfish.network)"]
+authors = ["Sean Bowe <ewillbefull@gmail.com>", "Iron Fish <contact@elosys.network> (https://elosys.network)"]
 description = "Library for performing MPCs for creating zk-SNARK public parameters"
-homepage = "https://github.com/iron-fish/ironfish"
+homepage = "https://github.com/elosys/elosys"
 license = "MIT OR Apache-2.0"
-repository = "https://github.com/iron-fish/ironfish"
+repository = "https://github.com/elosys/elosys"
 
 publish = false
 

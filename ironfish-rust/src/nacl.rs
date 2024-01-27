@@ -9,7 +9,7 @@ use crypto_box::{
 };
 use rand::RngCore;
 
-use crate::errors::{IronfishError, IronfishErrorKind};
+use crate::errors::{elosysError, elosysErrorKind};
 
 pub const KEY_LENGTH: usize = crypto_box::KEY_SIZE;
 pub const NONCE_LENGTH: usize = 24;
@@ -35,7 +35,7 @@ pub fn box_message(
     plaintext: String,
     sender_secret_key: [u8; KEY_LENGTH],
     recipient_public_key: [u8; KEY_LENGTH],
-) -> Result<(Vec<u8>, Vec<u8>), IronfishError> {
+) -> Result<(Vec<u8>, Vec<u8>), elosysError> {
     let mut rng = OsRng;
 
     let sender: SecretKey = SecretKey::from(sender_secret_key);
@@ -55,9 +55,9 @@ pub fn unbox_message(
     nonce: &[u8],
     sender_public_key: [u8; KEY_LENGTH],
     recipient_secret_key: [u8; KEY_LENGTH],
-) -> Result<String, IronfishError> {
+) -> Result<String, elosysError> {
     if nonce.len() != NONCE_LENGTH {
-        return Err(IronfishError::new(IronfishErrorKind::InvalidNonceLength));
+        return Err(elosysError::new(elosysErrorKind::InvalidNonceLength));
     }
 
     let nonce = GenericArray::from_slice(nonce);

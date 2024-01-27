@@ -11,8 +11,8 @@ use std::num;
 use std::string;
 
 #[derive(Debug)]
-pub struct IronfishError {
-    pub kind: IronfishErrorKind,
+pub struct elosysError {
+    pub kind: elosysErrorKind,
     pub source: Option<Box<dyn Error>>,
     pub backtrace: Backtrace,
 }
@@ -23,7 +23,7 @@ pub struct IronfishError {
 /// types. The second is to give a singular type to convert into NAPI errors to
 /// be raised on the Javascript side.
 #[derive(Debug, PartialEq)]
-pub enum IronfishErrorKind {
+pub enum elosysErrorKind {
     BellpersonSynthesis,
     CryptoBox,
     FrostLibError,
@@ -64,8 +64,8 @@ pub enum IronfishErrorKind {
     Utf8,
 }
 
-impl IronfishError {
-    pub fn new(kind: IronfishErrorKind) -> Self {
+impl elosysError {
+    pub fn new(kind: elosysErrorKind) -> Self {
         Self {
             kind,
             source: None,
@@ -73,7 +73,7 @@ impl IronfishError {
         }
     }
 
-    pub fn new_with_source<E>(kind: IronfishErrorKind, source: E) -> Self
+    pub fn new_with_source<E>(kind: elosysErrorKind, source: E) -> Self
     where
         E: Into<Box<dyn Error>>,
     {
@@ -85,9 +85,9 @@ impl IronfishError {
     }
 }
 
-impl Error for IronfishError {}
+impl Error for elosysError {}
 
-impl fmt::Display for IronfishError {
+impl fmt::Display for elosysError {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         let has_backtrace = self.backtrace.status() == BacktraceStatus::Captured;
         write!(f, "{:?}", self.kind)?;
@@ -102,38 +102,38 @@ impl fmt::Display for IronfishError {
     }
 }
 
-impl From<io::Error> for IronfishError {
-    fn from(e: io::Error) -> IronfishError {
-        IronfishError::new_with_source(IronfishErrorKind::Io, e)
+impl From<io::Error> for elosysError {
+    fn from(e: io::Error) -> elosysError {
+        elosysError::new_with_source(elosysErrorKind::Io, e)
     }
 }
 
-impl From<crypto_box::aead::Error> for IronfishError {
-    fn from(e: crypto_box::aead::Error) -> IronfishError {
-        IronfishError::new_with_source(IronfishErrorKind::CryptoBox, e)
+impl From<crypto_box::aead::Error> for elosysError {
+    fn from(e: crypto_box::aead::Error) -> elosysError {
+        elosysError::new_with_source(elosysErrorKind::CryptoBox, e)
     }
 }
 
-impl From<string::FromUtf8Error> for IronfishError {
-    fn from(e: string::FromUtf8Error) -> IronfishError {
-        IronfishError::new_with_source(IronfishErrorKind::Utf8, e)
+impl From<string::FromUtf8Error> for elosysError {
+    fn from(e: string::FromUtf8Error) -> elosysError {
+        elosysError::new_with_source(elosysErrorKind::Utf8, e)
     }
 }
 
-impl From<bellperson::SynthesisError> for IronfishError {
-    fn from(e: bellperson::SynthesisError) -> IronfishError {
-        IronfishError::new_with_source(IronfishErrorKind::BellpersonSynthesis, e)
+impl From<bellperson::SynthesisError> for elosysError {
+    fn from(e: bellperson::SynthesisError) -> elosysError {
+        elosysError::new_with_source(elosysErrorKind::BellpersonSynthesis, e)
     }
 }
 
-impl From<num::TryFromIntError> for IronfishError {
-    fn from(e: num::TryFromIntError) -> IronfishError {
-        IronfishError::new_with_source(IronfishErrorKind::TryFromInt, e)
+impl From<num::TryFromIntError> for elosysError {
+    fn from(e: num::TryFromIntError) -> elosysError {
+        elosysError::new_with_source(elosysErrorKind::TryFromInt, e)
     }
 }
 
-impl From<ironfish_frost::frost::Error> for IronfishError {
-    fn from(e: ironfish_frost::frost::Error) -> IronfishError {
-        IronfishError::new_with_source(IronfishErrorKind::FrostLibError, e)
+impl From<elosys_frost::frost::Error> for elosysError {
+    fn from(e: elosys_frost::frost::Error) -> elosysError {
+        elosysError::new_with_source(elosysErrorKind::FrostLibError, e)
     }
 }

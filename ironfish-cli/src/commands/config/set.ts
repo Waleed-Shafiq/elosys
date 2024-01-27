@@ -2,10 +2,10 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 import { Flags } from '@oclif/core'
-import { IronfishCommand } from '../../command'
+import { elosysCommand } from '../../command'
 import { RemoteFlags } from '../../flags'
 
-export class SetCommand extends IronfishCommand {
+export class SetCommand extends elosysCommand {
   static description = `Set a value in the config`
 
   static args = [
@@ -32,7 +32,7 @@ export class SetCommand extends IronfishCommand {
   }
 
   static examples = [
-    '$ ironfish config:set bootstrapNodes "test.bn1.ironfish.network,example.com"',
+    '$ elosys config:set bootstrapNodes "test.bn1.elosys.network,example.com"',
   ]
 
   async start(): Promise<void> {

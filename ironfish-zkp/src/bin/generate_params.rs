@@ -1,6 +1,6 @@
 use bellperson::{groth16, Circuit};
 use blstrs::Bls12;
-use ironfish_zkp::{
+use elosys_zkp::{
     constants::ASSET_ID_LENGTH,
     proofs::{MintAsset, Output, Spend},
 };

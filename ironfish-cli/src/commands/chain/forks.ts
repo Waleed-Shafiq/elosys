@@ -1,13 +1,13 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
-import { BufferUtils, PromiseUtils } from '@ironfish/sdk'
+import { BufferUtils, PromiseUtils } from '@elosys/sdk'
 import blessed from 'blessed'
-import { IronfishCommand } from '../../command'
+import { elosysCommand } from '../../command'
 import { RemoteFlags } from '../../flags'
 import { GossipForkCounter } from '../../utils/gossipForkCounter'
 
-export default class ForksCommand extends IronfishCommand {
+export default class ForksCommand extends elosysCommand {
   static description = 'Try to detect forks that are being mined'
 
   static flags = {

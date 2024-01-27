@@ -1,15 +1,15 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
-import { BannedPeerResponse, GetBannedPeersResponse, PromiseUtils } from '@ironfish/sdk'
+import { BannedPeerResponse, GetBannedPeersResponse, PromiseUtils } from '@elosys/sdk'
 import { CliUx, Flags } from '@oclif/core'
 import blessed from 'blessed'
-import { IronfishCommand } from '../../command'
+import { elosysCommand } from '../../command'
 import { RemoteFlags } from '../../flags'
 
 const { sort, ...tableFlags } = CliUx.ux.table.flags()
 
-export class BannedCommand extends IronfishCommand {
+export class BannedCommand extends elosysCommand {
   static description = `List all banned peers`
 
   static flags = {

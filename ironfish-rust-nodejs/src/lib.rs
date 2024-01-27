@@ -4,16 +4,16 @@
 
 use std::fmt::Display;
 
-use ironfish::keys::Language;
-use ironfish::keys::ProofGenerationKeySerializable;
-use ironfish::PublicAddress;
-use ironfish::SaplingKey;
+use elosys::keys::Language;
+use elosys::keys::ProofGenerationKeySerializable;
+use elosys::PublicAddress;
+use elosys::SaplingKey;
 
 use napi::bindgen_prelude::*;
 use napi_derive::napi;
 
-use ironfish::mining;
-use ironfish::sapling_bls12;
+use elosys::mining;
+use elosys::sapling_bls12;
 
 pub mod fish_hash;
 pub mod frost;

@@ -1,9 +1,9 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
-import { getFeeRate, GetMempoolTransactionResponse, MinMax, Transaction } from '@ironfish/sdk'
+import { getFeeRate, GetMempoolTransactionResponse, MinMax, Transaction } from '@elosys/sdk'
 import { CliUx, Flags } from '@oclif/core'
-import { IronfishCommand } from '../../command'
+import { elosysCommand } from '../../command'
 import { RemoteFlags } from '../../flags'
 import { CommandFlags } from '../../types'
 
@@ -30,7 +30,7 @@ const parseMinMax = (input: string): MinMax | undefined => {
   }
 }
 
-export class TransactionsCommand extends IronfishCommand {
+export class TransactionsCommand extends elosysCommand {
   static description = `List transactions in the mempool`
 
   static flags = {

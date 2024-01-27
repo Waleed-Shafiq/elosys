@@ -7,10 +7,10 @@ import {
   ASSET_METADATA_LENGTH,
   ASSET_NAME_LENGTH,
   PUBLIC_ADDRESS_LENGTH,
-} from '@ironfish/rust-nodejs'
-import { BufferUtils } from '@ironfish/sdk'
+} from '@elosys/rust-nodejs'
+import { BufferUtils } from '@elosys/sdk'
 import { CliUx } from '@oclif/core'
-import { IronfishCommand } from '../../command'
+import { elosysCommand } from '../../command'
 import { RemoteFlags } from '../../flags'
 import { renderAssetNameFromHex } from '../../utils'
 import { TableCols } from '../../utils/table'
@@ -23,7 +23,7 @@ const MIN_ASSET_NAME_COLUMN_WIDTH = ASSET_NAME_LENGTH / 2 + 1
 
 const { ...tableFlags } = CliUx.ux.table.flags()
 
-export class AssetsCommand extends IronfishCommand {
+export class AssetsCommand extends elosysCommand {
   static description = `Display the wallet's assets`
 
   static flags = {

@@ -13,10 +13,10 @@ export DOCKER_BUILDKIT=1
 
 docker build . \
     --progress plain \
-    --tag ironfish:latest \
-    --file ironfish-cli/Dockerfile
+    --tag elosys:latest \
+    --file elosys-cli/Dockerfile
 
 docker run \
     --interactive \
     --rm \
-    ironfish:latest --version
+    elosys:latest --version

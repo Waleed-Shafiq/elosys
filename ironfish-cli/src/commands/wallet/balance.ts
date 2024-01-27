@@ -1,13 +1,13 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
-import { CurrencyUtils, GetBalanceResponse, isNativeIdentifier } from '@ironfish/sdk'
+import { CurrencyUtils, GetBalanceResponse, isNativeIdentifier } from '@elosys/sdk'
 import { Flags } from '@oclif/core'
-import { IronfishCommand } from '../../command'
+import { elosysCommand } from '../../command'
 import { RemoteFlags } from '../../flags'
 import { renderAssetName } from '../../utils'
 
-export class BalanceCommand extends IronfishCommand {
+export class BalanceCommand extends elosysCommand {
   static description =
     'Display the account balance\n\
   What is the difference between available to spend balance, and balance?\n\

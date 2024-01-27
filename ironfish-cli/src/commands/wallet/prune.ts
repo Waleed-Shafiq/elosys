@@ -1,12 +1,12 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
-import { NodeUtils, TransactionStatus } from '@ironfish/sdk'
+import { NodeUtils, TransactionStatus } from '@elosys/sdk'
 import { CliUx, Flags } from '@oclif/core'
-import { IronfishCommand } from '../../command'
+import { elosysCommand } from '../../command'
 import { LocalFlags } from '../../flags'
 
-export default class PruneCommand extends IronfishCommand {
+export default class PruneCommand extends elosysCommand {
   static description = 'Removes expired transactions from the wallet'
 
   static hidden = false

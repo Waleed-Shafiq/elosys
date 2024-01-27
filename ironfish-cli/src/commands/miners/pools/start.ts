@@ -11,14 +11,14 @@ import {
   StringUtils,
   TlsUtils,
   WebhookNotifier,
-} from '@ironfish/sdk'
+} from '@elosys/sdk'
 import { Flags } from '@oclif/core'
 import dns from 'dns'
-import { IronfishCommand } from '../../../command'
+import { elosysCommand } from '../../../command'
 import { RemoteFlags } from '../../../flags'
 import { getExplorer } from '../../../utils/explorer'
 
-export class StartPool extends IronfishCommand {
+export class StartPool extends elosysCommand {
   static description = `Start a mining pool that connects to a node`
 
   static flags = {

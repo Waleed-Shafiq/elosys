@@ -3,7 +3,7 @@
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 
 use crate::{
-    errors::{IronfishError, IronfishErrorKind},
+    errors::{elosysError, elosysErrorKind},
     keys::EphemeralKeyPair,
     merkle_note::MerkleNote,
     note::Note,
@@ -15,7 +15,7 @@ use bellperson::groth16;
 use blstrs::{Bls12, Scalar};
 use ff::Field;
 use group::Curve;
-use ironfish_zkp::{primitives::ValueCommitment, proofs::Output, redjubjub, ProofGenerationKey};
+use elosys_zkp::{primitives::ValueCommitment, proofs::Output, redjubjub, ProofGenerationKey};
 use jubjub::ExtendedPoint;
 use rand::thread_rng;
 
@@ -85,7 +85,7 @@ impl OutputBuilder {
         outgoing_view_key: &OutgoingViewKey,
         public_key_randomness: &jubjub::Fr,
         randomized_public_key: &redjubjub::PublicKey,
-    ) -> Result<OutputDescription, IronfishError> {
+    ) -> Result<OutputDescription, elosysError> {
         let diffie_hellman_keys = EphemeralKeyPair::new();
 
         let circuit = Output {
@@ -143,7 +143,7 @@ impl OutputDescription {
     /// Load an [`OutputDescription`] from a Read implementation( e.g: socket, file)
     /// This is the main entry-point when reconstructing a serialized
     /// transaction.
-    pub fn read<R: io::Read>(mut reader: R) -> Result<Self, IronfishError> {
+    pub fn read<R: io::Read>(mut reader: R) -> Result<Self, elosysError> {
         let proof = groth16::Proof::read(&mut reader)?;
         let merkle_note = MerkleNote::read(&mut reader)?;
 
@@ -151,7 +151,7 @@ impl OutputDescription {
     }
 
     /// Stow the bytes of this [`OutputDescription`] in the given writer.
-    pub fn write<W: io::Write>(&self, writer: W) -> Result<(), IronfishError> {
+    pub fn write<W: io::Write>(&self, writer: W) -> Result<(), elosysError> {
         self.serialize_signature_fields(writer)
     }
 
@@ -160,19 +160,19 @@ impl OutputDescription {
     /// with. Note that this does not verify the proof, that happens in the
     /// [`OutputBuilder`] build function as the prover, and in
     /// [`super::batch_verify_transactions`] as the verifier.
-    pub fn partial_verify(&self) -> Result<(), IronfishError> {
+    pub fn partial_verify(&self) -> Result<(), elosysError> {
         self.verify_not_small_order()?;
 
         Ok(())
     }
 
-    fn verify_not_small_order(&self) -> Result<(), IronfishError> {
+    fn verify_not_small_order(&self) -> Result<(), elosysError> {
         if self.merkle_note.value_commitment.is_small_order().into()
             || ExtendedPoint::from(self.merkle_note.ephemeral_public_key)
                 .is_small_order()
                 .into()
         {
-            return Err(IronfishError::new(IronfishErrorKind::IsSmallOrder));
+            return Err(elosysError::new(elosysErrorKind::IsSmallOrder));
         }
 
         Ok(())
@@ -214,7 +214,7 @@ impl OutputDescription {
     pub(crate) fn serialize_signature_fields<W: io::Write>(
         &self,
         mut writer: W,
-    ) -> Result<(), IronfishError> {
+    ) -> Result<(), elosysError> {
         self.proof.write(&mut writer)?;
         self.merkle_note.write(&mut writer)?;
 
@@ -232,7 +232,7 @@ mod test {
     };
     use ff::{Field, PrimeField};
     use group::Curve;
-    use ironfish_zkp::{constants::SPENDING_KEY_GENERATOR, redjubjub};
+    use elosys_zkp::{constants::SPENDING_KEY_GENERATOR, redjubjub};
     use jubjub::ExtendedPoint;
     use rand::thread_rng;
 

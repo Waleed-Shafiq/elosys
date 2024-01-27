@@ -1,9 +1,9 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
-import { createRootLogger, setLogPrefixFromConfig } from '@ironfish/sdk'
+import { createRootLogger, setLogPrefixFromConfig } from '@elosys/sdk'
 import { Flags } from '@oclif/core'
-import { IronfishCommand } from '../../command'
+import { elosysCommand } from '../../command'
 import { RemoteFlags } from '../../flags'
 import { CeremonyServer } from '../../trusted-setup/server'
 import { S3Utils } from '../../utils'
@@ -13,7 +13,7 @@ const UPLOAD_TIMEOUT_MS = 5 * 60 * 1000
 const PRESIGNED_EXPIRATION_SEC = 5 * 60
 const START_DATE = 1680904800000 // Friday, April 07 2023 15:00:00 GMT-0700 (Pacific Daylight Time)
 
-export default class CeremonyService extends IronfishCommand {
+export default class CeremonyService extends elosysCommand {
   static hidden = true
 
   static description = `
@@ -27,14 +27,14 @@ export default class CeremonyService extends IronfishCommand {
       parse: (input: string) => Promise.resolve(input.trim()),
       required: false,
       description: 'S3/R2 bucket to download and upload params to',
-      default: 'ironfish-contributions',
+      default: 'elosys-contributions',
     }),
     downloadPrefix: Flags.string({
       char: 'b',
       parse: (input: string) => Promise.resolve(input.trim()),
       required: false,
       description: 'Prefix for contribution download URLs',
-      default: 'https://contributions.ironfish.network',
+      default: 'https://contributions.elosys.network',
     }),
     contributionTimeoutMs: Flags.integer({
       required: false,

@@ -2,7 +2,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 
-use crate::errors::{IronfishError, IronfishErrorKind};
+use crate::errors::{elosysError, elosysErrorKind};
 use chacha20poly1305::aead::{AeadInPlace, NewAead};
 use chacha20poly1305::{ChaCha20Poly1305, Key, Nonce};
 
@@ -16,7 +16,7 @@ pub const MAC_SIZE: usize = 16;
 pub(crate) fn encrypt<const SIZE: usize>(
     key: &[u8; 32],
     plaintext: &[u8],
-) -> Result<[u8; SIZE], IronfishError> {
+) -> Result<[u8; SIZE], elosysError> {
     let mut encrypted_output = [0u8; SIZE];
     encrypted_output[..plaintext.len()].copy_from_slice(plaintext);
 
@@ -28,7 +28,7 @@ pub(crate) fn encrypt<const SIZE: usize>(
             &[],
             &mut encrypted_output[..plaintext.len()],
         )
-        .map_err(|_| IronfishError::new(IronfishErrorKind::InvalidSigningKey))?;
+        .map_err(|_| elosysError::new(elosysErrorKind::InvalidSigningKey))?;
     encrypted_output[plaintext.len()..].copy_from_slice(&tag);
 
     Ok(encrypted_output)
@@ -40,7 +40,7 @@ pub(crate) fn encrypt<const SIZE: usize>(
 pub(crate) fn decrypt<const SIZE: usize>(
     key: &[u8; 32],
     ciphertext: &[u8],
-) -> Result<[u8; SIZE], IronfishError> {
+) -> Result<[u8; SIZE], elosysError> {
     let decryptor = ChaCha20Poly1305::new(Key::from_slice(key));
 
     let mut plaintext = [0u8; SIZE];
@@ -53,7 +53,7 @@ pub(crate) fn decrypt<const SIZE: usize>(
             &mut plaintext,
             ciphertext[SIZE..].into(),
         )
-        .map_err(|_| IronfishError::new(IronfishErrorKind::InvalidDecryptionKey))?;
+        .map_err(|_| elosysError::new(elosysErrorKind::InvalidDecryptionKey))?;
 
     Ok(plaintext)
 }

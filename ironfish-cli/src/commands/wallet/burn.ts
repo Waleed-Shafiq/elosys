@@ -8,9 +8,9 @@ import {
   RawTransaction,
   RawTransactionSerde,
   Transaction,
-} from '@ironfish/sdk'
+} from '@elosys/sdk'
 import { CliUx, Flags } from '@oclif/core'
-import { IronfishCommand } from '../../command'
+import { elosysCommand } from '../../command'
 import { IronFlag, RemoteFlags } from '../../flags'
 import { selectAsset } from '../../utils/asset'
 import { promptCurrency } from '../../utils/currency'
@@ -18,13 +18,13 @@ import { getExplorer } from '../../utils/explorer'
 import { selectFee } from '../../utils/fees'
 import { watchTransaction } from '../../utils/transaction'
 
-export class Burn extends IronfishCommand {
+export class Burn extends elosysCommand {
   static description = 'Burn tokens and decrease supply for a given asset'
 
   static examples = [
-    '$ ironfish wallet:burn --assetId 618c098d8d008c9f78f6155947014901a019d9ec17160dc0f0d1bb1c764b29b4 --amount 1000',
-    '$ ironfish wallet:burn --assetId 618c098d8d008c9f78f6155947014901a019d9ec17160dc0f0d1bb1c764b29b4 --amount 1000 --account otheraccount',
-    '$ ironfish wallet:burn --assetId 618c098d8d008c9f78f6155947014901a019d9ec17160dc0f0d1bb1c764b29b4 --amount 1000 --account otheraccount --fee 0.00000001',
+    '$ elosys wallet:burn --assetId 618c098d8d008c9f78f6155947014901a019d9ec17160dc0f0d1bb1c764b29b4 --amount 1000',
+    '$ elosys wallet:burn --assetId 618c098d8d008c9f78f6155947014901a019d9ec17160dc0f0d1bb1c764b29b4 --amount 1000 --account otheraccount',
+    '$ elosys wallet:burn --assetId 618c098d8d008c9f78f6155947014901a019d9ec17160dc0f0d1bb1c764b29b4 --amount 1000 --account otheraccount --fee 0.00000001',
   ]
 
   static flags = {
@@ -105,7 +105,7 @@ export class Burn extends IronfishCommand {
       if (!response.content.account) {
         this.error(
           `No account is currently active.
-           Use ironfish wallet:create <name> to first create an account`,
+           Use elosys wallet:create <name> to first create an account`,
         )
       }
 
@@ -179,7 +179,7 @@ export class Burn extends IronfishCommand {
     if (flags.rawTransaction) {
       this.log('Raw Transaction')
       this.log(RawTransactionSerde.serialize(raw).toString('hex'))
-      this.log(`Run "ironfish wallet:post" to post the raw transaction. `)
+      this.log(`Run "elosys wallet:post" to post the raw transaction. `)
       this.exit(0)
     }
 

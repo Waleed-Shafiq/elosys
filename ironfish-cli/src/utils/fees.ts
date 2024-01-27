@@ -2,7 +2,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 
-import { Asset } from '@ironfish/rust-nodejs'
+import { Asset } from '@elosys/rust-nodejs'
 import {
   Assert,
   CreateTransactionRequest,
@@ -13,7 +13,7 @@ import {
   RPC_ERROR_CODES,
   RpcClient,
   RpcRequestError,
-} from '@ironfish/sdk'
+} from '@elosys/sdk'
 import { CliUx } from '@oclif/core'
 import inquirer from 'inquirer'
 import { promptCurrency } from './currency'

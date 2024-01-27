@@ -1,10 +1,10 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
-import { Assert, BlockHeader, FullNode, IDatabaseTransaction, TimeUtils } from '@ironfish/sdk'
-import { Meter } from '@ironfish/sdk'
+import { Assert, BlockHeader, FullNode, IDatabaseTransaction, TimeUtils } from '@elosys/sdk'
+import { Meter } from '@elosys/sdk'
 import { CliUx, Flags } from '@oclif/core'
-import { IronfishCommand } from '../../command'
+import { elosysCommand } from '../../command'
 import { LocalFlags } from '../../flags'
 import { ProgressBar } from '../../types'
 
@@ -15,7 +15,7 @@ const TREE_END: number | null = null
 // I just took the repair speed I get and reduced it by 20%
 const SPEED_ESTIMATE = 42
 
-export default class RepairChain extends IronfishCommand {
+export default class RepairChain extends elosysCommand {
   static description = 'Rebuild the main chain to fix corruption'
 
   static hidden = true

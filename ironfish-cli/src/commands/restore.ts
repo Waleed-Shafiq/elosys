@@ -1,21 +1,21 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
-import { NodeUtils, PromiseUtils } from '@ironfish/sdk'
+import { NodeUtils, PromiseUtils } from '@elosys/sdk'
 import { CliUx, Flags } from '@oclif/core'
 import axios from 'axios'
 import fs from 'fs'
 import fsAsync from 'fs/promises'
 import os from 'os'
 import path from 'path'
-import { IronfishCommand } from '../command'
+import { elosysCommand } from '../command'
 import { DataDirFlag, DataDirFlagKey, VerboseFlag, VerboseFlagKey } from '../flags'
 import { ProgressBar } from '../types'
 import { S3Utils, TarUtils } from '../utils'
 
 const EXTENSION = '.tar.gz'
 
-export default class Restore extends IronfishCommand {
+export default class Restore extends elosysCommand {
   static hidden = true
   static description = 'Download and unzip a datadir from an S3 bucket'
 
@@ -58,7 +58,7 @@ export default class Restore extends IronfishCommand {
       await node.shutdown()
     }
 
-    const workDir = path.join(os.tmpdir(), `ironfish.backup`)
+    const workDir = path.join(os.tmpdir(), `elosys.backup`)
     const downloadDir = path.join(workDir, bucket)
     const downloadTo = path.join(downloadDir, name)
     const unzipTo = path.join(downloadDir, path.basename(downloadTo, EXTENSION))

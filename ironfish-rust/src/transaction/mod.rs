@@ -13,7 +13,7 @@ use crate::{
         asset::Asset,
         asset_identifier::{AssetIdentifier, NATIVE_ASSET},
     },
-    errors::{IronfishError, IronfishErrorKind},
+    errors::{elosysError, elosysErrorKind},
     keys::{PublicAddress, SaplingKey},
     note::Note,
     sapling_bls12::SAPLING,
@@ -29,7 +29,7 @@ use byteorder::{LittleEndian, ReadBytesExt, WriteBytesExt};
 use group::GroupEncoding;
 use jubjub::ExtendedPoint;
 
-use ironfish_zkp::{
+use elosys_zkp::{
     constants::{
         NATIVE_VALUE_COMMITMENT_GENERATOR, SPENDING_KEY_GENERATOR,
         VALUE_COMMITMENT_RANDOMNESS_GENERATOR,
@@ -140,7 +140,7 @@ impl ProposedTransaction {
         &mut self,
         note: Note,
         witness: &dyn WitnessTrait,
-    ) -> Result<(), IronfishError> {
+    ) -> Result<(), elosysError> {
         self.value_balances
             .add(note.asset_id(), note.value().try_into()?)?;
 
@@ -151,7 +151,7 @@ impl ProposedTransaction {
 
     /// Create a proof of a new note owned by the recipient in this
     /// transaction.
-    pub fn add_output(&mut self, note: Note) -> Result<(), IronfishError> {
+    pub fn add_output(&mut self, note: Note) -> Result<(), elosysError> {
         self.value_balances
             .subtract(note.asset_id(), note.value().try_into()?)?;
 
@@ -160,7 +160,7 @@ impl ProposedTransaction {
         Ok(())
     }
 
-    pub fn add_mint(&mut self, asset: Asset, value: u64) -> Result<(), IronfishError> {
+    pub fn add_mint(&mut self, asset: Asset, value: u64) -> Result<(), elosysError> {
         self.value_balances.add(asset.id(), value.try_into()?)?;
 
         self.mints.push(MintBuilder::new(asset, value));
@@ -173,7 +173,7 @@ impl ProposedTransaction {
         asset: Asset,
         value: u64,
         new_owner: PublicAddress,
-    ) -> Result<(), IronfishError> {
+    ) -> Result<(), elosysError> {
         self.value_balances.add(asset.id(), value.try_into()?)?;
 
         let mut mint_builder = MintBuilder::new(asset, value);
@@ -183,7 +183,7 @@ impl ProposedTransaction {
         Ok(())
     }
 
-    pub fn add_burn(&mut self, asset_id: AssetIdentifier, value: u64) -> Result<(), IronfishError> {
+    pub fn add_burn(&mut self, asset_id: AssetIdentifier, value: u64) -> Result<(), elosysError> {
         self.value_balances.subtract(&asset_id, value.try_into()?)?;
 
         self.burns.push(BurnBuilder::new(asset_id, value));
@@ -196,7 +196,7 @@ impl ProposedTransaction {
         change_goes_to: Option<PublicAddress>,
         public_address: PublicAddress,
         intended_transaction_fee: i64,
-    ) -> Result<(), IronfishError> {
+    ) -> Result<(), elosysError> {
         let mut change_notes = vec![];
 
         for (asset_id, value) in self.value_balances.iter() {
@@ -208,7 +208,7 @@ impl ProposedTransaction {
             };
 
             if change_amount < 0 {
-                return Err(IronfishError::new(IronfishErrorKind::InvalidBalance));
+                return Err(elosysError::new(elosysErrorKind::InvalidBalance));
             }
             if change_amount > 0 {
                 let change_address = change_goes_to.unwrap_or(public_address);
@@ -237,7 +237,7 @@ impl ProposedTransaction {
         public_address: PublicAddress,
         intended_transaction_fee: i64,
         change_goes_to: Option<PublicAddress>,
-    ) -> Result<UnsignedTransaction, IronfishError> {
+    ) -> Result<UnsignedTransaction, elosysError> {
         // skip adding change notes if this is special case of a miners fee transaction
         let is_miners_fee = self.outputs.iter().any(|output| output.get_is_miners_fee());
         if !is_miners_fee {
@@ -332,7 +332,7 @@ impl ProposedTransaction {
         spender_key: &SaplingKey,
         change_goes_to: Option<PublicAddress>,
         intended_transaction_fee: u64,
-    ) -> Result<Transaction, IronfishError> {
+    ) -> Result<Transaction, elosysError> {
         let public_address = spender_key.public_address();
 
         let i64_fee = i64::try_from(intended_transaction_fee)?;
@@ -356,14 +356,14 @@ impl ProposedTransaction {
     pub fn post_miners_fee(
         &mut self,
         spender_key: &SaplingKey,
-    ) -> Result<Transaction, IronfishError> {
+    ) -> Result<Transaction, elosysError> {
         if !self.spends.is_empty()
             || self.outputs.len() != 1
             || !self.mints.is_empty()
             || !self.burns.is_empty()
         {
-            return Err(IronfishError::new(
-                IronfishErrorKind::InvalidMinersFeeTransaction,
+            return Err(elosysError::new(
+                elosysErrorKind::InvalidMinersFeeTransaction,
             ));
         }
         self.post_miners_fee_unchecked(spender_key)
@@ -373,7 +373,7 @@ impl ProposedTransaction {
     pub fn post_miners_fee_unchecked(
         &mut self,
         spender_key: &SaplingKey,
-    ) -> Result<Transaction, IronfishError> {
+    ) -> Result<Transaction, elosysError> {
         // Set note_encryption_keys to a constant value on the outputs
         for output in &mut self.outputs {
             output.set_is_miners_fee();
@@ -411,7 +411,7 @@ impl ProposedTransaction {
         mints: &[UnsignedMintDescription],
         burns: &[BurnDescription],
         randomized_public_key: &PublicKey,
-    ) -> Result<[u8; 32], IronfishError> {
+    ) -> Result<[u8; 32], elosysError> {
         let mut hasher = Blake2b::new()
             .hash_length(32)
             .personal(SIGNATURE_HASH_PERSONALIZATION)
@@ -455,7 +455,7 @@ impl ProposedTransaction {
         private_key: &PrivateKey,
         public_key: &PublicKey,
         transaction_signature_hash: &[u8; 32],
-    ) -> Result<Signature, IronfishError> {
+    ) -> Result<Signature, elosysError> {
         // NOTE: The initial versions of the RedDSA specification and the redjubjub crate (that
         // we're using here) require the public key bytes to be prefixed to the message. The latest
         // version of the spec and the crate add the public key bytes automatically. Therefore, if
@@ -477,7 +477,7 @@ impl ProposedTransaction {
         &self,
         mints: &[UnsignedMintDescription],
         burns: &[BurnDescription],
-    ) -> Result<(redjubjub::PrivateKey, redjubjub::PublicKey), IronfishError> {
+    ) -> Result<(redjubjub::PrivateKey, redjubjub::PublicKey), elosysError> {
         // A "private key" manufactured from a bunch of randomness added for each
         // spend and output.
         let mut binding_signature_key = jubjub::Fr::zero();
@@ -507,7 +507,7 @@ impl ProposedTransaction {
         // the final value balance point. The binding verification key is how verifiers
         // check the consistency of the values in a transaction.
         if value_balance != public_key.0 {
-            return Err(IronfishError::new(IronfishErrorKind::InvalidBalance));
+            return Err(elosysError::new(elosysErrorKind::InvalidBalance));
         }
 
         Ok((private_key, public_key))
@@ -519,7 +519,7 @@ impl ProposedTransaction {
         binding_verification_key: &ExtendedPoint,
         mints: &[UnsignedMintDescription],
         burns: &[BurnDescription],
-    ) -> Result<ExtendedPoint, IronfishError> {
+    ) -> Result<ExtendedPoint, elosysError> {
         let mints_descriptions: Vec<MintDescription> =
             mints.iter().map(|m| m.description.clone()).collect();
 
@@ -579,7 +579,7 @@ impl Transaction {
     /// Load a Transaction from a Read implementation (e.g: socket, file)
     /// This is the main entry-point when reconstructing a serialized transaction
     /// for verifying.
-    pub fn read<R: io::Read>(mut reader: R) -> Result<Self, IronfishError> {
+    pub fn read<R: io::Read>(mut reader: R) -> Result<Self, elosysError> {
         let version = TransactionVersion::read(&mut reader)?;
         let num_spends = reader.read_u64::<LittleEndian>()?;
         let num_outputs = reader.read_u64::<LittleEndian>()?;
@@ -626,7 +626,7 @@ impl Transaction {
 
     /// Store the bytes of this transaction in the given writer. This is used
     /// to serialize transactions to file or network
-    pub fn write<W: io::Write>(&self, mut writer: W) -> Result<(), IronfishError> {
+    pub fn write<W: io::Write>(&self, mut writer: W) -> Result<(), elosysError> {
         self.version.write(&mut writer)?;
         writer.write_u64::<LittleEndian>(self.spends.len() as u64)?;
         writer.write_u64::<LittleEndian>(self.outputs.len() as u64)?;
@@ -709,7 +709,7 @@ impl Transaction {
     /// Calculate a hash of the transaction data. This hash was signed by the
     /// private keys when the transaction was constructed, and will now be
     /// reconstructed to verify the signature.
-    pub fn transaction_signature_hash(&self) -> Result<[u8; 32], IronfishError> {
+    pub fn transaction_signature_hash(&self) -> Result<[u8; 32], elosysError> {
         let mut hasher = Blake2b::new()
             .hash_length(32)
             .personal(SIGNATURE_HASH_PERSONALIZATION)
@@ -746,7 +746,7 @@ impl Transaction {
     fn verify_binding_signature(
         &self,
         binding_verification_key: &ExtendedPoint,
-    ) -> Result<(), IronfishError> {
+    ) -> Result<(), elosysError> {
         let value_balance =
             calculate_value_balance(binding_verification_key, self.fee, &self.mints, &self.burns)?;
 
@@ -759,7 +759,7 @@ impl Transaction {
             &self.binding_signature,
             *VALUE_COMMITMENT_RANDOMNESS_GENERATOR,
         ) {
-            return Err(IronfishError::new(IronfishErrorKind::InvalidSignature));
+            return Err(elosysError::new(elosysErrorKind::InvalidSignature));
         }
 
         Ok(())
@@ -768,13 +768,13 @@ impl Transaction {
 
 /// Convert the integer value to a point on the Jubjub curve, accounting for
 /// negative values
-fn fee_to_point(value: i64) -> Result<ExtendedPoint, IronfishError> {
+fn fee_to_point(value: i64) -> Result<ExtendedPoint, elosysError> {
     // Can only construct edwards point on positive numbers, so need to
     // add and possibly negate later
     let is_negative = value.is_negative();
     let abs = match value.checked_abs() {
         Some(a) => a as u64,
-        None => return Err(IronfishError::new(IronfishErrorKind::IllegalValue)),
+        None => return Err(elosysError::new(elosysErrorKind::IllegalValue)),
     };
 
     let mut value_balance = *NATIVE_VALUE_COMMITMENT_GENERATOR * jubjub::Fr::from(abs);
@@ -795,7 +795,7 @@ fn calculate_value_balance(
     fee: i64,
     mints: &[MintDescription],
     burns: &[BurnDescription],
-) -> Result<ExtendedPoint, IronfishError> {
+) -> Result<ExtendedPoint, elosysError> {
     let fee_point = fee_to_point(fee)?;
 
     let mut value_balance_point = binding_verification_key - fee_point;
@@ -815,7 +815,7 @@ fn calculate_value_balance(
 
 /// A convenience wrapper method around [`batch_verify_transactions`] for single
 /// transactions
-pub fn verify_transaction(transaction: &Transaction) -> Result<(), IronfishError> {
+pub fn verify_transaction(transaction: &Transaction) -> Result<(), elosysError> {
     batch_verify_transactions(iter::once(transaction))
 }
 
@@ -824,7 +824,7 @@ fn internal_batch_verify_transactions<'a>(
     spend_verifying_key: &PreparedVerifyingKey<Bls12>,
     output_verifying_key: &PreparedVerifyingKey<Bls12>,
     mint_verifying_key: &PreparedVerifyingKey<Bls12>,
-) -> Result<(), IronfishError> {
+) -> Result<(), elosysError> {
     let mut spend_proofs = vec![];
     let mut spend_public_inputs = vec![];
 
@@ -898,7 +898,7 @@ fn internal_batch_verify_transactions<'a>(
             &spend_public_inputs[..],
         )?
     {
-        return Err(IronfishError::new(IronfishErrorKind::InvalidSpendProof));
+        return Err(elosysError::new(elosysErrorKind::InvalidSpendProof));
     }
     if !output_proofs.is_empty()
         && !verify_proofs_batch(
@@ -908,7 +908,7 @@ fn internal_batch_verify_transactions<'a>(
             &output_public_inputs[..],
         )?
     {
-        return Err(IronfishError::new(IronfishErrorKind::InvalidOutputProof));
+        return Err(elosysError::new(elosysErrorKind::InvalidOutputProof));
     }
     if !mint_proofs.is_empty()
         && !verify_proofs_batch(
@@ -918,7 +918,7 @@ fn internal_batch_verify_transactions<'a>(
             &mint_public_inputs[..],
         )?
     {
-        return Err(IronfishError::new(IronfishErrorKind::InvalidOutputProof));
+        return Err(elosysError::new(elosysErrorKind::InvalidOutputProof));
     }
 
     Ok(())
@@ -935,7 +935,7 @@ fn internal_batch_verify_transactions<'a>(
 ///
 pub fn batch_verify_transactions<'a>(
     transactions: impl IntoIterator<Item = &'a Transaction>,
-) -> Result<(), IronfishError> {
+) -> Result<(), elosysError> {
     internal_batch_verify_transactions(
         transactions,
         &SAPLING.spend_verifying_key,

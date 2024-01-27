@@ -1,10 +1,10 @@
 [package]
-name = "ironfish_zkp"
+name = "elosys_zkp"
 version = "0.2.0"
 license = "MIT OR Apache-2.0"
 
-description = "Sapling API and zero-knowledge proving mechanism for the Iron Fish node"
-keywords = ["iron-fish", "sapling", "zero-knowledge"]
+description = "Sapling API and zero-knowledge proving mechanism for the elosys node"
+keywords = ["elosys", "sapling", "zero-knowledge"]
 
 [package.authors]
 workspace = true
@@ -21,14 +21,14 @@ workspace = true
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-bellperson = { git = "https://github.com/iron-fish/bellperson.git", branch = "blstrs", features = ["groth16"] }
+bellperson = { git = "https://github.com/elosys/bellperson.git", branch = "blstrs", features = ["groth16"] }
 blake2s_simd = "1.0.0"
 blstrs = { version = "0.6.0", features = ["portable"] }
 byteorder = "1.4.3"
 ff = "0.12.0"
 group = "0.12.0"
-jubjub = { git = "https://github.com/iron-fish/jubjub.git", branch = "blstrs" }
+jubjub = { git = "https://github.com/elosys/jubjub.git", branch = "blstrs" }
 lazy_static = "1.4.0"
 rand = "0.8.5"
-zcash_primitives = { git = "https://github.com/iron-fish/librustzcash.git", branch = "blstrs", package = "zcash_primitives" }
-zcash_proofs = { git = "https://github.com/iron-fish/librustzcash.git", branch = "blstrs", package = "zcash_proofs" }
+zcash_primitives = { git = "https://github.com/elosys/librustzcash.git", branch = "blstrs", package = "zcash_primitives" }
+zcash_proofs = { git = "https://github.com/elosys/librustzcash.git", branch = "blstrs", package = "zcash_proofs" }

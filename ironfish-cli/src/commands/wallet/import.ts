@@ -1,12 +1,12 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
-import { PromiseUtils } from '@ironfish/sdk'
+import { PromiseUtils } from '@elosys/sdk'
 import { CliUx, Flags } from '@oclif/core'
-import { IronfishCommand } from '../../command'
+import { elosysCommand } from '../../command'
 import { RemoteFlags } from '../../flags'
 
-export class ImportCommand extends IronfishCommand {
+export class ImportCommand extends elosysCommand {
   static description = `Import an account`
 
   static flags = {
@@ -90,7 +90,7 @@ export class ImportCommand extends IronfishCommand {
     if (isDefaultAccount) {
       this.log(`The default account is now: ${name}`)
     } else {
-      this.log(`Run "ironfish wallet:use ${name}" to set the account as default`)
+      this.log(`Run "elosys wallet:use ${name}" to set the account as default`)
     }
   }
 

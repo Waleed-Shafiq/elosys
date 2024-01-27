@@ -3,11 +3,11 @@
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 
 use crate::{
-    errors::{IronfishError, IronfishErrorKind},
+    errors::{elosysError, elosysErrorKind},
     serializing::{bytes_to_hex, hex_to_bytes},
 };
 use group::GroupEncoding;
-use ironfish_zkp::constants::PUBLIC_KEY_GENERATOR;
+use elosys_zkp::constants::PUBLIC_KEY_GENERATOR;
 use jubjub::SubgroupPoint;
 
 use std::io;
@@ -25,19 +25,19 @@ impl PublicAddress {
     /// Initialize a public address from its 32 byte representation.
     pub fn new(
         public_address_bytes: &[u8; PUBLIC_ADDRESS_SIZE],
-    ) -> Result<PublicAddress, IronfishError> {
+    ) -> Result<PublicAddress, elosysError> {
         assert!(public_address_bytes.len() == 32);
         let public_address_non_prime = SubgroupPoint::from_bytes(public_address_bytes);
 
         if public_address_non_prime.is_some().into() {
             Ok(PublicAddress(public_address_non_prime.unwrap()))
         } else {
-            Err(IronfishError::new(IronfishErrorKind::InvalidPaymentAddress))
+            Err(elosysError::new(elosysErrorKind::InvalidPaymentAddress))
         }
     }
 
     /// Load a public address from a Read implementation (e.g: socket, file)
-    pub fn read<R: io::Read>(reader: &mut R) -> Result<Self, IronfishError> {
+    pub fn read<R: io::Read>(reader: &mut R) -> Result<Self, elosysError> {
         let mut address_bytes = [0; PUBLIC_ADDRESS_SIZE];
         reader.read_exact(&mut address_bytes)?;
         Self::new(&address_bytes)
@@ -56,9 +56,9 @@ impl PublicAddress {
     /// Convert a String of hex values to a PublicAddress. The String must
     /// be 64 hexadecimal characters representing the 32 bytes of an address
     /// or it fails.
-    pub fn from_hex(value: &str) -> Result<Self, IronfishError> {
+    pub fn from_hex(value: &str) -> Result<Self, elosysError> {
         match hex_to_bytes(value) {
-            Err(_) => Err(IronfishError::new(IronfishErrorKind::InvalidPublicAddress)),
+            Err(_) => Err(elosysError::new(elosysErrorKind::InvalidPublicAddress)),
             Ok(bytes) => Self::new(&bytes),
         }
     }
@@ -74,7 +74,7 @@ impl PublicAddress {
     }
 
     /// Store the bytes of this public address in the given writer.
-    pub fn write<W: io::Write>(&self, mut writer: W) -> Result<(), IronfishError> {
+    pub fn write<W: io::Write>(&self, mut writer: W) -> Result<(), elosysError> {
         writer.write_all(&self.public_address())?;
 
         Ok(())

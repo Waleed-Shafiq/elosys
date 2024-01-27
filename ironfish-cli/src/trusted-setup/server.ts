@@ -2,8 +2,8 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 import { S3Client } from '@aws-sdk/client-s3'
-import { verifyTransform } from '@ironfish/rust-nodejs'
-import { ErrorUtils, Logger, MessageBuffer, SetTimeoutToken, YupUtils } from '@ironfish/sdk'
+import { verifyTransform } from '@elosys/rust-nodejs'
+import { ErrorUtils, Logger, MessageBuffer, SetTimeoutToken, YupUtils } from '@elosys/sdk'
 import fsAsync from 'fs/promises'
 import net from 'net'
 import path from 'path'

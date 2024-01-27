@@ -3,19 +3,19 @@
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 
 use group::GroupEncoding;
-pub use ironfish_zkp::ProofGenerationKey;
+pub use elosys_zkp::ProofGenerationKey;
 use jubjub::{Fr, SubgroupPoint};
 
 use crate::{
-    errors::{IronfishError, IronfishErrorKind},
+    errors::{elosysError, elosysErrorKind},
     serializing::{bytes_to_hex, hex_to_bytes},
 };
 
 pub trait ProofGenerationKeySerializable {
     fn serialize(&self) -> [u8; 64];
-    fn deserialize(bytes: [u8; 64]) -> Result<ProofGenerationKey, IronfishError>;
+    fn deserialize(bytes: [u8; 64]) -> Result<ProofGenerationKey, elosysError>;
     fn hex_key(&self) -> String;
-    fn from_hex(hex_key: &str) -> Result<ProofGenerationKey, IronfishError>;
+    fn from_hex(hex_key: &str) -> Result<ProofGenerationKey, elosysError>;
 }
 
 impl ProofGenerationKeySerializable for ProofGenerationKey {
@@ -26,7 +26,7 @@ impl ProofGenerationKeySerializable for ProofGenerationKey {
         proof_generation_key_bytes
     }
 
-    fn deserialize(proof_generation_key_bytes: [u8; 64]) -> Result<Self, IronfishError> {
+    fn deserialize(proof_generation_key_bytes: [u8; 64]) -> Result<Self, elosysError> {
         let mut ak_bytes: [u8; 32] = [0; 32];
         let mut nsk_bytes: [u8; 32] = [0; 32];
 
@@ -35,14 +35,14 @@ impl ProofGenerationKeySerializable for ProofGenerationKey {
 
         let ak = match SubgroupPoint::from_bytes(&ak_bytes).into() {
             Some(ak) => ak,
-            None => return Err(IronfishError::new(IronfishErrorKind::InvalidAuthorizingKey)),
+            None => return Err(elosysError::new(elosysErrorKind::InvalidAuthorizingKey)),
         };
 
         let nsk = match Fr::from_bytes(&nsk_bytes).into() {
             Some(nsk) => nsk,
             None => {
-                return Err(IronfishError::new(
-                    IronfishErrorKind::InvalidNullifierDerivingKey,
+                return Err(elosysError::new(
+                    elosysErrorKind::InvalidNullifierDerivingKey,
                 ))
             }
         };
@@ -55,7 +55,7 @@ impl ProofGenerationKeySerializable for ProofGenerationKey {
         bytes_to_hex(&serialized_bytes[..])
     }
 
-    fn from_hex(hex_key: &str) -> Result<ProofGenerationKey, IronfishError> {
+    fn from_hex(hex_key: &str) -> Result<ProofGenerationKey, elosysError> {
         let bytes = hex_to_bytes(hex_key)?;
         ProofGenerationKey::deserialize(bytes)
     }
@@ -63,10 +63,10 @@ impl ProofGenerationKeySerializable for ProofGenerationKey {
 
 #[cfg(test)]
 mod test {
-    use crate::errors::IronfishErrorKind;
+    use crate::errors::elosysErrorKind;
     use ff::Field;
     use group::{Group, GroupEncoding};
-    use ironfish_zkp::ProofGenerationKey;
+    use elosys_zkp::ProofGenerationKey;
 
     use super::ProofGenerationKeySerializable;
     use jubjub;
@@ -97,7 +97,7 @@ mod test {
 
         let err = result.err().unwrap();
 
-        assert!(matches!(err.kind, IronfishErrorKind::InvalidAuthorizingKey));
+        assert!(matches!(err.kind, elosysErrorKind::InvalidAuthorizingKey));
     }
 
     #[test]
@@ -116,7 +116,7 @@ mod test {
 
         assert!(matches!(
             err.kind,
-            IronfishErrorKind::InvalidNullifierDerivingKey
+            elosysErrorKind::InvalidNullifierDerivingKey
         ));
     }
 

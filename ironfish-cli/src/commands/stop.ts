@@ -1,12 +1,12 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
-import { FullNode } from '@ironfish/sdk'
+import { FullNode } from '@elosys/sdk'
 import { CliUx } from '@oclif/core'
-import { IronfishCommand } from '../command'
+import { elosysCommand } from '../command'
 import { RemoteFlags } from '../flags'
 
-export default class StopCommand extends IronfishCommand {
+export default class StopCommand extends elosysCommand {
   static description = 'Stop the node from running'
 
   static flags = {

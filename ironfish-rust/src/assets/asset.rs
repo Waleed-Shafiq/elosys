@@ -2,13 +2,13 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 use crate::{
-    errors::{IronfishError, IronfishErrorKind},
+    errors::{elosysError, elosysErrorKind},
     keys::PUBLIC_ADDRESS_SIZE,
     util::str_to_array,
     PublicAddress,
 };
 use byteorder::{ReadBytesExt, WriteBytesExt};
-use ironfish_zkp::constants::{ASSET_ID_LENGTH, ASSET_ID_PERSONALIZATION, GH_FIRST_BLOCK};
+use elosys_zkp::constants::{ASSET_ID_LENGTH, ASSET_ID_PERSONALIZATION, GH_FIRST_BLOCK};
 use jubjub::{ExtendedPoint, SubgroupPoint};
 use std::io;
 
@@ -41,10 +41,10 @@ pub struct Asset {
 
 impl Asset {
     /// Create a new AssetType from a public address, name, chain, and network
-    pub fn new(creator: PublicAddress, name: &str, metadata: &str) -> Result<Asset, IronfishError> {
+    pub fn new(creator: PublicAddress, name: &str, metadata: &str) -> Result<Asset, elosysError> {
         let trimmed_name = name.trim();
         if trimmed_name.is_empty() {
-            return Err(IronfishError::new(IronfishErrorKind::InvalidData));
+            return Err(elosysError::new(elosysErrorKind::InvalidData));
         }
 
         let name_bytes = str_to_array(trimmed_name);
@@ -57,7 +57,7 @@ impl Asset {
             }
             nonce = nonce
                 .checked_add(1)
-                .ok_or_else(|| IronfishError::new(IronfishErrorKind::RandomnessError))?;
+                .ok_or_else(|| elosysError::new(elosysErrorKind::RandomnessError))?;
         }
     }
 
@@ -66,7 +66,7 @@ impl Asset {
         name: [u8; NAME_LENGTH],
         metadata: [u8; METADATA_LENGTH],
         nonce: u8,
-    ) -> Result<Asset, IronfishError> {
+    ) -> Result<Asset, elosysError> {
         // Create the potential asset identifier from the asset info
         let asset_id_hash = blake2s_simd::Params::new()
             .hash_length(ASSET_ID_LENGTH)
@@ -120,7 +120,7 @@ impl Asset {
         self.id.value_commitment_generator()
     }
 
-    pub fn read<R: io::Read>(mut reader: R) -> Result<Self, IronfishError> {
+    pub fn read<R: io::Read>(mut reader: R) -> Result<Self, elosysError> {
         let creator = PublicAddress::read(&mut reader)?;
 
         let mut name = [0; NAME_LENGTH];
@@ -135,7 +135,7 @@ impl Asset {
     }
 
     /// Stow the bytes of this struct in the given writer.
-    pub fn write<W: io::Write>(&self, mut writer: W) -> Result<(), IronfishError> {
+    pub fn write<W: io::Write>(&self, mut writer: W) -> Result<(), elosysError> {
         self.creator.write(&mut writer)?;
         writer.write_all(&self.name)?;
         writer.write_all(&self.metadata)?;

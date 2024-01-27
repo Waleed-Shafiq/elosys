@@ -9,7 +9,7 @@ body:
     attributes:
       value: |
         Thanks for taking the time to fill out this bug report! 
-        If you are experiencing an issue after upgrading to a new version, please make sure you restart your Elosys node. You can check this by running `elosys status` and `elosys debug` and comparing the Iron Fish version. In both commands, the version should match.
+        If you are experiencing an issue after upgrading to a new version, please make sure you restart your Elosys node. You can check this by running `elosys status` and `elosys debug` and comparing the elosys version. In both commands, the version should match.
   - type: textarea
     id: what-happened
     attributes:

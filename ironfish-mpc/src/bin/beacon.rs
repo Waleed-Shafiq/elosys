@@ -21,13 +21,13 @@ fn main() {
     let new_params = File::create("new_params").expect("couldn't create `./new_params`");
     let mut new_params = BufWriter::with_capacity(1024 * 1024, new_params);
 
-    let mut sapling_spend = ironfish_phase2::MPCParameters::read(&mut current_params, false)
+    let mut sapling_spend = elosys_phase2::MPCParameters::read(&mut current_params, false)
         .expect("couldn't deserialize Sapling Spend params");
 
-    let mut sapling_output = ironfish_phase2::MPCParameters::read(&mut current_params, false)
+    let mut sapling_output = elosys_phase2::MPCParameters::read(&mut current_params, false)
         .expect("couldn't deserialize Sapling Output params");
 
-    let mut sapling_mint = ironfish_phase2::MPCParameters::read(&mut current_params, false)
+    let mut sapling_mint = elosys_phase2::MPCParameters::read(&mut current_params, false)
         .expect("couldn't deserialize Sapling Mint params");
 
     // Create an RNG based on the outcome of the random beacon

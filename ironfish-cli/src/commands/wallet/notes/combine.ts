@@ -1,7 +1,7 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
-import { Asset } from '@ironfish/rust-nodejs'
+import { Asset } from '@elosys/rust-nodejs'
 import {
   Assert,
   BenchUtils,
@@ -14,17 +14,17 @@ import {
   RpcResponseEnded,
   TimeUtils,
   Transaction,
-} from '@ironfish/sdk'
+} from '@elosys/sdk'
 import { CliUx, Flags } from '@oclif/core'
 import inquirer from 'inquirer'
-import { IronfishCommand } from '../../../command'
+import { elosysCommand } from '../../../command'
 import { IronFlag, RemoteFlags } from '../../../flags'
 import { ProgressBar } from '../../../types'
 import { getExplorer } from '../../../utils/explorer'
 import { selectFee } from '../../../utils/fees'
 import { displayTransactionSummary, watchTransaction } from '../../../utils/transaction'
 
-export class CombineNotesCommand extends IronfishCommand {
+export class CombineNotesCommand extends elosysCommand {
   static description = `Combine notes into a single note`
 
   static flags = {
@@ -392,7 +392,7 @@ export class CombineNotesCommand extends IronfishCommand {
       if (!response.content.account) {
         this.error(
           `No account is currently active.
-          Use ironfish wallet:create <name> to first create an account`,
+          Use elosys wallet:create <name> to first create an account`,
         )
       }
 

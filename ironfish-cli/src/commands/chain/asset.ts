@@ -1,11 +1,11 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
-import { Assert, BufferUtils } from '@ironfish/sdk'
-import { IronfishCommand } from '../../command'
+import { Assert, BufferUtils } from '@elosys/sdk'
+import { elosysCommand } from '../../command'
 import { RemoteFlags } from '../../flags'
 
-export default class Asset extends IronfishCommand {
+export default class Asset extends elosysCommand {
   static description = 'Get the asset info'
 
   static args = [

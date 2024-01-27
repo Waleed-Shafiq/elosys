@@ -8,7 +8,7 @@ use super::{
     MerkleNoteHash,
 };
 use blstrs::Scalar;
-use ironfish_zkp::constants::TREE_DEPTH;
+use elosys_zkp::constants::TREE_DEPTH;
 use rand::{thread_rng, Rng};
 
 /// Given a note, construct a Witness with a valid root_hash and authentication

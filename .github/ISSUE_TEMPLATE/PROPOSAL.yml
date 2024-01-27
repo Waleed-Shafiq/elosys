@@ -3,7 +3,7 @@ description: Propose an improvement you would like to make
 title: "Feature: "
 labels: ["feature request"]
 assignees:
-  - iron-fish/engineering
+  - elosys/engineering
 body:
   - type: textarea
     id: description

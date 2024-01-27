@@ -4,7 +4,7 @@ const MIN_NODE_VERSION = 18
 
 // the signal handler does not support windows yet
 if (process.platform !== 'win32') {
-  require('@ironfish/rust-nodejs').initSignalHandler()
+  require('@elosys/rust-nodejs').initSignalHandler()
 }
 
 if (process.platform === 'win32' && process.arch === 'ia32') {
@@ -19,7 +19,7 @@ if (Number(process.versions.node.split('.')[0]) < MIN_NODE_VERSION) {
     `NodeJS version ${process.versions.node} is not compatible. Must have at least Node v${MIN_NODE_VERSION} installed: https://nodejs.org/en/download/`,
   )
   console.log(
-    'After an updated version is installed, MAKE SURE TO run `npm install -g ironfish` again to install ironfish with the correct Node version',
+    'After an updated version is installed, MAKE SURE TO run `npm install -g elosys` again to install elosys with the correct Node version',
   )
   process.exit(1)
 }

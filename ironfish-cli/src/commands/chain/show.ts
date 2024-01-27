@@ -2,10 +2,10 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 import { parseNumber } from '../../args'
-import { IronfishCommand } from '../../command'
+import { elosysCommand } from '../../command'
 import { LocalFlags } from '../../flags'
 
-export default class Show extends IronfishCommand {
+export default class Show extends elosysCommand {
   static description = 'Show the heaviest chain'
 
   static flags = {

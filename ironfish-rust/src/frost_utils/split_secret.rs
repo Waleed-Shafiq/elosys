@@ -2,7 +2,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 
-use ironfish_frost::frost::{
+use elosys_frost::frost::{
     frost::keys::split,
     keys::{IdentifierList, KeyPackage, PublicKeyPackage},
     Identifier, SigningKey,
@@ -10,7 +10,7 @@ use ironfish_frost::frost::{
 use rand::rngs::ThreadRng;
 use std::collections::HashMap;
 
-use crate::errors::{IronfishError, IronfishErrorKind};
+use crate::errors::{elosysError, elosysErrorKind};
 
 pub struct SecretShareConfig {
     pub min_signers: u16,
@@ -22,12 +22,12 @@ pub(crate) fn split_secret(
     config: &SecretShareConfig,
     identifiers: IdentifierList,
     rng: &mut ThreadRng,
-) -> Result<(HashMap<Identifier, KeyPackage>, PublicKeyPackage), IronfishError> {
+) -> Result<(HashMap<Identifier, KeyPackage>, PublicKeyPackage), elosysError> {
     let secret_bytes: [u8; 32] = config
         .secret
         .clone()
         .try_into()
-        .map_err(|_| IronfishError::new(IronfishErrorKind::InvalidSecret))?;
+        .map_err(|_| elosysError::new(elosysErrorKind::InvalidSecret))?;
 
     let secret_key = SigningKey::deserialize(secret_bytes)?;
 
@@ -57,7 +57,7 @@ pub(crate) fn split_secret(
 mod test {
     use super::*;
     use crate::keys::SaplingKey;
-    use ironfish_frost::frost::{frost::keys::reconstruct, JubjubBlake2b512};
+    use elosys_frost::frost::{frost::keys::reconstruct, JubjubBlake2b512};
 
     #[test]
     fn test_invalid_secret() {
@@ -70,12 +70,12 @@ mod test {
         let mut rng = rand::thread_rng();
         let result = split_secret(
             &config,
-            ironfish_frost::frost::keys::IdentifierList::Default,
+            elosys_frost::frost::keys::IdentifierList::Default,
             &mut rng,
         );
         assert!(result.is_err());
         assert!(
-            matches!(result.unwrap_err().kind, IronfishErrorKind::InvalidSecret),
+            matches!(result.unwrap_err().kind, elosysErrorKind::InvalidSecret),
             "expected InvalidSecret error"
         );
     }
@@ -94,7 +94,7 @@ mod test {
 
         let (key_packages, _) = split_secret(
             &config,
-            ironfish_frost::frost::keys::IdentifierList::Default,
+            elosys_frost::frost::keys::IdentifierList::Default,
             &mut rng,
         )
         .unwrap();

@@ -1,10 +1,10 @@
-[![codecov](https://codecov.io/gh/iron-fish/ironfish/branch/master/graph/badge.svg?token=PCSVEVEW5V&flag=ironfish-cli)](https://codecov.io/gh/iron-fish/ironfish)
+[![codecov](https://codecov.io/gh/elosys/elosys/branch/master/graph/badge.svg?token=PCSVEVEW5V&flag=elosys-cli)](https://codecov.io/gh/elosys/elosys)
 
-The main entry point for an Iron Fish CLI that is capable of mining blocks and spending notes. It's created using the [oclif CLI framework](https://oclif.io)
+The main entry point for an Elosys CLI that is capable of mining blocks and spending notes. It's created using the [oclif CLI framework](https://oclif.io)
 
 ## Starting the CLI
 
-If you're still in the `ironfish` directory in your terminal window, run `cd ironfish-cli`.
+If you're still in the `elosys` directory in your terminal window, run `cd elosys-cli`.
 
 - Otherwise, you'll get a "Command not found" error.
 
@@ -25,12 +25,12 @@ Interact with the node in a new terminal window:
 - `yarn start status`
   - Show your node's status
 - `yarn start wallet:balance`
-  - Show the balance of your account, including $IRON from blocks you've mined
+  - Show the balance of your account, including $ELOSYS from blocks you've mined
   - Tentative balance includes all known transactions. Spending balance includes only transactions on blocks on the main chain
 - `yarn start faucet`
-  - Request a small amount of $IRON for testing payments
+  - Request a small amount of $ELOSYS for testing payments
 - `yarn start wallet:send`
-  - Send $IRON to another account
+  - Send $ELOSYS to another account
 - `yarn start wallet:transactions [account]`
   - Display transactions from and to your account
 
@@ -96,31 +96,31 @@ yarn start miners:start
 
 ```bash
 # in tab 3
-yarn start start --datadir ~/.ironfish2 --port 9034 --bootstrap ws://localhost:9033
+yarn start start --datadir ~/.elosys2 --port 9034 --bootstrap ws://localhost:9033
 
 # in tab 4
-yarn start miners:start --datadir ~/.ironfish2
+yarn start miners:start --datadir ~/.elosys2
 ```
 
 **Running a Development Node**
 
 ```bash
 # in tab 1
-yarn start start --networkId=2 --datadir ~/.ironfish-dev 
+yarn start start --networkId=2 --datadir ~/.elosys-dev 
 
 # in tab 2
-yarn start miners:start --datadir ~/.ironfish-dev
+yarn start miners:start --datadir ~/.elosys-dev
 
 # in tab 3, to check the status of the node
-yarn start status --datadir ~/.ironfish-dev 
+yarn start status --datadir ~/.elosys-dev 
 
 # in tab 3, to check the wallet balance
-yarn start wallet:balance --datadir ~/.ironfish-dev 
+yarn start wallet:balance --datadir ~/.elosys-dev 
 ```
 
-[More information on local mining and testing](https://ironfish.network/developers/documentation/integration_local)
+[More information on local mining and testing](https://elosys.network/developers/documentation/integration_local)
 
 
 ## Documentation
 
-[CLI Commands](https://ironfish.network/use/get-started/cli-commands)
+[CLI Commands](https://elosys.network/use/get-started/cli-commands)

@@ -3,10 +3,10 @@
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 import { S3Client } from '@aws-sdk/client-s3'
 import { Flags } from '@oclif/core'
-import { IronfishCommand } from '../../command'
+import { elosysCommand } from '../../command'
 import { S3Utils } from '../../utils'
 
-export default class CeremonyContributions extends IronfishCommand {
+export default class CeremonyContributions extends elosysCommand {
   static description = 'List all the current contributions with names'
 
   static flags = {
@@ -31,7 +31,7 @@ export default class CeremonyContributions extends IronfishCommand {
 
     const r2Client = S3Utils.getR2S3Client(r2Credentials)
 
-    const latestParamName = await this.getLatestParamName(r2Client, 'ironfish-contributions')
+    const latestParamName = await this.getLatestParamName(r2Client, 'elosys-contributions')
     const latestParamNumber = parseInt(latestParamName.split('_')[1])
     const keys: string[] = [...new Array<number>(latestParamNumber + 1)]
       .map((_, i) => i)
@@ -43,7 +43,7 @@ export default class CeremonyContributions extends IronfishCommand {
     for (const key of keys) {
       const { Metadata } = await S3Utils.getObjectMetadata(
         r2Client,
-        'ironfish-contributions',
+        'elosys-contributions',
         key,
       )
       this.log(

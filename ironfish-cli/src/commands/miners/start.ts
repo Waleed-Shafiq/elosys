@@ -11,14 +11,14 @@ import {
   SetIntervalToken,
   StratumTcpClient,
   StratumTlsClient,
-} from '@ironfish/sdk'
+} from '@elosys/sdk'
 import { CliUx, Flags } from '@oclif/core'
 import dns from 'dns'
 import os from 'os'
-import { IronfishCommand } from '../../command'
+import { elosysCommand } from '../../command'
 import { RemoteFlags } from '../../flags'
 
-export class Miner extends IronfishCommand {
+export class Miner extends elosysCommand {
   static description = `Start a miner and subscribe to new blocks for the node`
 
   updateInterval: SetIntervalToken | null = null

@@ -1,10 +1,10 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
-import { GetPeersResponse, PromiseUtils } from '@ironfish/sdk'
+import { GetPeersResponse, PromiseUtils } from '@elosys/sdk'
 import { CliUx, Flags } from '@oclif/core'
 import blessed from 'blessed'
-import { IronfishCommand } from '../../command'
+import { elosysCommand } from '../../command'
 import { RemoteFlags } from '../../flags'
 import { CommandFlags } from '../../types'
 
@@ -12,7 +12,7 @@ type GetPeerResponsePeer = GetPeersResponse['peers'][0]
 
 const STATE_COLUMN_HEADER = 'STATE'
 
-export class ListCommand extends IronfishCommand {
+export class ListCommand extends elosysCommand {
   static description = `List all connected peers`
 
   static flags = {
