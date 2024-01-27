@@ -1,5 +1,5 @@
 
-# elosys
+# Elosys
 
 elosys is a Layer 1 blockchain that provides the strongest privacy guarantees on every single transaction. Leveraging zero-knowledge proofs (zk-SNARKs), and the highest industry standards for encryption.
 
@@ -66,4 +66,4 @@ If you want to contribute code, you must first read [our contributing guidelines
 ## Licensing
 
 This code base and any contributions will be under the [MPL-2.0](https://www.mozilla.org/en-US/MPL/2.0/) Software License.
-# elosys
+# Elosys
