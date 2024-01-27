@@ -1,0 +1,30 @@
+{
+  "BalanceValueEncoding with all fields defined serializes the object into a buffer and deserializes to the original object": [
+    {
+      "header": {
+        "sequence": 2,
+        "previousBlockHash": "4791D7AE9F97DF100EF1558E84772D6A09B43762388283F75C6F20A32A88AA86",
+        "noteCommitment": {
+          "type": "Buffer",
+          "data": "base64:7L8hY1BofEm8kXjaLznfKNEAYxhxKuUA/kCsfqg8x1E="
+        },
+        "transactionCommitment": {
+          "type": "Buffer",
+          "data": "base64:x35sJbd/ydt2WeYzQUpBU7ppdjksC/yTZ/Yp3lQvkTg="
+        },
+        "target": "9282972777491357380673661573939192202192629606981189395159182914949423",
+        "randomness": "0",
+        "timestamp": 1695140332830,
+        "graffiti": "0000000000000000000000000000000000000000000000000000000000000000",
+        "noteSize": 4,
+        "work": "0"
+      },
+      "transactions": [
+        {
+          "type": "Buffer",
+          "data": "base64:AgAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGzKiP////8AAAAA2GthC02n2wMQ2wLCSnAaO2VyB60zAKBzJF9XaxOzS1iQbYZcJgIdweB8ttZnEUCojbTybBMHO+SJx0QL3a1xCtsxSQXwMaQdtEuQ2OzFGbapc3ciMQNY8KZ7gnuTD+vSkZGbE5l16St+MDzOj5PK1dsHd6w5NiXCIrbnweErHBAEmLJlaNR93geT2pHs6x21wnHjLLhQC+jvj3Vu3DUtYdYVXJJozbHPoXpwhQXvsgekcwri7++AfCYpzcic76A+zoIBKY8XH0eyRqSgvbs4yo20H6hrmWvm2+UzGHXm2nAvUoNqDHhWiu4MxDWJemvD+lDLZvRt0pU1UQmsFrbjAzCePtJ+O2F1l3uzbDru5G6m8viE3wl9NBo3jB7x/zBOm1S1egzWUeph/9czbD5l60DfSMC164crNj+u6JcqWB6VeUBwU+oMCZHNQKjq0O0Ca/E/qjG3xEjLCIZA2RYWeQhqbcHAfNSpBVrodMky8465KsxysAZYgSDi6H72ABci3Y+3vKOXiThJW+tMgvkjuvvRKIwnNLs4oGtxKPyCyCkOzJC8L/IMngGV/zxavqxTcVr60tkbLLNAgjCzj2hT9vfovmawufOEK0SDmR5+fTs2nHkE2zCiBElyb24gRmlzaCBub3RlIGVuY3J5cHRpb24gbWluZXIga2V5MDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwGF9LiwCnB1cUGONX070xYOTNCCKcaOx5S8e9kO6uJ9l83KMMHTdDLvzYyFqpOHK1DQ3uJRmlIso65uXgS3bCBg=="
+        }
+      ]
+    }
+  ]
+}

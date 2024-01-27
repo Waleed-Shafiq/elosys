@@ -1,0 +1,117 @@
+on:
+  pull_request:
+    paths:
+      - "benchmarks/**"
+      - "ironfish-mpc/**"
+      - "ironfish-phase2/**"
+      - "ironfish-rust/**"
+      - "ironfish-rust-nodejs/**"
+      - "ironfish-zkp/**"
+      - "rust-toolchain"
+      - ".github/workflows/rust*"
+      - ".cargo/**"
+      - "Cargo*"
+  push:
+    branches:
+      - master
+    paths:
+      - "benchmarks/**"
+      - "ironfish-mpc/**"
+      - "ironfish-phase2/**"
+      - "ironfish-rust/**"
+      - "ironfish-rust-nodejs/**"
+      - "ironfish-zkp/**"
+      - "rust-toolchain"
+      - ".github/workflows/rust*"
+      - ".cargo/**"
+      - "Cargo*"
+
+name: Rust CI
+
+jobs:
+  rust_lint:
+    name: Lint Rust
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Cache Rust
+        uses: Swatinem/rust-cache@v2
+        with:
+          save-if: false
+          shared-key: base
+
+      - name: Install Cargo tools
+        run: |
+          rustup component add rustfmt clippy
+
+      - name: Check that cargo lockfile is up to date
+        run: |
+          cargo check --locked --all-targets
+
+      # Note: ironfish-zkp is does not need this due to different licensing
+      - name: Check for license headers for ironfish-rust
+        run: ./ci/lintHeaders.sh ./ironfish-rust/src *.rs
+
+      - name: Check for license headers for ironfish-rust-nodejs
+        run: ./ci/lintHeaders.sh ./ironfish-rust-nodejs/src *.rs
+
+      - name: "`cargo fmt` check on ironfish-rust"
+        run: |
+          cargo fmt --all -- --check
+
+      - name: "Clippy check on ironfish-rust"
+        run: |
+          cargo clippy --all-targets -- -D warnings
+
+  ironfish_rust:
+    name: Test ironfish-rust
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Cache Rust
+        uses: Swatinem/rust-cache@v2
+        with:
+          shared-key: base
+
+      # Run tests to collect code coverage
+      - name: Run cargo-tarpaulin on ironfish-rust
+        run: |
+          wget -O tarpaulin.tar.gz https://github.com/xd009642/tarpaulin/releases/download/0.22.0/cargo-tarpaulin-0.22.0-travis.tar.gz
+          tar -xzf tarpaulin.tar.gz
+          mv cargo-tarpaulin ~/.cargo/bin/
+          cargo tarpaulin -p ironfish --release --out Xml --avoid-cfg-tarpaulin --skip-clean --timeout 300 -- --test-threads 1
+
+      # Upload code coverage to Codecov
+      - name: Upload to codecov.io
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{secrets.CODECOV_TOKEN}}
+          flags: ironfish-rust
+
+  ironfish_zkp:
+    name: Test ironfish-zkp
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Cache Rust
+        uses: Swatinem/rust-cache@v2
+        with:
+          shared-key: zkp
+
+      # Run tests to collect code coverage
+      - name: Run cargo-tarpaulin on ironfish-zkp
+        run: |
+          wget -O tarpaulin.tar.gz https://github.com/xd009642/tarpaulin/releases/download/0.22.0/cargo-tarpaulin-0.22.0-travis.tar.gz
+          tar -xzf tarpaulin.tar.gz
+          mv cargo-tarpaulin ~/.cargo/bin/
+          cargo tarpaulin -p ironfish_zkp --release --out Xml --avoid-cfg-tarpaulin --skip-clean --timeout 300 -- --test-threads 1
+
+      # Upload code coverage to Codecov
+      - name: Upload to codecov.io
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{secrets.CODECOV_TOKEN}}
+          flags: ironfish-zkp

@@ -1,0 +1,37 @@
+[package]
+name = "ironfish-rust-nodejs"
+version = "0.1.0"
+license = "MPL-2.0"
+
+description = "Node.js addon for interacting with transactions on the Iron Fish chain"
+keywords = ["iron-fish", "cryptocurrency", "blockchain"]
+
+publish = false
+
+[package.authors]
+workspace = true
+
+[package.edition]
+workspace = true
+
+[package.homepage]
+workspace = true
+
+[package.repository]
+workspace = true
+
+[lib]
+crate-type = ["cdylib"]
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+base64 = "0.13.0"
+fish_hash = "0.1.0"
+ironfish = { path = "../ironfish-rust" }
+ironfish_mpc = { path = "../ironfish-mpc" }
+napi = { version = "2.13.2", features = ["napi6"] }
+napi-derive = "2.13.0"
+
+[build-dependencies]
+napi-build = "2.0.1"

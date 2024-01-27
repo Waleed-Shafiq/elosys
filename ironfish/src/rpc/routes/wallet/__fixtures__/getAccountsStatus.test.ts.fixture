@@ -1,0 +1,30 @@
+{
+  "Route wallet/getAccountsStatus should return account head": [
+    {
+      "header": {
+        "sequence": 2,
+        "previousBlockHash": "4791D7AE9F97DF100EF1558E84772D6A09B43762388283F75C6F20A32A88AA86",
+        "noteCommitment": {
+          "type": "Buffer",
+          "data": "base64:aHGz4sVmUhGttlZ+jvdG5IJltmyHqoIwd0CMDrX+n0c="
+        },
+        "transactionCommitment": {
+          "type": "Buffer",
+          "data": "base64:EZGMhS8JZK9SRKZC26MWmzGOcc1ow4gNKw/l2cb+dsw="
+        },
+        "target": "9282972777491357380673661573939192202192629606981189395159182914949423",
+        "randomness": "0",
+        "timestamp": 1702505679938,
+        "graffiti": "0000000000000000000000000000000000000000000000000000000000000000",
+        "noteSize": 4,
+        "work": "0"
+      },
+      "transactions": [
+        {
+          "type": "Buffer",
+          "data": "base64:AgAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGzKiP////8AAAAACIFiBp1GbWZtdr7trm0wljgN1tTxKD0ZgDF2xd45f9WoZnOhhWFnd+iBG65TBZYwua5LEaCzBnraevEu8JELyMPGypr+7hcFdIAP/ZfsvG6KnpJjLtvHom5xe7MBkxXTlG7DEHLMKjo8FnKhrOeKktNMuCwfGk6marmj5eSSe38DNUk8V2fMGpXYW4BbT2CMl/ucbGKhwYFh/JHXbBoRoqtH3tmZNPxlH74QMiCFXumh/5jEru2T1Mw7EbdzW/4qByU/Og1UWlU+Iar8bG7gvIVubbKUCIRcUnuk17P8qfDVxWUCpFCamCQPeMYbsJ56/JJDHMildhkIRWZpixjIkzPRlpvDxmJn2tFAp8vioGML3vWeQEpb1t6OnBtLkRlvmlE+8N9S4DetC5pxaRXaKF6ATZ/lSTIXsccBglgVfzqyHIVQ/Pj/THU6oL/pRmA1NLTnXu/p9iLnO2z5YzKOaW4RdPyDmVrMTyKWJ6+1Lx7t8K6O9LOqVywiHlMyh46ipJBflJk1u7b4EkwaN+BBXT3xJDqRMz+kMjIn5ryO3Bk5stPdyDO0svKwa6RpkITUk71vq56d2bjvNKdKjdBC5rtPwtnTy8bKaaP+X1mbO3FVCXV8DJBBDElyb24gRmlzaCBub3RlIGVuY3J5cHRpb24gbWluZXIga2V5MDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAw0+MjHMqsy2YcShwmGNJ2z/tQhxbm3ioiAMLuT1c1Wa1A7dUIbWEgKzPYgwmcfz99OLnTRDCvXAkDIkDn/JEZCw=="
+        }
+      ]
+    }
+  ]
+}

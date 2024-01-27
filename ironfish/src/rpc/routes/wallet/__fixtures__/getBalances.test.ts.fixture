@@ -1,0 +1,40 @@
+{
+  "Route wallet/getBalances with a valid account streams balances for all assets owned by the account": [
+    {
+      "version": 2,
+      "id": "847df9de-9ff2-4293-961d-9955dd5633bd",
+      "name": "accountA",
+      "spendingKey": "5c86a0f06fa013f35d3decdd1b2a3c8fd5be9d5a7744ad2d622a3c3eae6dd144",
+      "viewKey": "065b9c02d30039288d26a4332b197ad1878900adcd77947cef408cc012533f2bbb1afe16a0e834bd903f148d5e4f04de5818e6295870999d2190f995f3edbb49",
+      "incomingViewKey": "e7b8e318a06d28ede9f4f05ce1fb24681077b4409b46380371f07b9849d21b03",
+      "outgoingViewKey": "102c28bea3b025ebe90ccaa28d7d971c7e64c955ddb53191fcf3f659ae38016e",
+      "publicAddress": "d97de3be545d5a9c337bf7194435048c3e5d772914a47a6a3b4b64602699626b",
+      "createdAt": {
+        "hash": {
+          "type": "Buffer",
+          "data": "base64:R5HXrp+X3xAO8VWOhHctagm0N2I4goP3XG8goyqIqoY="
+        },
+        "sequence": 1
+      }
+    }
+  ],
+  "Route wallet/getBalances with a valid account returns asset verification information": [
+    {
+      "version": 2,
+      "id": "319016b7-d04e-43f2-927f-33e3d6fbeef2",
+      "name": "accountB",
+      "spendingKey": "0a591ac2eeb8ce2d706390bf7cebe41bd430118ffb9fb8a9dfd27e3a013c930c",
+      "viewKey": "9fd188240f5c3c330ea0ebf197e408a3893b557206f8035145337226da9440d4dc77611be7de09570fa16b62f8631ae83b462a70606b3b1cc77eb3279343e350",
+      "incomingViewKey": "b5ea06a0c50b9934bcf79d8bef1c085d1543d98f7f93359788646369e1306a03",
+      "outgoingViewKey": "04d59920d66c4b9ec22d93656fe088e5d4003ab032ce3b41452fb9b3949916bb",
+      "publicAddress": "33019b1f30714ec97ca6ab71ceb961496be857d9c3df10096ea20842509f6a46",
+      "createdAt": {
+        "hash": {
+          "type": "Buffer",
+          "data": "base64:R5HXrp+X3xAO8VWOhHctagm0N2I4goP3XG8goyqIqoY="
+        },
+        "sequence": 1
+      }
+    }
+  ]
+}
