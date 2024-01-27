@@ -6,7 +6,7 @@ import {
   LanguageCode,
   spendingKeyToWords,
   wordsToSpendingKey,
-} from '@ironfish/rust-nodejs'
+} from '@elosys/rust-nodejs'
 import { LanguageUtils } from '../../../utils'
 import { AccountImport } from '../../walletdb/accountValue'
 import { ACCOUNT_SCHEMA_VERSION } from '../account'

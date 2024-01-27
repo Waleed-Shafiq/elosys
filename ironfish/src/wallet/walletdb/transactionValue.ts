@@ -2,7 +2,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 import type { IDatabaseEncoding } from '../../storage/database/types'
-import { ASSET_ID_LENGTH } from '@ironfish/rust-nodejs'
+import { ASSET_ID_LENGTH } from '@elosys/rust-nodejs'
 import { BufferMap } from 'buffer-map'
 import bufio from 'bufio'
 import { Transaction } from '../../primitives'

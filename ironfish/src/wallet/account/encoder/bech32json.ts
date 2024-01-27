@@ -10,7 +10,7 @@ export class Bech32JsonEncoder implements AccountEncoder {
    * @deprecated Bech32 JSON encoding is deprecated. Use the newest version of the Bech32JSONEncoder.
    */
   encode(value: AccountImport): string {
-    return Bech32m.encode(new JsonEncoder().encode(value), 'ironfishaccount00000')
+    return Bech32m.encode(new JsonEncoder().encode(value), 'elosysaccount00000')
   }
 
   decode(value: string, options?: AccountDecodingOptions): AccountImport {

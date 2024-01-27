@@ -1,7 +1,7 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
-import { initializeSapling } from '@ironfish/rust-nodejs'
+import { initializeSapling } from '@elosys/rust-nodejs'
 import path from 'path'
 import { MessagePort, parentPort, Worker as WorkerThread } from 'worker_threads'
 import { Assert } from '../assert'
@@ -268,11 +268,11 @@ export function getWorkerPath(): string {
   let workerPath = __dirname
 
   // Works around different paths when run under ts-jest
-  const workerPoolPath = path.join('ironfish', 'src', 'workerPool')
+  const workerPoolPath = path.join('elosys', 'src', 'workerPool')
   if (workerPath.includes(workerPoolPath)) {
     workerPath = workerPath.replace(
       workerPoolPath,
-      path.join('ironfish', 'build', 'src', 'workerPool'),
+      path.join('elosys', 'build', 'src', 'workerPool'),
     )
   }
 

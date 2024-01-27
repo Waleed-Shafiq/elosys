@@ -1,7 +1,7 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
-import { PUBLIC_ADDRESS_LENGTH } from '@ironfish/rust-nodejs'
+import { PUBLIC_ADDRESS_LENGTH } from '@elosys/rust-nodejs'
 import bufio, { EncodingError } from 'bufio'
 import { Bech32m } from '../../../utils'
 import { AccountImport, KEY_LENGTH, VIEW_KEY_LENGTH } from '../../walletdb/accountValue'

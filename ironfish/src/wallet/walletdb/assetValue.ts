@@ -7,7 +7,7 @@ import {
   ASSET_METADATA_LENGTH,
   ASSET_NAME_LENGTH,
   PUBLIC_ADDRESS_LENGTH,
-} from '@ironfish/rust-nodejs'
+} from '@elosys/rust-nodejs'
 import bufio from 'bufio'
 import { BigIntUtils } from '../../utils'
 
