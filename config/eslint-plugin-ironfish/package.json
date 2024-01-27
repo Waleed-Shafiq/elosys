@@ -1,8 +1,8 @@
 {
-  "name": "eslint-plugin-ironfish",
+  "name": "eslint-plugin-elosys",
   "version": "0.1.0",
   "private": true,
-  "author": "Iron Fish <contact@ironfish.network> (https://ironfish.network)",
+  "author": "Elosys <contact@elosys.network> (https://elosys.network)",
   "license": "MPL-2.0",
   "files": [
     "index.js"

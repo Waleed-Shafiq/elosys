@@ -6,7 +6,7 @@ import {
   ASSET_METADATA_LENGTH,
   ASSET_NAME_LENGTH,
   MEMO_LENGTH,
-} from '@ironfish/rust-nodejs'
+} from '@elosys/rust-nodejs'
 import * as yup from 'yup'
 import { Assert } from '../../../assert'
 import { RawTransactionSerde } from '../../../primitives/rawTransaction'

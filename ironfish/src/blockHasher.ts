@@ -2,7 +2,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 
-import { FishHashContext } from '@ironfish/rust-nodejs'
+import { FishHashContext } from '@elosys/rust-nodejs'
 import { blake3 } from '@napi-rs/blake-hash'
 import bufio from 'bufio'
 import { Assert } from './assert'

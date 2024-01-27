@@ -2,7 +2,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 
-import { Asset, generateKey, Note as NativeNote } from '@ironfish/rust-nodejs'
+import { Asset, generateKey, Note as NativeNote } from '@elosys/rust-nodejs'
 import { Assert } from '../assert'
 import { VerificationResultReason } from '../consensus'
 import { FullNode } from '../node'
@@ -624,7 +624,7 @@ describe('Blockchain', () => {
      * root commitments when adding to a fork because the trees are
      * not valid in the forked blocks state. We should wait to validate
      * them once we reorg to the new chain. Before this PR it would fail
-     * https://github.com/iron-fish/ironfish/pull/393
+     * https://github.com/elosys/elosys/pull/393
      *
      * G -> A1 -> A2 -> A3 -> A4 -> A5
      *   -> B1 -> B2 -> B3 -> B4

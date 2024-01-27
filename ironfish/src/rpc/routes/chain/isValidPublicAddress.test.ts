@@ -3,7 +3,7 @@
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 
 import '../../../testUtilities/matchers'
-import { generateKey } from '@ironfish/rust-nodejs'
+import { generateKey } from '@elosys/rust-nodejs'
 import { createRouteTest } from '../../../testUtilities/routeTest'
 
 describe('Route chain.isValidPublicAddress', () => {

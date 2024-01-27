@@ -1,5 +1,5 @@
 use criterion::{black_box, criterion_group, criterion_main, BatchSize, Criterion};
-use ironfish::{
+use elosys::{
     assets::asset::{Asset, METADATA_LENGTH, NAME_LENGTH},
     SaplingKey,
 };

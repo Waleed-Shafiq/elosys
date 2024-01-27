@@ -1,7 +1,7 @@
 blank_issues_enabled: false
 contact_links:
   - name: Github Discussions
-    url: https://github.com/iron-fish/ironfish/discussions
+    url: https://github.com/iron-fish/elosys/discussions
     about: Ask and answer development questions here.
   - name: Discord
     url: https://discord.com/channels/771503434028941353/

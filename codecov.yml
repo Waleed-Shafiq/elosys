@@ -1,12 +1,12 @@
 ignore:
   - config/*
-  - ironfish-rust-nodejs/*
+  - elosys-rust-nodejs/*
 comment: false
 github_checks:
   annotations: false
 coverage:
   fixes:
-    - "/home/runner/work/ironfish/ironfish/::/"
+    - "/home/runner/work/elosys/elosys/::/"
   status:
     patch:
       default:
@@ -15,24 +15,24 @@ coverage:
     project:
       default:
         target: 10%
-      ironfish-rust:
+      elosys-rust:
         target: 10%
         flags:
-          - ironfish-rust
-      ironfish-cli:
+          - elosys-rust
+      elosys-cli:
         target: 10%
         flags:
-          - ironfish-cli
-      ironfish:
+          - elosys-cli
+      elosys:
         target: 10%
         flags:
-          - ironfish
+          - elosys
 flags:
-  ironfish-rust:
+  elosys-rust:
     paths:
-      - ironfish-rust
+      - elosys-rust
     carryforward: true
-  ironfish:
+  elosys:
     paths:
-      - ironfish
+      - elosys
     carryforward: true

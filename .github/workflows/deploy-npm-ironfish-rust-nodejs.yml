@@ -1,4 +1,4 @@
-name: Deploy @ironfish/rust-nodejs NPM Packages
+name: Deploy @elosys/rust-nodejs NPM Packages
 
 env:
   DEBUG: 'napi:*'
@@ -9,7 +9,7 @@ on:
 
 jobs:
   build-and-test:
-    uses: ./.github/workflows/build-ironfish-rust-nodejs.yml
+    uses: ./.github/workflows/build-elosys-rust-nodejs.yml
 
   publish:
     name: Publish
@@ -18,7 +18,7 @@ jobs:
       - build-and-test
     defaults:
       run:
-        working-directory: ./ironfish-rust-nodejs
+        working-directory: ./elosys-rust-nodejs
 
     steps:
       - uses: actions/checkout@v4
@@ -36,7 +36,7 @@ jobs:
       - name: Download all artifacts
         uses: actions/download-artifact@v3
         with:
-          path: ironfish-rust-nodejs/artifacts
+          path: elosys-rust-nodejs/artifacts
 
       - name: List packages
         run: ls -R .

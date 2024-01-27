@@ -71,9 +71,9 @@ export class Telemetry {
 
     this.apiUrl = this.config.get('telemetryApi')
     if (!this.apiUrl && options.networkId === 0) {
-      this.apiUrl = 'https://testnet.api.ironfish.network'
+      this.apiUrl = 'https://testnet.api.elosys.network'
     } else if (!this.apiUrl) {
-      this.apiUrl = 'https://api.ironfish.network'
+      this.apiUrl = 'https://api.elosys.network'
     }
   }
 

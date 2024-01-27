@@ -37,7 +37,7 @@ export class DatabaseVersionError extends DatabaseOpenError {
     super(
       current <= version
         ? `Your database needs to be upgraded (v${current} vs v${version}).\n` +
-            `Run "ironfish migrations:start" or "ironfish start --upgrade"\n`
+            `Run "elosys migrations:start" or "elosys start --upgrade"\n`
         : `Your database is newer than your node.\n` +
             `Your database is ${current} and your node is ${version}.\n`,
     )

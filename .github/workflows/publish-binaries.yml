@@ -1,4 +1,4 @@
-name: Build @ironfish binaries
+name: Build @elosys binaries
 
 # on:
 #   push
@@ -21,7 +21,7 @@ jobs:
             arch: x86_64
             system: windows
 
-          # requires 20.04 because ironfish depends on openssl 1.1.1, new ubuntu only allows 3.x
+          # requires 20.04 because elosys depends on openssl 1.1.1, new ubuntu only allows 3.x
           - host: ubuntu-20.04
             arch: x86_64
             system: linux
@@ -76,22 +76,22 @@ jobs:
           cd build
           cp $(node -e "console.log(process.execPath)") ${{ matrix.settings.system != 'windows' && 'node' || 'node.exe' }}
           npm init -y
-          npm install ironfish
+          npm install elosys
           tar -czf ../tools/build.tar.gz -C . .
 
       - name: Create binary
         id: binary
         run: |
-          go build -ldflags "-X 'main.Identifier=${{ steps.identifier.outputs.identifier }}' -X 'main.Command={{caxac}}/${{ matrix.settings.system != 'windows' && 'node' || 'node.exe' }} --enable-source-maps {{caxac}}/node_modules/ironfish/bin/run' -X 'main.UncompressionMessage=Unpackaging ironfish application, this may take a minute when run for the first time.'" -o tools/${{ matrix.settings.system != 'windows' && 'ironfish' || 'ironfish.exe' }} tools/build-binary.go 
+          go build -ldflags "-X 'main.Identifier=${{ steps.identifier.outputs.identifier }}' -X 'main.Command={{caxac}}/${{ matrix.settings.system != 'windows' && 'node' || 'node.exe' }} --enable-source-maps {{caxac}}/node_modules/elosys/bin/run' -X 'main.UncompressionMessage=Unpackaging elosys application, this may take a minute when run for the first time.'" -o tools/${{ matrix.settings.system != 'windows' && 'elosys' || 'elosys.exe' }} tools/build-binary.go 
 
       - name: Set paths
         id: set_paths
         shell: bash
         run: |
-          name="ironfish-${{ matrix.settings.system }}-${{ matrix.settings.arch }}-${{ github.event.release.tag_name }}"
+          name="elosys-${{ matrix.settings.system }}-${{ matrix.settings.arch }}-${{ github.event.release.tag_name }}"
           echo "name=${name}" >> $GITHUB_OUTPUT
           echo "zip=${name}.zip" >> $GITHUB_OUTPUT
-          echo "binary=${{ matrix.settings.system != 'windows' && 'ironfish' || 'ironfish.exe' }}" >> $GITHUB_OUTPUT
+          echo "binary=${{ matrix.settings.system != 'windows' && 'elosys' || 'elosys.exe' }}" >> $GITHUB_OUTPUT
 
       - name: chmod binary
         working-directory: tools

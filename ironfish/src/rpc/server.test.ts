@@ -7,8 +7,8 @@ describe('RpcServer', () => {
   const nodeTest = createNodeTest()
 
   it('should authenticate', () => {
-    nodeTest.node.rpc.internal.set('rpcAuthToken', 'ironfish')
-    expect(nodeTest.node.rpc.authenticate('ironfish')).toBe(true)
+    nodeTest.node.rpc.internal.set('rpcAuthToken', 'elosys')
+    expect(nodeTest.node.rpc.authenticate('elosys')).toBe(true)
     expect(nodeTest.node.rpc.authenticate('')).toBe(false)
     expect(nodeTest.node.rpc.authenticate('foobar')).toBe(false)
   })

@@ -55,65 +55,65 @@ jobs:
           AWS_REGISTRY_URL: ${{ secrets.AWS_NODE_REGISTRY_URL }}
 
       - name: Build Node Image
-        run: ./ironfish-cli/scripts/build-docker.sh
+        run: ./elosys-cli/scripts/build-docker.sh
 
       - name: Deploy Node Image to GitHub:mainnet
         if: ${{ inputs.github_tag_mainnet }}
         run: |
-          docker tag ironfish ghcr.io/iron-fish/ironfish:mainnet
-          docker push ghcr.io/iron-fish/ironfish:mainnet
+          docker tag elosys ghcr.io/elosys/elosys:mainnet
+          docker push ghcr.io/elosys/elosys:mainnet
 
       # If we are deploying a new public release to mainnet
       # also update the docker registry :latest tag for hygiene
       - name: Deploy Node Image to GitHub:latest
         if: ${{ inputs.github_tag_mainnet }}
         run: |
-          docker tag ironfish ghcr.io/iron-fish/ironfish:latest
-          docker push ghcr.io/iron-fish/ironfish:latest
+          docker tag elosys ghcr.io/elosys/elosys:latest
+          docker push ghcr.io/elosys/elosys:latest
 
       # Used if we are deploying a new version (e.g. v1.1)
       - name: Deploy Node Image to GitHub:${{ github.ref_name }}
         if: ${{ github.ref_type == 'tag'}}
         run: |
-          docker tag ironfish ghcr.io/iron-fish/ironfish:${{ github.ref_name }}
-          docker push ghcr.io/iron-fish/ironfish:${{ github.ref_name }}
+          docker tag elosys ghcr.io/elosys/elosys:${{ github.ref_name }}
+          docker push ghcr.io/elosys/elosys:${{ github.ref_name }}
 
       - name: Deploy Node Image to GitHub:testnet
         if: ${{ inputs.github_tag_testnet }}
         run: |
-          docker tag ironfish ghcr.io/iron-fish/ironfish:testnet
-          docker push ghcr.io/iron-fish/ironfish:testnet
+          docker tag elosys ghcr.io/elosys/elosys:testnet
+          docker push ghcr.io/elosys/elosys:testnet
 
       - name: Deploy Node Image to AWS:mainnet
         if: ${{ inputs.aws_tag_mainnet }}
         run: |
-          docker tag ironfish ${{ secrets.AWS_NODE_REGISTRY_URL }}/ironfish:mainnet
-          docker push ${{ secrets.AWS_NODE_REGISTRY_URL }}/ironfish:mainnet
+          docker tag elosys ${{ secrets.AWS_NODE_REGISTRY_URL }}/elosys:mainnet
+          docker push ${{ secrets.AWS_NODE_REGISTRY_URL }}/elosys:mainnet
 
       # If we are deploying a new public release to mainnet
       # also update the docker registry :latest tag for hygiene
       - name: Deploy Node Image to AWS:latest
         if: ${{ inputs.aws_tag_mainnet }}
         run: |
-          docker tag ironfish ${{ secrets.AWS_NODE_REGISTRY_URL }}/ironfish:latest
-          docker push ${{ secrets.AWS_NODE_REGISTRY_URL }}/ironfish:latest
+          docker tag elosys ${{ secrets.AWS_NODE_REGISTRY_URL }}/elosys:latest
+          docker push ${{ secrets.AWS_NODE_REGISTRY_URL }}/elosys:latest
 
       # Used if we are deploying a new version (e.g. v1.1)
       # This is only executed when deploying a new release to mainnet
       - name: Deploy Node Image to AWS:${{ github.ref_name }}
         if: ${{ inputs.aws_tag_mainnet && github.event.ref_type == 'tag'}}
         run: |
-          docker tag ironfish ${{ secrets.AWS_NODE_REGISTRY_URL }}/ironfish:${{ github.ref_name }}
-          docker push ${{ secrets.AWS_NODE_REGISTRY_URL }}/ironfish:${{ github.ref_name }}
+          docker tag elosys ${{ secrets.AWS_NODE_REGISTRY_URL }}/elosys:${{ github.ref_name }}
+          docker push ${{ secrets.AWS_NODE_REGISTRY_URL }}/elosys:${{ github.ref_name }}
 
       - name: Deploy Node Image to AWS:testnet
         if: ${{ inputs.aws_tag_testnet }}
         run: |
-          docker tag ironfish ${{ secrets.AWS_NODE_REGISTRY_URL }}/ironfish:testnet
-          docker push ${{ secrets.AWS_NODE_REGISTRY_URL }}/ironfish:testnet
+          docker tag elosys ${{ secrets.AWS_NODE_REGISTRY_URL }}/elosys:testnet
+          docker push ${{ secrets.AWS_NODE_REGISTRY_URL }}/elosys:testnet
 
       - name: Deploy Node Image to AWS:${{ github.sha }}
         if: ${{ inputs.aws_tag_git_sha }}
         run: |
-          docker tag ironfish ${{ secrets.AWS_NODE_REGISTRY_URL }}/ironfish:${{ github.sha }}
-          docker push ${{ secrets.AWS_NODE_REGISTRY_URL }}/ironfish:${{ github.sha }}
+          docker tag elosys ${{ secrets.AWS_NODE_REGISTRY_URL }}/elosys:${{ github.sha }}
+          docker push ${{ secrets.AWS_NODE_REGISTRY_URL }}/elosys:${{ github.sha }}

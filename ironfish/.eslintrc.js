@@ -1,5 +1,5 @@
 module.exports = {
-  extends: ['ironfish'],
+  extends: ['elosys'],
   parserOptions: {
     tsconfigRootDir: __dirname,
   },

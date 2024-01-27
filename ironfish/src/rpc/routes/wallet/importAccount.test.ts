@@ -2,7 +2,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 
-import { generateKey, LanguageCode, spendingKeyToWords } from '@ironfish/rust-nodejs'
+import { generateKey, LanguageCode, spendingKeyToWords } from '@elosys/rust-nodejs'
 import fs from 'fs'
 import path from 'path'
 import { createRouteTest } from '../../../testUtilities/routeTest'

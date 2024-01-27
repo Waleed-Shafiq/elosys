@@ -1,7 +1,7 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
-import { boxMessage, unboxMessage } from '@ironfish/rust-nodejs'
+import { boxMessage, unboxMessage } from '@elosys/rust-nodejs'
 import { Assert } from '../../assert'
 import { Blockchain } from '../../blockchain'
 import { Identity, PrivateIdentity, privateIdentityToIdentity } from '../identity'

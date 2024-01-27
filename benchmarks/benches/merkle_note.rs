@@ -1,5 +1,5 @@
 use criterion::{criterion_group, criterion_main, BatchSize, Criterion};
-use ironfish::{
+use elosys::{
     assets::asset_identifier::NATIVE_ASSET, keys::EphemeralKeyPair, MerkleNote, Note, SaplingKey,
     ValueCommitment,
 };

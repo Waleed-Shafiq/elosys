@@ -12,8 +12,8 @@ import {
   TRANSACTION_FEE_LENGTH,
   TRANSACTION_PUBLIC_KEY_RANDOMNESS_LENGTH,
   TRANSACTION_SIGNATURE_LENGTH,
-} from '@ironfish/rust-nodejs'
-import { Asset, ASSET_ID_LENGTH } from '@ironfish/rust-nodejs'
+} from '@elosys/rust-nodejs'
+import { Asset, ASSET_ID_LENGTH } from '@elosys/rust-nodejs'
 import bufio from 'bufio'
 import { Assert } from '../assert'
 import { Witness } from '../merkletree'

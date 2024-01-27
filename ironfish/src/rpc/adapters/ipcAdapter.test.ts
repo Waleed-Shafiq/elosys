@@ -3,7 +3,7 @@
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 import * as yup from 'yup'
 import { Assert } from '../../assert'
-import { IronfishSdk } from '../../sdk'
+import { ElosysSdk } from '../../sdk'
 import { getUniqueTestDataDir } from '../../testUtilities'
 import { PromiseUtils } from '../../utils/promise'
 import { RpcRequestError } from '../clients'
@@ -14,11 +14,11 @@ import { RpcIpcAdapter } from './ipcAdapter'
 
 describe('IpcAdapter', () => {
   let ipc: RpcIpcAdapter
-  let sdk: IronfishSdk
+  let sdk: ElosysSdk
   let client: RpcIpcClient
 
   beforeEach(async () => {
-    sdk = await IronfishSdk.init({
+    sdk = await ElosysSdk.init({
       dataDir: getUniqueTestDataDir(),
       configOverrides: {
         enableRpc: false,

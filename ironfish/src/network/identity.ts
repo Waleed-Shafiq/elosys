@@ -1,7 +1,7 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
-import { BoxKeyPair, KEY_LENGTH } from '@ironfish/rust-nodejs'
+import { BoxKeyPair, KEY_LENGTH } from '@elosys/rust-nodejs'
 
 /**
  * Types and helper functions related to a peer's identity.

@@ -3,7 +3,7 @@
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 
 import '../../../testUtilities/matchers'
-import { Asset } from '@ironfish/rust-nodejs'
+import { Asset } from '@elosys/rust-nodejs'
 import { Assert } from '../../../assert'
 import { FullNode } from '../../../node'
 import { Block, Transaction } from '../../../primitives'

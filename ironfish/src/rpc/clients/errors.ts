@@ -6,7 +6,7 @@ import { RpcResponse } from '../response'
 
 /*
  The errors in this file are to be used by RPC client implementations
- to provide a common error interface to consumers of the Ironfish RPC
+ to provide a common error interface to consumers of the elosys RPC
  interface. Try to throw these errors when you are developing a client
  so developers can rely on these errors.
 */

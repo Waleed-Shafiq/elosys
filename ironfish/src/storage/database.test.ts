@@ -118,7 +118,7 @@ describe('Database', () => {
 
   it('should store and get values', async () => {
     await db.open()
-    const foo = { hash: 'hello', name: '@ironfish/sdk' }
+    const foo = { hash: 'hello', name: '@elosys/sdk' }
     const fooHash = Buffer.from(JSON.stringify(foo))
 
     await fooStore.put('hello', foo)
@@ -141,7 +141,7 @@ describe('Database', () => {
   it('should clear store', async () => {
     await db.open()
 
-    const foo = { hash: 'hello', name: '@ironfish/sdk' }
+    const foo = { hash: 'hello', name: '@elosys/sdk' }
     const fooHash = Buffer.from(JSON.stringify(foo))
 
     await fooStore.put('hello', foo)
@@ -293,7 +293,7 @@ describe('Database', () => {
     it('should batch array of writes', async () => {
       await db.open()
 
-      const foo = { hash: 'hello', name: '@ironfish/sdk' }
+      const foo = { hash: 'hello', name: '@elosys/sdk' }
       const fooHash = Buffer.from(JSON.stringify(foo))
 
       await db.batch([
@@ -320,7 +320,7 @@ describe('Database', () => {
     it('should batch chained of writes', async () => {
       await db.open()
 
-      const foo = { hash: 'hello', name: '@ironfish/sdk' }
+      const foo = { hash: 'hello', name: '@elosys/sdk' }
       const fooHash = Buffer.from(JSON.stringify(foo))
 
       await db
@@ -351,7 +351,7 @@ describe('Database', () => {
     it('should write in transaction manually', async () => {
       await db.open()
 
-      const foo = { hash: 'hello', name: '@ironfish/sdk' }
+      const foo = { hash: 'hello', name: '@elosys/sdk' }
       const fooHash = Buffer.from(JSON.stringify(foo))
 
       let transaction = db.transaction()
@@ -415,7 +415,7 @@ describe('Database', () => {
     it('should write in transaction automatically', async () => {
       await db.open()
 
-      const foo = { hash: 'hello', name: '@ironfish/sdk' }
+      const foo = { hash: 'hello', name: '@elosys/sdk' }
       const fooHash = Buffer.from(JSON.stringify(foo))
 
       await expect(() =>
@@ -456,7 +456,7 @@ describe('Database', () => {
     it('should cache transaction operations', async () => {
       await db.open()
 
-      const foo = { hash: 'hello', name: '@ironfish/sdk' }
+      const foo = { hash: 'hello', name: '@elosys/sdk' }
       const bar = { hash: 'hello', name: 'world' }
 
       // With an automatic transaction

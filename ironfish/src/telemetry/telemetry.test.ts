@@ -138,7 +138,7 @@ describe('Telemetry', () => {
       expect(submitTelemetry).toHaveBeenCalledWith(
         points.slice(0, telemetry['MAX_POINTS_TO_SUBMIT']),
         GraffitiUtils.fromString(mockGraffiti),
-        'https://api.ironfish.network',
+        'https://api.elosys.network',
       )
       expect(telemetry['points']).toEqual(points.slice(telemetry['MAX_POINTS_TO_SUBMIT']))
       expect(telemetry['points']).toHaveLength(

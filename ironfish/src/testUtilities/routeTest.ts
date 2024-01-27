@@ -9,7 +9,7 @@ import { FullNode } from '../node'
 import { ALL_API_NAMESPACES } from '../rpc'
 import { RpcMemoryAdapter } from '../rpc/adapters'
 import { RpcMemoryClient } from '../rpc/clients'
-import { IronfishSdk } from '../sdk'
+import { ElosysSdk } from '../sdk'
 import { Syncer } from '../syncer'
 import { Wallet } from '../wallet'
 import { WorkerPool } from '../workerPool'
@@ -26,7 +26,7 @@ export class RouteTest extends NodeTest {
   client!: RpcMemoryClient
 
   async createSetup(): Promise<{
-    sdk: IronfishSdk
+    sdk: ElosysSdk
     node: FullNode
     strategy: TestStrategy
     verifier: Verifier

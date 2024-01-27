@@ -1,16 +1,16 @@
-# Ironfish
+# Elosys
 
-[![codecov](https://codecov.io/gh/iron-fish/ironfish/branch/master/graph/badge.svg?token=PCSVEVEW5V&flag=ironfish)](https://codecov.io/gh/iron-fish/ironfish)
+[![codecov](https://codecov.io/gh/elosys/elosys/branch/master/graph/badge.svg?token=PCSVEVEW5V&flag=elosys)](https://codecov.io/gh/elosys/elosys)
 
-Ironfish contains the implementation of the Ironfish node and all relevant components that run it including the Blockchain, MemPool, RPC layer, PeerNetwork, and more.
+Elosys contains the implementation of the Elosys node and all relevant components that run it including the Blockchain, MemPool, RPC layer, PeerNetwork, and more.
 
 ## Components
 
 ### Accounts
- An account store used to manage, create, and update Ironfish accounts.
+ An account store used to manage, create, and update Elosys accounts.
 
 ### Config
-This represents the IronfishConfig and all of its options. It's a hierarchical config system that has 3 levels of options. If you use `config.get()` or `config.config` then you'll always get the top-level config options.
+This represents the Elosys Config and all of its options. It's a hierarchical config system that has 3 levels of options. If you use `config.get()` or `config.config` then you'll always get the top-level config options.
 
 ```
 -> config
@@ -38,14 +38,14 @@ By default, the log level is set to only display info.
 
 Change the `logLevel` in the config file, from `*:info` to `*:debug` if you want verbose logs.
 
-### IronfishSDK
-This project contains the IronfishSdk, which is just a simple wrapper around the ironfish components like Blockchain, Config, Accounts. You can use the individual components whenever you feel like it, though the SDK is aimed at making usage easier.
+### ElosysSDK
+This project contains the ElosysSdk, which is just a simple wrapper around the elosys components like Blockchain, Config, Accounts. You can use the individual components whenever you feel like it, though the SDK is aimed at making usage easier.
 
 #### SDK Example
 
 ```typescript
 // Initialize the SDK
-const sdk = await IronfishSdk.init()
+const sdk = await ElosysSdk.init()
 
 // Get a config option from the SDK
 console.log(await sdk.config.get('blockGraffiti'))

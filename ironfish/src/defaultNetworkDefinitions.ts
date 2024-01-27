@@ -27,7 +27,7 @@ export function defaultNetworkName(networkId: number): string | undefined {
 // TODO: @ygao76 update this once the change is ready to release to testnet.
 export const TESTNET = `{
   "id": 0,
-  "bootstrapNodes": ["1.test.bn.ironfish.network", "2.test.bn.ironfish.network"],
+  "bootstrapNodes": ["1.test.bn.elosys.network", "2.test.bn.elosys.network"],
   "genesis": ${TESTNET_GENESIS},
   "consensus": {
       "allowedBlockFutureSeconds": 15,
@@ -49,7 +49,7 @@ export const TESTNET = `{
 export const MAINNET = `
 {
     "id": 1,
-    "bootstrapNodes": ["1.main.bn.ironfish.network", "2.main.bn.ironfish.network"],
+    "bootstrapNodes": ["1.main.bn.elosys.network", "2.main.bn.elosys.network"],
     "genesis": ${MAINNET_GENESIS},
     "consensus": {
         "allowedBlockFutureSeconds": 15,

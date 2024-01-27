@@ -10,7 +10,7 @@ import {
   Note as NativeNote,
   Transaction as NativeTransaction,
   TransactionPosted as NativeTransactionPosted,
-} from '@ironfish/rust-nodejs'
+} from '@elosys/rust-nodejs'
 import { blake3 } from '@napi-rs/blake-hash'
 import { serializeHeaderBlake3, serializeHeaderFishHash } from './blockHasher'
 import { ConsensusParameters, TestnetConsensus } from './consensus'
@@ -80,7 +80,7 @@ const consensusParameters: ConsensusParameters = {
 
 /**
  * Tests whether it's possible to create a miner reward and transfer those funds
- * to another account using ironfish-rust transactions + strategy.
+ * to another account using elosys-rust transactions + strategy.
  *
  * This is an integration test dependent on order of execution of the `it`
  * blocks inside the test.

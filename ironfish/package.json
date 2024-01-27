@@ -1,13 +1,13 @@
 {
-  "name": "@ironfish/sdk",
+  "name": "@elosys/sdk",
   "version": "1.17.0",
   "description": "SDK for running and interacting with an Iron Fish node",
-  "author": "Iron Fish <contact@ironfish.network> (https://ironfish.network)",
+  "author": "Elosys <contact@elosys.network> (https://elosys.network)",
   "main": "build/src/index.js",
   "types": "build/src/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/iron-fish/ironfish.git"
+    "url": "git+https://github.com/elosys/elosys.git"
   },
   "license": "MPL-2.0",
   "files": [
@@ -22,7 +22,7 @@
   "dependencies": {
     "@ethersproject/bignumber": "5.7.0",
     "@fast-csv/format": "4.3.5",
-    "@ironfish/rust-nodejs": "1.14.0",
+    "@elosys/rust-nodejs": "1.14.0",
     "@napi-rs/blake-hash": "1.3.3",
     "axios": "0.21.4",
     "bech32": "2.0.0",
@@ -84,7 +84,7 @@
     "@typescript-eslint/parser": "6.19.0",
     "cross-env": "7.0.3",
     "eslint": "8.56.0",
-    "eslint-config-ironfish": "*",
+    "eslint-config-elosys": "*",
     "eslint-config-prettier": "8.3.0",
     "eslint-plugin-jest": "27.1.6",
     "eslint-plugin-prettier": "3.4.0",
@@ -97,7 +97,7 @@
     "typescript": "5.0.4"
   },
   "bugs": {
-    "url": "https://github.com/iron-fish/ironfish/issues"
+    "url": "https://github.com/elosys/elosys/issues"
   },
-  "homepage": "https://ironfish.network"
+  "homepage": "https://elosys.network"
 }

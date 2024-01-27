@@ -4,11 +4,11 @@ on:
       - master
       - staging
     paths:
-      - "ironfish-mpc/**"
-      - "ironfish-phase2/**"
-      - "ironfish-rust/**"
-      - "ironfish-rust-nodejs/**"
-      - "ironfish-zkp/**"
+      - "elosys-mpc/**"
+      - "elosys-phase2/**"
+      - "elosys-rust/**"
+      - "elosys-rust-nodejs/**"
+      - "elosys-zkp/**"
       - "rust-toolchain"
       - ".github/workflows/rust*"
       - ".cargo/**"

@@ -47,6 +47,6 @@ jobs:
           INFLUX_ORG: 'fdcfe96f6c31245a'
           INFLUX_HOST: 'https://us-east-1-1.aws.cloud2.influxdata.com'
         run: |
-          for f in ironfish/test-reports/*.perf.csv; do
-            influx write --bucket ironfish-telemetry-mainnet --format=csv --file $f
+          for f in elosys/test-reports/*.perf.csv; do
+            influx write --bucket elosys-telemetry-mainnet --format=csv --file $f
           done

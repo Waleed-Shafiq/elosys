@@ -25,4 +25,4 @@ export const getPackageFrom = (p: PackageJson): Package => ({
   git: p.gitHash || 'src',
 })
 
-export const IronfishPKG = getPackageFrom(pkgJson)
+export const ElosysPKG = getPackageFrom(pkgJson)

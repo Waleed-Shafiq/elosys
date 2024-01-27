@@ -7,7 +7,7 @@ import {
   generateKey,
   Note as NativeNote,
   Transaction as NativeTransaction,
-} from '@ironfish/rust-nodejs'
+} from '@elosys/rust-nodejs'
 import { Blockchain } from '../blockchain'
 import { Logger } from '../logger'
 import { Block } from '../primitives'

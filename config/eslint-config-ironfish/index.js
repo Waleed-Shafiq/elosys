@@ -15,7 +15,7 @@ module.exports = {
     sourceType: 'module',
   },
 
-  plugins: ['header', 'ironfish', 'jest', 'prettier', 'simple-import-sort'],
+  plugins: ['header', 'elosys', 'jest', 'prettier', 'simple-import-sort'],
 
   extends: ['eslint:recommended', 'plugin:prettier/recommended', 'prettier'],
 
@@ -66,8 +66,8 @@ module.exports = {
   ],
 
   rules: {
-    'ironfish/no-vague-imports': 'error',
-    'ironfish/no-buffer-cmp': 'error',
+    'elosys/no-vague-imports': 'error',
+    'elosys/no-buffer-cmp': 'error',
 
     // Catches expressions that aren't assigned
     '@typescript-eslint/no-unused-expressions': [

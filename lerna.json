@@ -1,10 +1,10 @@
 {
   "packages": [
-    "config/eslint-config-ironfish",
-    "config/eslint-plugin-ironfish",
-    "ironfish-cli",
-    "ironfish",
-    "ironfish-rust-nodejs"
+    "config/eslint-config-elosys",
+    "config/eslint-plugin-elosys",
+    "elosys-cli",
+    "elosys",
+    "elosys-rust-nodejs"
   ],
   "version": "independent",
   "npmClient": "yarn",

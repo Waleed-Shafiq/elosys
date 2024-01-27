@@ -3,13 +3,13 @@
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 
 /**
- * This account (IronFishGenesisAccount) can be imported to access the funds in the genesis block.
+ * This account (ElosysGenesisAccount) can be imported to access the funds in the genesis block.
  *
  * If the dev genesis block is ever regenerated, this account will need to be updated.
  */
 const DEV_GENESIS_ACCOUNT = {
   version: 2,
-  name: 'IronFishGenesisAccount',
+  name: 'ElosysGenesisAccount',
   spendingKey: '2abe405e7110640e0e7bdedc95f1df14bd425df1cb8d87e88c9d4fce7bf89d40',
   viewKey:
     '689634cf4d97c7472c3fc861877caf27e6be48220111db840c066b7ba70f60e5f92bc747bc388d5b39c261a977416e9e1f432a6db317237ea89c8a16ef1eea9c',

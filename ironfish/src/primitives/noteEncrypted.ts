@@ -6,7 +6,7 @@ import {
   ENCRYPTED_NOTE_PLAINTEXT_LENGTH,
   NOTE_ENCRYPTION_KEY_LENGTH,
   NoteEncrypted as NativeNoteEncrypted,
-} from '@ironfish/rust-nodejs'
+} from '@elosys/rust-nodejs'
 import bufio from 'bufio'
 import { Serde } from '../serde'
 import { Note } from './note'

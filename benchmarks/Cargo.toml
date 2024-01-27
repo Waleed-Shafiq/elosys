@@ -19,7 +19,7 @@ workspace = true
 
 [dependencies]
 criterion = "0.4"
-ironfish = { path = "../ironfish-rust", features = ["benchmark"] }
+elosys = { path = "../elosys-rust", features = ["benchmark"] }
 
 [[bench]]
 name = "asset"

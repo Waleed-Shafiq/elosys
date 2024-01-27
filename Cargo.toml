@@ -3,21 +3,21 @@ resolver = "2"
 
 members = [
     "benchmarks",
-    "ironfish-mpc",
-    "ironfish-phase2",
-    "ironfish-rust",
-    "ironfish-rust-nodejs",
-    "ironfish-zkp",
+    "elosys-mpc",
+    "elosys-phase2",
+    "elosys-rust",
+    "elosys-rust-nodejs",
+    "elosys-zkp",
 ]
 
 [workspace.package]
-authors = ["Iron Fish <contact@ironfish.network> (https://ironfish.network)"]
+authors = ["Elosys <contact@elosys.network> (https://elosys.network)"]
 edition = "2021"
-homepage = "https://ironfish.network/"
-repository = "https://github.com/iron-fish/ironfish"
+homepage = "https://elosys.network/"
+repository = "https://github.com/elosys/elosys"
 
 [patch.crates-io]
-bellman = { git = "https://github.com/iron-fish/bellman", rev = "1cc52ca33e6db14233f1cbc0c9c5b7c822b229ec" }
+bellman = { git = "https://github.com/elosys/bellman", rev = "1cc52ca33e6db14233f1cbc0c9c5b7c822b229ec" }
 
 [profile.release]
 debug = true

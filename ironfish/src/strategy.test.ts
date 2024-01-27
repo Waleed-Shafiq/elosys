@@ -30,27 +30,27 @@ describe('Miners reward', () => {
     })
   })
 
-  // see https://ironfish.network/docs/whitepaper/4_mining#include-the-miner-reward-based-on-coin-emission-schedule
+  // see https://elosys.network/docs/whitepaper/4_mining#include-the-miner-reward-based-on-coin-emission-schedule
   // for more details
 
-  // for 60 second block time, miner's block reward in the first year should be 20 IRON
+  // for 60 second block time, miner's block reward in the first year should be 20 Elosys
   it('miners reward is properly calculated for year 0-1', () => {
-    const ironFishYearInBlocks =
+    const elosysYearInBlocks =
       (365 * 24 * 60 * 60) / consensusParameters.targetBlockTimeInSeconds
 
     let minersReward = strategy.miningReward(1)
     expect(minersReward).toBe(20 * 10 ** 8)
 
-    minersReward = strategy.miningReward(ironFishYearInBlocks - 1)
+    minersReward = strategy.miningReward(elosysYearInBlocks - 1)
     expect(minersReward).toBe(20 * 10 ** 8)
   })
 
-  // for 60 second block time, miner's block reward in the second year should be 19 IRON
+  // for 60 second block time, miner's block reward in the second year should be 19 elosys
   it('miners reward is properly calculated for year 1-2', () => {
-    const ironFishYearInBlocks =
+    const elosysYearInBlocks =
       (365 * 24 * 60 * 60) / consensusParameters.targetBlockTimeInSeconds
 
-    const minersReward = strategy.miningReward(ironFishYearInBlocks + 1)
+    const minersReward = strategy.miningReward(elosysYearInBlocks + 1)
     expect(minersReward).toBe(19 * 10 ** 8)
   })
 })

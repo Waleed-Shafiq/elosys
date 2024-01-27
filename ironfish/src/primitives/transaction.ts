@@ -12,7 +12,7 @@ import {
   TRANSACTION_PUBLIC_KEY_RANDOMNESS_LENGTH,
   TRANSACTION_SIGNATURE_LENGTH,
   TransactionPosted,
-} from '@ironfish/rust-nodejs'
+} from '@elosys/rust-nodejs'
 import { blake3 } from '@napi-rs/blake-hash'
 import bufio from 'bufio'
 import { BurnDescription } from './burnDescription'

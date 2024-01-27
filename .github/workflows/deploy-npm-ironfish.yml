@@ -1,4 +1,4 @@
-name: Deploy @ironfish/sdk NPM Package
+name: Deploy @elosys/sdk NPM Package
 
 on:
   workflow_dispatch:
@@ -20,20 +20,20 @@ jobs:
       - name: Remove lifecycle scripts
         run: cat <<< "$(jq 'del(.scripts.postinstall)' < package.json)" > package.json
 
-      - name: Insert Git hash into ironfish/package.json as gitHash
+      - name: Insert Git hash into elosys/package.json as gitHash
         run: |
           GIT_HASH=$(git rev-parse --short HEAD)
-          cat <<< "$(jq --arg gh "$GIT_HASH" '.gitHash = $gh' < ironfish/package.json)" > ironfish/package.json
+          cat <<< "$(jq --arg gh "$GIT_HASH" '.gitHash = $gh' < elosys/package.json)" > elosys/package.json
 
       - name: Install dependencies
         run: yarn --non-interactive --frozen-lockfile
 
       - name: Build
         run: yarn build
-        working-directory: ./ironfish
+        working-directory: ./elosys
 
       - name: Publish
         run: npm publish --access public
-        working-directory: ./ironfish
+        working-directory: ./elosys
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

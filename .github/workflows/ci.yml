@@ -73,7 +73,7 @@ jobs:
           fi
 
       - name: Upload coverage
-        if: github.repository == 'iron-fish/ironfish'
+        if: github.repository == 'elosys/elosys'
         run: CODECOV_TOKEN=${{ secrets.CODECOV_TOKEN }} ROOT_PATH=$GITHUB_WORKSPACE/ yarn coverage:upload
 
   testslow:
@@ -110,5 +110,5 @@ jobs:
           fi
 
       - name: Upload coverage
-        if: github.repository == 'iron-fish/ironfish'
+        if: github.repository == 'elosys/elosys'
         run: CODECOV_TOKEN=${{ secrets.CODECOV_TOKEN }} ROOT_PATH=$GITHUB_WORKSPACE/ yarn coverage:upload

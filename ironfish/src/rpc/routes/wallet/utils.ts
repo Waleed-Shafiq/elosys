@@ -35,7 +35,7 @@ export function getAccount(wallet: Wallet, name?: string): Account {
 
   throw new RpcValidationError(
     `No account is currently active.\n\n` +
-      `Use ironfish wallet:create <name> to first create an account`,
+      `Use elosys wallet:create <name> to first create an account`,
   )
 }
 

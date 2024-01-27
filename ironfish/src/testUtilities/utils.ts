@@ -4,7 +4,7 @@
 
 /* eslint-disable no-console */
 
-import { Asset } from '@ironfish/rust-nodejs'
+import { Asset } from '@elosys/rust-nodejs'
 import path from 'path'
 import { v4 as uuid } from 'uuid'
 import { Assert } from '../assert'

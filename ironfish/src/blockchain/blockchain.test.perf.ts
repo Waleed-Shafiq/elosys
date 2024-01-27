@@ -4,7 +4,7 @@
 
 /* eslint-disable jest/expect-expect */
 
-import { Asset } from '@ironfish/rust-nodejs'
+import { Asset } from '@elosys/rust-nodejs'
 import _ from 'lodash'
 import { Assert } from '../assert'
 import { FullNode } from '../node'

@@ -2,7 +2,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 
-import { RollingFilter } from '@ironfish/rust-nodejs'
+import { RollingFilter } from '@elosys/rust-nodejs'
 import LRU from 'blru'
 import { BufferMap } from 'buffer-map'
 import { Assert } from '../assert'
@@ -18,7 +18,7 @@ import { PeerStore } from '../fileStores/peerStore'
 import { createRootLogger, Logger } from '../logger'
 import { MetricsMonitor } from '../metrics'
 import { FullNode } from '../node'
-import { IronfishPKG } from '../package'
+import { ElosysPKG } from '../package'
 import { Platform } from '../platform'
 import { GENESIS_BLOCK_SEQUENCE, Transaction } from '../primitives'
 import { Block, CompactBlock, RawBlock } from '../primitives/block'
@@ -191,7 +191,7 @@ export class PeerNetwork {
 
     this.localPeer = new LocalPeer(
       options.identity,
-      options.agent || Platform.getAgent(IronfishPKG),
+      options.agent || Platform.getAgent(ElosysPKG),
       VERSION_PROTOCOL,
       options.chain,
       options.webSocket,
@@ -367,7 +367,7 @@ export class PeerNetwork {
       }
 
       // If the user has not specified a port, we can guess that
-      // it's running on the default ironfish websocket port
+      // it's running on the default elosys websocket port
       const port = url.port ? url.port : DEFAULT_WEBSOCKET_PORT
 
       this.peerManager.connectToWebSocketAddress({

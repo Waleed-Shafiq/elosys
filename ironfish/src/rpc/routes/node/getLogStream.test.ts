@@ -20,7 +20,7 @@ describe('Route node/getLogStream', () => {
 
     expect(value).toMatchObject({
       level: LogLevel.Info.toString(),
-      tag: expect.stringContaining('ironfishnode'),
+      tag: expect.stringContaining('elosysnode'),
       type: 'info',
       args: '["Hello",{"foo":2}]',
       date: expect.anything(),
@@ -42,7 +42,7 @@ describe('Route node/getLogStream', () => {
 
     expect(value).toMatchObject({
       level: LogLevel.Info.toString(),
-      tag: expect.stringContaining('ironfishnode'),
+      tag: expect.stringContaining('elosysnode'),
       type: 'info',
       args: '["2"]',
       date: expect.anything(),

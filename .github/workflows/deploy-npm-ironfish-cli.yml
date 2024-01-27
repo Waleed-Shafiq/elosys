@@ -1,4 +1,4 @@
-name: Deploy ironfish NPM Package
+name: Deploy elosys NPM Package
 
 env:
   DEBUG: 'napi:*'
@@ -25,16 +25,16 @@ jobs:
         with:
           shared-key: nodejs
 
-      - name: Insert Git hash into ironfish-cli/package.json as gitHash
+      - name: Insert Git hash into elosys-cli/package.json as gitHash
         run: |
           GIT_HASH=$(git rev-parse --short HEAD)
-          cat <<< "$(jq --arg gh "$GIT_HASH" '.gitHash = $gh' < ironfish-cli/package.json)" > ironfish-cli/package.json
+          cat <<< "$(jq --arg gh "$GIT_HASH" '.gitHash = $gh' < elosys-cli/package.json)" > elosys-cli/package.json
 
       - name: Install dependencies
         run: yarn --non-interactive --frozen-lockfile
 
       - name: Publish
         run: npm publish --access public
-        working-directory: ./ironfish-cli
+        working-directory: ./elosys-cli
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

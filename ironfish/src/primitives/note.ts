@@ -8,7 +8,7 @@ import {
   Note as NativeNote,
   PUBLIC_ADDRESS_LENGTH,
   RANDOMNESS_LENGTH,
-} from '@ironfish/rust-nodejs'
+} from '@elosys/rust-nodejs'
 import bufio from 'bufio'
 import { NoteEncryptedHash } from './noteEncrypted'
 

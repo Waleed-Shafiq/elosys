@@ -7,9 +7,9 @@ import { YupUtils } from '../utils'
 import { KeyStore } from './keyStore'
 
 export const DEFAULT_CONFIG_NAME = 'config.json'
-export const DEFAULT_DATA_DIR = '~/.ironfish'
+export const DEFAULT_DATA_DIR = '~/.elosys'
 export const DEFAULT_WEBSOCKET_PORT = 9033
-export const DEFAULT_DISCORD_INVITE = 'https://discord.ironfish.network'
+export const DEFAULT_DISCORD_INVITE = 'https://discord.elosys.network'
 export const DEFAULT_USE_RPC_IPC = true
 export const DEFAULT_USE_RPC_TCP = false
 export const DEFAULT_USE_RPC_TLS = true
@@ -440,8 +440,8 @@ export class Config<
       enableTelemetry: false,
       enableMetrics: true,
       enableAssetVerification: true,
-      getFundsApi: 'https://testnet.api.ironfish.network/faucet_transactions',
-      ipcPath: files.resolve(files.join(dataDir, 'ironfish.ipc')),
+      getFundsApi: 'https://testnet.api.elosys.network/faucet_transactions',
+      ipcPath: files.resolve(files.join(dataDir, 'elosys.ipc')),
       logLevel: '*:info',
       logPeerMessages: false,
       logPrefix: '',

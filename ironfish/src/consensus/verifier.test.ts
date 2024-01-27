@@ -11,7 +11,7 @@ import {
   LATEST_TRANSACTION_VERSION,
   Note as NativeNote,
   Transaction as NativeTransaction,
-} from '@ironfish/rust-nodejs'
+} from '@elosys/rust-nodejs'
 import { BufferMap } from 'buffer-map'
 import { Assert } from '../assert'
 import { getBlockSize, getBlockWithMinersFeeSize } from '../network/utils/serializers'

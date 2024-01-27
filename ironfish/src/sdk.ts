@@ -1,7 +1,7 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
-import { BoxKeyPair, FishHashContext } from '@ironfish/rust-nodejs'
+import { BoxKeyPair, FishHashContext } from '@elosysSdk/rust-nodejs'
 import {
   Config,
   ConfigOptions,
@@ -24,7 +24,7 @@ import { isHexSecretKey, PrivateIdentity } from './network/identity'
 import { IsomorphicWebSocketConstructor } from './network/types'
 import { WebSocketClient } from './network/webSocketClient'
 import { FullNode } from './node'
-import { IronfishPKG, Package } from './package'
+import { ElosysPKG, Package } from './package'
 import { Platform } from './platform'
 import { RpcHttpAdapter, RpcSocketClient, RpcTlsAdapter } from './rpc'
 import { RpcIpcAdapter } from './rpc/adapters/ipcAdapter'
@@ -38,7 +38,7 @@ import { ALL_API_NAMESPACES } from './rpc/routes/router'
 import { Strategy } from './strategy'
 import { NodeUtils } from './utils'
 
-export class IronfishSdk {
+export class ElosysSdk {
   pkg: Package
   client: RpcSocketClient
   config: Config
@@ -91,7 +91,7 @@ export class IronfishSdk {
     logger?: Logger
     metrics?: MetricsMonitor
     strategyClass?: typeof Strategy
-  } = {}): Promise<IronfishSdk> {
+  } = {}): Promise<ElosysSdk> {
     const runtime = Platform.getRuntime()
 
     if (!fileSystem) {
@@ -103,7 +103,7 @@ export class IronfishSdk {
       }
     }
 
-    logger = logger.withTag('ironfishsdk')
+    logger = logger.withTag('elosyssdk')
     dataDir = dataDir || DEFAULT_DATA_DIR
 
     const config = new Config(fileSystem, dataDir, {}, configName)
@@ -137,7 +137,7 @@ export class IronfishSdk {
     const logFile = config.get('enableLogFile')
 
     if (logFile && fileSystem instanceof NodeFileProvider && fileSystem.path) {
-      const path = fileSystem.path.join(config.dataDir, 'ironfish.log')
+      const path = fileSystem.path.join(config.dataDir, 'elosys.log')
       const fileLogger = new FileReporter(fileSystem, path)
       logger.addReporter(fileLogger)
     }
@@ -165,8 +165,8 @@ export class IronfishSdk {
       client = new RpcIpcClient(config.get('ipcPath'), logger)
     }
 
-    return new IronfishSdk(
-      pkg || IronfishPKG,
+    return new ElosysSdk(
+      pkg || ElosysPKG,
       client,
       config,
       internal,

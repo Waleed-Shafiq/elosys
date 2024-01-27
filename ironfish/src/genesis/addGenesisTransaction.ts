@@ -6,7 +6,7 @@ import {
   Asset,
   Note as NativeNote,
   Transaction as NativeTransaction,
-} from '@ironfish/rust-nodejs'
+} from '@elosys/rust-nodejs'
 import { Logger } from '../logger'
 import { FullNode } from '../node'
 import { Block } from '../primitives'

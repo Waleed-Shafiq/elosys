@@ -63,7 +63,7 @@ export class AssetsVerificationApi {
   readonly url: string
 
   constructor(options?: { url?: string; timeout?: number }) {
-    this.url = options?.url || 'https://api.ironfish.network/assets/verified'
+    this.url = options?.url || 'https://api.elosys.network/assets/verified'
     this.timeout = options?.timeout ?? 30 * 1000 // 30 seconds
     this.adapter = isFileUrl(this.url) ? axiosFileAdapter : axios.defaults.adapter
   }

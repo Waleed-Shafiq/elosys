@@ -2,13 +2,13 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 import './matchers'
-import { FishHashContext } from '@ironfish/rust-nodejs'
+import { FishHashContext } from '@elosys/rust-nodejs'
 import { Blockchain } from '../blockchain'
 import { Verifier } from '../consensus/verifier'
 import { ConfigOptions } from '../fileStores/config'
 import { PeerNetwork } from '../network'
 import { FullNode } from '../node'
-import { IronfishSdk } from '../sdk'
+import { ElosysSdk } from '../sdk'
 import { Syncer } from '../syncer'
 import { Wallet } from '../wallet'
 import { WorkerPool } from '../workerPool'
@@ -33,7 +33,7 @@ export const FISH_HASH_CONTEXT = new FishHashContext(false)
 export class NodeTest {
   options: NodeTestOptions
 
-  sdk!: IronfishSdk
+  sdk!: ElosysSdk
   node!: FullNode
   strategy!: TestStrategy
   verifier!: Verifier
@@ -44,7 +44,7 @@ export class NodeTest {
   workerPool!: WorkerPool
 
   setups = new Array<{
-    sdk: IronfishSdk
+    sdk: ElosysSdk
     node: FullNode
     strategy: TestStrategy
     chain: Blockchain
@@ -59,7 +59,7 @@ export class NodeTest {
   }
 
   async createSetup(options?: NodeTestOptions): Promise<{
-    sdk: IronfishSdk
+    sdk: ElosysSdk
     node: FullNode
     strategy: TestStrategy
     verifier: Verifier
@@ -76,7 +76,7 @@ export class NodeTest {
     const dataDir = getUniqueTestDataDir()
     const strategyClass = TestStrategy
 
-    const sdk = await IronfishSdk.init({ dataDir, strategyClass })
+    const sdk = await ElosysSdk.init({ dataDir, strategyClass })
 
     sdk.config.setOverride('bootstrapNodes', [''])
     sdk.config.setOverride('networkId', 2)

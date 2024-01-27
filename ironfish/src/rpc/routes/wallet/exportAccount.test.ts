@@ -2,7 +2,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 
-import { generateKey } from '@ironfish/rust-nodejs'
+import { generateKey } from '@elosys/rust-nodejs'
 import { v4 as uuid } from 'uuid'
 import { useAccountFixture } from '../../../testUtilities'
 import { createRouteTest } from '../../../testUtilities/routeTest'

@@ -1,7 +1,7 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
-import { FishHashContext } from '@ironfish/rust-nodejs'
+import { FishHashContext } from '@elosys/rust-nodejs'
 import { BlockHasher } from './blockHasher'
 import { Consensus } from './consensus'
 import { Block, RawBlock } from './primitives/block'
@@ -37,12 +37,12 @@ export class Strategy {
   /**
    * Calculate the mining reward for a block based on its sequence
    *
-   * See https://ironfish.network/docs/whitepaper/4_mining#include-the-miner-reward-based-on-coin-emission-schedule
+   * See https://elosys.network/docs/whitepaper/4_mining#include-the-miner-reward-based-on-coin-emission-schedule
    *
    * Annual coin issuance from mining goes down every year. Year is defined here by the
    * number of blocks
    *
-   * Given the genesis block supply (genesisSupplyInIron) the formula to calculate
+   * Given the genesis block supply (genesisSupplyInElosys) the formula to calculate
    * reward per block is:
    * (genesisSupply / 4) * e ^(-.05 * yearsAfterLaunch)
    * Where e is the natural number e (Euler's number), and -.05 is a decay function constant
@@ -51,9 +51,9 @@ export class Strategy {
    * @returns mining reward (in ORE) per block given the block sequence
    */
   miningReward(sequence: number): number {
-    const ironFishYearInBlocks =
+    const elosysYearInBlocks =
       (365 * 24 * 60 * 60) / this.consensus.parameters.targetBlockTimeInSeconds
-    const yearsAfterLaunch = Math.floor(Number(sequence) / ironFishYearInBlocks)
+    const yearsAfterLaunch = Math.floor(Number(sequence) / elosysYearInBlocks)
 
     let reward = this.miningRewardCachedByYear.get(yearsAfterLaunch)
     if (reward) {
@@ -64,7 +64,7 @@ export class Strategy {
       (this.consensus.parameters.genesisSupplyInIron / 4) * Math.E ** (-0.05 * yearsAfterLaunch)
 
     reward = this.convertIronToOre(
-      MathUtils.roundBy(annualReward / ironFishYearInBlocks, 0.125),
+      MathUtils.roundBy(annualReward / elosysYearInBlocks, 0.125),
     )
 
     this.miningRewardCachedByYear.set(yearsAfterLaunch, reward)

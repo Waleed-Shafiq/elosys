@@ -8,7 +8,7 @@ import * as yup from 'yup'
 import { Assert } from '../../assert'
 import { createRootLogger, Logger } from '../../logger'
 import { FullNode } from '../../node'
-import { IronfishSdk } from '../../sdk'
+import { ElosysSdk } from '../../sdk'
 import { getUniqueTestDataDir } from '../../testUtilities'
 import { RpcRequestError } from '../clients'
 import { RpcTcpClient } from '../clients/tcpClient'
@@ -18,7 +18,7 @@ import { RpcTcpAdapter } from './tcpAdapter'
 
 describe('TcpAdapter', () => {
   let tcp: RpcTcpAdapter | undefined
-  let sdk: IronfishSdk
+  let sdk: ElosysSdk
   let client: RpcTcpClient | undefined
   let node: FullNode
   let logger: Logger
@@ -27,7 +27,7 @@ describe('TcpAdapter', () => {
   beforeEach(async () => {
     logger = createRootLogger().withTag('tcpadapter')
 
-    sdk = await IronfishSdk.init({
+    sdk = await ElosysSdk.init({
       dataDir: getUniqueTestDataDir(),
       configOverrides: {
         enableRpc: false,
