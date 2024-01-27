@@ -42,7 +42,7 @@ lerna-debug.log*
 **/target
 *.node
 
-# ironfish-cli
-bin/ironfish-cli/databases
+# elosys-cli
+bin/elosys-cli/databases
 .dockerignore
-ironfish-cli/segfault.log
+elosys-cli/segfault.log

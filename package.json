@@ -1,16 +1,16 @@
 {
   "name": "root",
   "version": "1.0.0",
-  "repository": "https://github.com/iron-fish/ironfish",
+  "repository": "https://github.com/Waleed-Shafiq/elosys",
   "private": true,
-  "author": "Iron Fish <contact@ironfish.network> (https://ironfish.network)",
+  "author": "Elosys",
   "license": "MPL-2.0",
   "workspaces": [
-    "ironfish-cli",
-    "config/eslint-config-ironfish",
-    "config/eslint-plugin-ironfish",
-    "ironfish",
-    "ironfish-rust-nodejs"
+    "elosys-cli",
+    "config/eslint-config-elosys",
+    "config/eslint-plugin-elosys",
+    "elosys",
+    "elosys-rust-nodejs"
   ],
   "scripts": {
     "build": "lerna run build",
@@ -21,7 +21,7 @@
     "lint:changed": "lerna run --since origin/master --include-dependents lint",
     "lint:fix": "lerna run lint:fix",
     "lint:ci": "lerna run lint:ci",
-    "postinstall": "(cd ironfish-rust-nodejs && yarn build)",
+    "postinstall": "(cd elosys-rust-nodejs && yarn build)",
     "test": "lerna run test --stream",
     "test:coverage": "lerna run test --stream --concurrency 1 -- --collect-coverage",
     "test:coverage:html": "lerna run test:coverage:html --stream",
